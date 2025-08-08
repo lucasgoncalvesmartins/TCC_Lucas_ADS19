@@ -20,7 +20,7 @@
                     <?php if (!empty($categorias)): ?>
                         <?php foreach ($categorias as $categoria): ?>
                             <?php if ($categoria): ?>
-                                <a href="PostCategoria.php?categoria_id=<?= $categoria['id'] ?>">
+                                <a href="PostListarPorCategoria.php?categoria_id=<?= $categoria['id'] ?>">
                                     <?= $categoria['nome'] ?>
                                 </a>
                             <?php endif; ?>
@@ -41,14 +41,14 @@
             <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
                 <div>
                     <a href="PostCadastrar.php">Adcionar Publicação</a>
-                    <a href="">Editar Publicação</a>
+                    <a href="PostEditar-Excluir.php">Editar/Excluir Publicação</a>
                 </div>
             <?php endif; ?>
         </div>
         <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
             <div>
                 <a href="PostCadastrar.php">Adcionar Publicação</a>
-                <a href="">Editar Publicação</a>
+                <a href="PostEditar-Excluir.php">Editar/Excluir Publicação</a>
                 <a href="">Categoria</a>
                 <a href="">Editar Categoria</a>
                 <a href="">Usuários</a>
@@ -62,6 +62,8 @@
                 <a href="">Enviar Sugestões</a>
                 <a href="">Sobre Nós</a>
                 <a href="">Contato</a>
+                <a href="">Glossário</a>
+                
             </div>
         <?php endif; ?>
         </div>
