@@ -1,3 +1,21 @@
+<?php
+    session_start();
+    if(isset($_SESSION['id'])) {
+        header('Location: home.php');
+        exit;
+    }
+
+    include_once __DIR__ . '/../Controller/LoginDAO.php';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include_once __DIR__ . '/../Controller/LoginController.php';
+    $dao = new loginDAO();
+    $dao->login();
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +26,8 @@
 <body>
     <form action="" method="post">
      <div>
-            <label for="usuario">Usuário:</label>
-            <input type="text" id="usuario" name="usuario" required>
+            <label for="email">Gmail:</label>
+            <input type="text" id="email" name="email" required>
         </div>
         <div>
             <label for="senha">Senha:</label>
