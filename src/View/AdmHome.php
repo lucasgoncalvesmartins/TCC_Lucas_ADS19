@@ -8,5 +8,9 @@
 <body>
     
 <h1>BEM VINDO</h1>
+
+<form action="logout.php" method="post">
+    <button type="submit">Sair</button>
+</form>
 </body>
 </html>

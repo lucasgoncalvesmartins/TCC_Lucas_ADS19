@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION['id'])) {
-        header('Location: home.php');
+        header('Location: AdmHome.php');
         exit;
     }
 
@@ -37,7 +37,7 @@
             <button type="submit">Entrar</button>
         </div>
         <div>
-            <a href="">Esqueci a senha</a>
+            <a href="Solicitar_Recuperacao.php">Esqueci a senha</a>
         </div>
 
 
