@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php @session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -40,14 +40,14 @@
 
             <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
                 <div>
-                    <a href="">Adcionar Publicação</a>
+                    <a href="PostCadastrar.php">Adcionar Publicação</a>
                     <a href="">Editar Publicação</a>
                 </div>
             <?php endif; ?>
         </div>
         <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
             <div>
-                <a href="">Adcionar Publicação</a>
+                <a href="PostCadastrar.php">Adcionar Publicação</a>
                 <a href="">Editar Publicação</a>
                 <a href="">Categoria</a>
                 <a href="">Editar Categoria</a>
