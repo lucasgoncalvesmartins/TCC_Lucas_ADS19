@@ -36,11 +36,11 @@ try {
             exit;
         }
 
-        // Gerando o código e expiração
+        // Gerando o código e expiração e salvando no banco
         $codigo = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
         $expiracao = date('Y-m-d H:i:s', strtotime('+15 minutes'));
 
-        // aqui esta salvando no banco
+        
         $stmt = $pdo->prepare("
             UPDATE usuarios
             SET codigo_recuperacao = :codigo, codigo_expiracao = :expiracao
@@ -84,7 +84,7 @@ try {
             exit;
         }
 
-        // aqui ele faz a busca do codigo no banco
+     
         $stmt = $pdo->prepare("SELECT codigo_recuperacao, codigo_expiracao FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
