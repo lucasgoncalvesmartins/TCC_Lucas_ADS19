@@ -1,0 +1,22 @@
+{
+    "name": "tcc/phpmailer-oauth2",
+    "description": "PHPMailer with OAuth2 support for Google and Microsoft/Azure",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "phpmailer/phpmailer": "^6.8",
+        "league/oauth2-google": "^4.0",
+        "thenetworg/oauth2-azure": "^2.0",
+        "stevenmaguire/oauth2-microsoft": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPMailer\\PHPMailer\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.12"
+        }
+    }
+}

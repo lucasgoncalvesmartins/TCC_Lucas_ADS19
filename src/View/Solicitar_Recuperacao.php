@@ -14,35 +14,74 @@
       <button type="submit">Enviar Código</button>
   </form>
 
+  <div id="codigoContainer" style="display:none; margin-top:20px;">
+      <label for="codigo">Insira o código recebido:</label><br>
+      <input type="text" id="codigo" name="codigo" maxlength="6">
+      <br><br>
+      <button id="btnVerificarCodigo">Verificar Código</button>
+  </div>
+
   <div id="mensagem" style="margin-top: 20px; color: red;"></div>
 
   <script>
-    document.getElementById('formSolicitarRecuperacao').addEventListener('submit', function(e) {
-      e.preventDefault();
+    const form = document.getElementById('formSolicitarRecuperacao');
+    const codigoContainer = document.getElementById('codigoContainer');
+    const btnVerificar = document.getElementById('btnVerificarCodigo');
+    const mensagemDiv = document.getElementById('mensagem');
 
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      mensagemDiv.textContent = '';
       const formData = new FormData(this);
 
       fetch('../Controller/RecuperaSenhaController.php?function=solicitarRecuperacao', {
         method: 'POST',
         body: formData
       })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
-        const mensagemDiv = document.getElementById('mensagem');
         mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
-        mensagemDiv.innerHTML = data.message + (data.debug_code ? `<br><strong>Código (DEBUG): ${data.debug_code}</strong>` : '');
+        mensagemDiv.innerHTML = data.message;
 
         if (data.status === 'success') {
-          setTimeout(() => {
-            window.location.href = `inserir_codigo.php?email=${encodeURIComponent(formData.get('email'))}`;
-          }, 2000);
+          codigoContainer.style.display = 'block';
         }
       })
-      .catch(error => {
-        const mensagemDiv = document.getElementById('mensagem');
+      .catch(err => {
         mensagemDiv.style.color = 'red';
-        mensagemDiv.textContent = 'Erro na requisição. Tente novamente.';
-        console.error('Erro no fetch:', error);
+        mensagemDiv.textContent = 'Erro na requisição';
+        console.error(err);
+      });
+    });
+
+    btnVerificar.addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const codigo = document.getElementById('codigo').value;
+
+      if (!codigo) return alert('Informe o código recebido');
+
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('codigo', codigo);
+
+      fetch('../Controller/RecuperaSenhaController.php?function=verificarCodigo', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
+        mensagemDiv.textContent = data.message;
+
+        if (data.status === 'success') {
+          alert('Código validado! Redirecione para redefinição de senha');
+        }
+      })
+      .catch(err => {
+        mensagemDiv.style.color = 'red';
+        mensagemDiv.textContent = 'Erro na verificação';
+        console.error(err);
       });
     });
   </script>

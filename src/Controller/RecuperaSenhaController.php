@@ -1,123 +1,119 @@
 <?php
-include_once __DIR__ . '/../Conexao/Conexao.php';
+namespace Controller;
 
-// Ativa exibição de erros para teste (remova em produção)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// Define header JSON
+require __DIR__ . '/../../vendor/autoload.php';
+
 header('Content-Type: application/json');
 
+$function = $_GET['function'] ?? '';
 
-class RecuperaSenhaController {
-    private $pdo;
+try {
 
-    public function __construct() {
-        $this->pdo = Conexao::getConexao();
-    }
+    $pdo = new \PDO(
+        'mysql:host=127.0.0.1;dbname=tcclucas_ads19;charset=utf8mb4',
+        'root',
+        ''
+    );
+    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-    // Função principal para rotear chamadas
-    public function run() {
-        $func = $_GET['function'] ?? '';
-
-        if (!method_exists($this, $func)) {
-            echo json_encode(['status'=>'error','message'=>"Função inválida: $func"]);
+    if ($function === 'solicitarRecuperacao') {
+        $email = $_POST['email'] ?? '';
+        if (!$email) {
+            echo json_encode(['status' => 'error', 'message' => 'Email não fornecido']);
             exit;
         }
 
-        $this->$func();
-    }
+        // Verificando se usuário/email existe
+        $stmt = $pdo->prepare("SELECT id, nome_usuario FROM usuarios WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-    // Solicita recuperação - gera código e salva no banco
-    public function solicitarRecuperacao() {
-        $email = $_POST['email'] ?? '';
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo json_encode(['status'=>'error','message'=>'Email inválido']);
-            return;
+        if (!$user) {
+            echo json_encode(['status' => 'error', 'message' => 'Email não encontrado']);
+            exit;
         }
 
-        // Verifica se email existe
-        $stmt = $this->pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
-        $stmt->execute([$email]);
-        if ($stmt->rowCount() === 0) {
-            echo json_encode(['status'=>'error','message'=>'Email não encontrado']);
-            return;
-        }
-
-        // Gera código e expiração
+        // Gerando o código e expiração
         $codigo = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
         $expiracao = date('Y-m-d H:i:s', strtotime('+15 minutes'));
 
-        // Atualiza código no banco
-        $upd = $this->pdo->prepare("UPDATE usuarios SET codigo_recuperacao = ?, codigo_expiracao = ? WHERE email = ?");
-        $upd->execute([$codigo, $expiracao, $email]);
+        // aqui esta salvando no banco
+        $stmt = $pdo->prepare("
+            UPDATE usuarios
+            SET codigo_recuperacao = :codigo, codigo_expiracao = :expiracao
+            WHERE id = :id
+        ");
+        $stmt->execute([
+            'codigo' => $codigo,
+            'expiracao' => $expiracao,
+            'id' => $user['id']
+        ]);
 
-        // Enviar email (simulação local)
-        if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1') {
-            // Simula envio
-            echo json_encode([
-                'status'=>'success',
-                'message'=>'Código gerado (ambiente local). Verifique seu email.',
-                'debug_code'=>$codigo
-            ]);
-        } else {
-            // Aqui você deve implementar o envio real de email
-            echo json_encode([
-                'status'=>'success',
-                'message'=>'Código enviado para seu email.'
-            ]);
-        }
-    }
+        // aqui ele esta enviando o email
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'lucascamargogoncalvesmartins@gmail.com';  
+        $mail->Password = 'cjpi npqk ocbh evdu';  
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
-    // Verifica se código é válido
-    public function verificarCodigo() {
+        $mail->setFrom('lucascamargogoncalvesmartins@gmail.com', 'Sistema'); 
+        $mail->addAddress($email, $user['nome_usuario']);
+        $mail->isHTML(true);
+        $mail->Subject = 'Código de recuperação de senha';
+        $mail->Body = "Olá {$user['nome_usuario']},<br>
+                       Seu código de recuperação é: <strong>$codigo</strong>.<br>
+                       Expira em 15 minutos.";
+
+        $mail->send();
+
+        echo json_encode(['status' => 'success', 'message' => 'Código enviado!', 'debug_code' => $codigo]);
+        exit;
+
+    } elseif ($function === 'verificarCodigo') {
         $email = $_POST['email'] ?? '';
         $codigo = $_POST['codigo'] ?? '';
 
         if (!$email || !$codigo) {
-            echo json_encode(['status'=>'error','message'=>'Email ou código não enviados']);
-            return;
+            echo json_encode(['status' => 'error', 'message' => 'Email ou código não fornecido']);
+            exit;
         }
 
-        $stmt = $this->pdo->prepare("SELECT id FROM usuarios WHERE email = ? AND codigo_recuperacao = ? AND codigo_expiracao > NOW()");
-        $stmt->execute([$email, $codigo]);
+        // aqui ele faz a busca do codigo no banco
+        $stmt = $pdo->prepare("SELECT codigo_recuperacao, codigo_expiracao FROM usuarios WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        if ($stmt->rowCount() > 0) {
-            echo json_encode(['status'=>'success','message'=>'Código válido']);
-        } else {
-            echo json_encode(['status'=>'error','message'=>'Código inválido ou expirado']);
+        if (!$user) {
+            echo json_encode(['status' => 'error', 'message' => 'Email não encontrado']);
+            exit;
         }
+
+        if ($user['codigo_recuperacao'] !== $codigo) {
+            echo json_encode(['status' => 'error', 'message' => 'Código inválido']);
+            exit;
+        }
+
+        if (strtotime($user['codigo_expiracao']) < time()) {
+            echo json_encode(['status' => 'error', 'message' => 'Código expirado']);
+            exit;
+        }
+
+        echo json_encode(['status' => 'success', 'message' => 'Código válido!']);
+        exit;
+
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Função inválida']);
+        exit;
     }
 
-    // Atualiza a senha do usuário
-    public function atualizarSenha() {
-        $email = $_POST['email'] ?? '';
-        $codigo = $_POST['codigo'] ?? '';
-        $novaSenha = $_POST['nova_senha'] ?? '';
-
-        if (!$email || !$codigo || !$novaSenha) {
-            echo json_encode(['status'=>'error','message'=>'Dados incompletos']);
-            return;
-        }
-
-        // Valida código
-        $stmt = $this->pdo->prepare("SELECT id FROM usuarios WHERE email = ? AND codigo_recuperacao = ? AND codigo_expiracao > NOW()");
-        $stmt->execute([$email, $codigo]);
-
-        if ($stmt->rowCount() === 0) {
-            echo json_encode(['status'=>'error','message'=>'Código inválido ou expirado']);
-            return;
-        }
-
-        // Atualiza senha (usar password_hash para segurança!)
-        $senhaHash = password_hash($novaSenha, PASSWORD_DEFAULT);
-
-        $upd = $this->pdo->prepare("UPDATE usuarios SET senha = ?, codigo_recuperacao = NULL, codigo_expiracao = NULL WHERE email = ?");
-        $upd->execute([$senhaHash, $email]);
-
-        echo json_encode(['status'=>'success','message'=>'Senha atualizada com sucesso']);
-    }
+} catch (\PDOException $e) {
+    echo json_encode(['status' => 'error', 'message' => 'Erro no banco de dados: ' . $e->getMessage()]);
+} catch (Exception $e) {
+    echo json_encode(['status' => 'error', 'message' => 'Erro no PHPMailer: ' . $e->getMessage()]);
 }
-
-$controller = new RecuperaSenhaController();
-$controller->run();
