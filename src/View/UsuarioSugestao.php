@@ -1,0 +1,44 @@
+<?php
+require_once __DIR__ . '/../Controller/EnviarPdfController.php';
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Enviar PDF</title>
+</head>
+<body>
+    <h1>Enviar PDF por Email</h1>
+
+    <?php if (!empty($msg)): ?>
+        <p style="color: <?= strpos($msg, 'sucesso') !== false ? 'green' : 'red' ?>;">
+            <?= htmlspecialchars($msg) ?>
+        </p>
+    <?php endif; ?>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="nome">Nome completo:</label><br>
+            <input type="text" name="nome" id="nome" required>
+        </div>
+        <br>
+        <div>
+            <label for="cpf">CPF:</label><br>
+            <input type="text" name="cpf" id="cpf" required>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <br>
+        <div>
+            <label for="pdf">Selecione o PDF:</label><br>
+            <input type="file" name="pdf" id="pdf" accept=".pdf" required>
+        </div>
+        <br>
+        <button type="submit">Enviar PDF</button>
+    </form>
+</body>
+</html>

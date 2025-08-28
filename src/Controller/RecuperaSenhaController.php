@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-session_start(); // ✅ inicia sessão em todas as funções
+session_start(); 
 header('Content-Type: application/json');
 
 $function = $_GET['function'] ?? '';
@@ -19,9 +19,7 @@ try {
     );
     $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
-    // ======================
-    // 1) Solicitar recuperação
-    // ======================
+   
     if ($function === 'solicitarRecuperacao') {
         $email = $_POST['email'] ?? '';
         if (!$email) {

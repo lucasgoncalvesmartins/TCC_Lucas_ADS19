@@ -47,7 +47,7 @@
         <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
             <div>
                 <a href="PostCadastrar.php">Adcionar Publicação</a>
-                <a href="PostEditar-Excluir.php">Editar/Excluir Publicação</a>
+                <a href="PostEditar-Excluir.php">Editar Publicação</a>
                 <a href="CategoriaEditar.php">Editar Categoria</a>
                 <a href="UsuarioListar.php">Usuários</a>
             </div>
@@ -57,7 +57,7 @@
         </div>
         <?php if (!isset($_SESSION['id'])): ?>
             <div>
-                <a href="">Enviar Sugestões</a>
+                <a href="UsuarioSugestao.php">Enviar Sugestões</a>
                 <a href="">Sobre Nós</a>
                 <a href="">Contato</a>
                 <a href="">Glossário</a>
