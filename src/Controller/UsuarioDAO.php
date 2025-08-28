@@ -14,7 +14,7 @@ class UsuarioDAO{
     public function cadastrar() {
         $Usuario = new UsuarioModel($_POST);
         $Usuario->setTipo('comum');
-        $stmt = $this->conexao->prepare('insert into usuario (nome_usuario, email, senha, tipo) values (:nome_usuario, :email, :senha, :tipo)');
+        $stmt = $this->conexao->prepare('insert into usuarios (nome_usuario, email, senha, tipo) values (:nome_usuario, :email, :senha, :tipo)');
         $stmt->bindValue(":nome_usuario", $Usuario->getNome());
         $stmt->bindValue(":email", $Usuario->getEmail());
         $stmt->bindValue(":senha", $Usuario->getSenha());
@@ -64,7 +64,11 @@ public function buscarPorEmail($email) {
         return $stmt->rowCount() > 0;
     }
 
-
+public function listarTodos() {
+    $stmt = $this->conexao->prepare("SELECT * FROM usuarios ORDER BY id ASC");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
     public function atualizarRole($idUsuario, $novaRole) {
     $sql = "UPDATE usuarios SET tipo = :tipo WHERE id = :id";

@@ -41,7 +41,6 @@
             <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
                 <div>
                     <a href="PostCadastrar.php">Adcionar Publicação</a>
-                    <a href="Perfil.php">Meu Parfil</a>
                 </div>
             <?php endif; ?>
         </div>
@@ -49,9 +48,8 @@
             <div>
                 <a href="PostCadastrar.php">Adcionar Publicação</a>
                 <a href="PostEditar-Excluir.php">Editar/Excluir Publicação</a>
-                <a href="Perfil.php">Meu Perfil</a>
                 <a href="CategoriaEditar.php">Editar Categoria</a>
-                <a href="">Usuários</a>
+                <a href="UsuarioListar.php">Usuários</a>
             </div>
         <?php endif; ?>
         </div>
