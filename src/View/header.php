@@ -50,7 +50,7 @@
             <div>
                 <a href="PostCadastrar.php">Adcionar Publicação</a>
                 <a href="PostEditar-Excluir.php">Editar/Excluir Publicação</a>
-                <a href="Perfil.php">Meu Parfil</a>
+                <a href="Perfil.php">Meu Perfil</a>
                 <a href="">Categoria</a>
                 <a href="">Editar Categoria</a>
                 <a href="">Usuários</a>
