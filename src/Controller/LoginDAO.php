@@ -45,7 +45,7 @@ class LoginDAO
 			echo "erro";
 			}
 		} else {
-		echo "erro";
+		echo "erro AQUI";
 		}
 	}
 

@@ -29,7 +29,7 @@ class UsuarioDAO{
   
 
     public function buscarPorId($id) {
-    $stmt = $this->conexao->prepare('SELECT * FROM usuario WHERE id = :id');
+    $stmt = $this->conexao->prepare('SELECT * FROM usuarios WHERE id = :id');
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
@@ -40,7 +40,7 @@ class UsuarioDAO{
 }
 
 public function buscarPorEmail($email) {
-    $stmt = $this->conexao->prepare("SELECT * FROM usuario WHERE email = :email");
+    $stmt = $this->conexao->prepare("SELECT * FROM usuarios WHERE email = :email");
     $stmt->bindValue(":email", $email, PDO::PARAM_STR);
     $stmt->execute();
 
@@ -49,7 +49,7 @@ public function buscarPorEmail($email) {
 }
 
    public function atualizar($id, $email, $senha) {
-    $stmt = $this->conexao->prepare('UPDATE usuario SET email = :email, senha = :senha WHERE id = :id');
+    $stmt = $this->conexao->prepare('UPDATE usuarios SET email = :email, senha = :senha WHERE id = :id');
     $stmt->bindValue(':email', $email);
     $stmt->bindValue(':senha', $senha); 
     $stmt->bindValue(':id', $id);
@@ -57,7 +57,7 @@ public function buscarPorEmail($email) {
 }
 
     public function remover($id) {
-        $stmt = $this->conexao->prepare('delete from usuario where id = :id');
+        $stmt = $this->conexao->prepare('delete from usuarios where id = :id');
         $stmt->bindValue(':id', $id);
         $stmt->execute();    
             
@@ -67,9 +67,9 @@ public function buscarPorEmail($email) {
 
 
     public function atualizarRole($idUsuario, $novaRole) {
-    $sql = "UPDATE usuario SET tipo = :tipo WHERE id = :id";
+    $sql = "UPDATE usuarios SET tipo = :tipo WHERE id = :id";
     $stmt = $this->conexao->prepare($sql);
-    $stmt->bindValue(':tipo', $novaRole); // Corrigido aqui
+    $stmt->bindValue(':tipo', $novaRole); 
     $stmt->bindValue(':id', $idUsuario);
     return $stmt->execute();
 }
