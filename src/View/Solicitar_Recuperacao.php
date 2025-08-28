@@ -75,8 +75,9 @@
         mensagemDiv.textContent = data.message;
 
         if (data.status === 'success') {
-          alert('Código validado! Redirecione para redefinição de senha');
-        }
+  
+    window.location.href = 'RedefinirSenha.php?email=' + encodeURIComponent(email);
+}
       })
       .catch(err => {
         mensagemDiv.style.color = 'red';

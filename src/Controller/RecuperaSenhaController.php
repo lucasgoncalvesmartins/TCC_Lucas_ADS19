@@ -6,12 +6,12 @@ use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+session_start(); // ✅ inicia sessão em todas as funções
 header('Content-Type: application/json');
 
 $function = $_GET['function'] ?? '';
 
 try {
-
     $pdo = new \PDO(
         'mysql:host=127.0.0.1;dbname=tcclucas_ads19;charset=utf8mb4',
         'root',
@@ -19,6 +19,9 @@ try {
     );
     $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
+    // ======================
+    // 1) Solicitar recuperação
+    // ======================
     if ($function === 'solicitarRecuperacao') {
         $email = $_POST['email'] ?? '';
         if (!$email) {
@@ -26,7 +29,7 @@ try {
             exit;
         }
 
-        // Verificando se usuário/email existe
+        // Verifica se existe usuário com este email
         $stmt = $pdo->prepare("SELECT id, nome_usuario FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -36,11 +39,11 @@ try {
             exit;
         }
 
-        // Gerando o código e expiração e salvando no banco
+        // Gera código de 6 dígitos e define expiração
         $codigo = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
         $expiracao = date('Y-m-d H:i:s', strtotime('+15 minutes'));
 
-        
+        // Salva código e expiração no banco
         $stmt = $pdo->prepare("
             UPDATE usuarios
             SET codigo_recuperacao = :codigo, codigo_expiracao = :expiracao
@@ -52,7 +55,7 @@ try {
             'id' => $user['id']
         ]);
 
-        // aqui ele esta enviando o email
+        // Envia e-mail com PHPMailer
         $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -72,9 +75,12 @@ try {
 
         $mail->send();
 
-        echo json_encode(['status' => 'success', 'message' => 'Código enviado!', 'debug_code' => $codigo]);
+        echo json_encode(['status' => 'success', 'message' => 'Código enviado!']);
         exit;
 
+    // ======================
+    // 2) Verificar código
+    // ======================
     } elseif ($function === 'verificarCodigo') {
         $email = $_POST['email'] ?? '';
         $codigo = $_POST['codigo'] ?? '';
@@ -84,8 +90,9 @@ try {
             exit;
         }
 
-     
-        $stmt = $pdo->prepare("SELECT codigo_recuperacao, codigo_expiracao FROM usuarios WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT id, codigo_recuperacao, codigo_expiracao 
+                               FROM usuarios 
+                               WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
@@ -103,6 +110,15 @@ try {
             echo json_encode(['status' => 'error', 'message' => 'Código expirado']);
             exit;
         }
+
+        // ✅ Cria sessão temporária para redefinir senha
+        $_SESSION['recuperar_email'] = $email;
+
+        // (opcional) limpa o código no banco para não reutilizar
+        $stmt = $pdo->prepare("UPDATE usuarios 
+                               SET codigo_recuperacao = NULL, codigo_expiracao = NULL 
+                               WHERE id = :id");
+        $stmt->execute(['id' => $user['id']]);
 
         echo json_encode(['status' => 'success', 'message' => 'Código válido!']);
         exit;

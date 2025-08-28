@@ -39,7 +39,7 @@ class LoginDAO
 				$_SESSION['sessaoID'] = $sessaoID;
 				$_SESSION['tipo'] = $linha['tipo']; 
 
-				header('Location: ./../View/AdmHome.php');
+				header('Location: ./../View/Home.php');
 				exit;
 			} else {
 			echo "erro";
