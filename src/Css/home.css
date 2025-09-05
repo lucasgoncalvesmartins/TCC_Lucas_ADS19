@@ -1,0 +1,35 @@
+/* Reset básico para consistência */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Espaço para não esconder o conteúdo atrás do header */
+body {
+    padding-top: 4.5rem; /* igual à altura do header */
+    font-size: 1rem;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main respeita o sumário lateral */
+main {
+    flex: 1;
+    margin-left: 18rem; /* espaço do sumário */
+    padding: 1.5rem;
+}
+
+/* Artigos */
+article.card {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+/* Rodapé */
+footer {
+    margin-left: 18rem; /* acompanha main */
+    padding: 1.5rem;
+}

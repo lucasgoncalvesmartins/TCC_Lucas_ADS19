@@ -1,7 +1,7 @@
 <?php
-include_once __DIR__ . '/PostDAO.php';
+include_once __DIR__ . '/SecaoDAO.php';
 
-$classe = new PostDAO();
+$classe = new SecaoDAO();
 
 if (isset($_GET['function'])) {
 	$metodo = $_GET['function'];

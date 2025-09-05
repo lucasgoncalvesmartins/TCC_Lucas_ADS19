@@ -1,7 +1,7 @@
 <?php
-include_once __DIR__ . '/CategoriaDAO.php';
+include_once __DIR__ . '/SubSecaoDAO.php';
 
-$classe = new CategoriaDAO();
+$classe = new SubSecaoDAO();
 
 if (isset($_GET['function'])) {
 	$metodo = $_GET['function'];

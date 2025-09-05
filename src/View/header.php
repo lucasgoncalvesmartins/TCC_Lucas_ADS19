@@ -1,9 +1,16 @@
+<?php 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    <link rel="stylesheet" href="../Css/header.css">
     <title></title>
 </head>
 <body>
@@ -15,19 +22,21 @@
                     <a href="#">Sobre Nós</a>
                     <a href="#">Contato</a>
                     <a href="#">Glossário</a>
+                    <a href="AdmLogin.php">Login</a>
                 <?php endif; ?>
             </div>
 
             <div class="nav-center">
                 <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
-                    <a href="PostCadastrar.php">Adicionar Publicação</a>
+                    <a href="SubSecaoCadastrar.php">Adicionar Publicação</a>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
-                    <a href="PostCadastrar.php">Adicionar Publicação</a>
-                    <a href="PostEditar-Excluir.php">Editar Publicação</a>
-                    <a href="CategoriaEditar.php">Editar Categoria</a>
+                    <a href="SubSecaoCadastrar.php">Adicionar SubSeção</a>
+                    <a href="SubSecaoEditar-Excluir.php">Editar Publicação</a>
+                    <a href="SecaoEditar.php">Editar Seção</a>
                     <a href="UsuarioListar.php">Usuários</a>
+                    <a href="SecaoCadastrar.php">Adcionar Seção</a>
                 <?php endif; ?>
             </div>
 

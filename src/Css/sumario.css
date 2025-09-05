@@ -1,0 +1,26 @@
+
+#sumario {
+    position: fixed;
+    top: 4.5rem; /* abaixo do header */
+    left: 0;
+    width: 18rem; /* ~288px para leitura confortável */
+    height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Listas e sublistas do sumário */
+#sumario ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#sumario li {
+    margin-bottom: 0.75rem;
+}
+
+#sumario li ul {
+    padding-left: 1rem; /* recuo para subcategorias */
+}

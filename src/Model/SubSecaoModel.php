@@ -1,37 +1,32 @@
 <?php
 
-
-class PostModel
+class SubSecaoModel
 {
-    private $id;
+    private $id;             // ID da subseção
     private $titulo;
     private $conteudo;
-    private $id_autor;
-    private $id_categoria;
+    private $id_autor;       // ID do usuário logado
+    private $id_secao;       // ID da seção à qual a subseção pertence
     private $data_publicacao;
 
-    public function __construct()
+    public function __construct($data = [])
     {
-        if (func_num_args() != 0) {
-            $atributos = func_get_args()[0];
-            foreach ($atributos as $atributo => $valor) {
-                if (isset($valor) && property_exists(get_class($this), $atributo)) {
-                    $this->$atributo = $valor;
-                }
-            }
-        }
+        $this->titulo = $data['titulo'] ?? '';
+        $this->conteudo = $data['conteudo'] ?? '';
+        $this->id_secao = $data['id_secao'] ?? null; // corrigido
+        // id_autor será setado manualmente pelo DAO
     }
 
-
-    function atualizar($atributos)
+    public function atualizar($atributos)
     {
         foreach ($atributos as $atributo => $valor) {
-            if (isset($valor) && property_exists(get_class($this), $atributo)) {
+            if (isset($valor) && property_exists($this, $atributo)) {
                 $this->$atributo = $valor;
             }
         }
     }
 
+    // ID da subseção
     public function getId()
     {
         return $this->id;
@@ -72,21 +67,23 @@ class PostModel
         $this->id_autor = $id_autor;
     }
 
-    public function getId_Categoria()
+    public function getId_Secao()
     {
-        return $this->id_categoria;
+        return $this->id_secao;
     }
 
-    public function setId_Categoria($id_categoria)
+    public function setId_Secao($id_secao)
     {
-        $this->id_categoria = $id_categoria;
+        $this->id_secao = $id_secao;
     }
 
-        public function getData_publicacao() {
+    public function getData_publicacao()
+    {
         return $this->data_publicacao;
     }
 
-    public function setData_publicacao($data_publicacao) {
+    public function setData_publicacao($data_publicacao)
+    {
         $this->data_publicacao = $data_publicacao;
     }
 }

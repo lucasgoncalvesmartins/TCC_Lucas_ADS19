@@ -38,7 +38,8 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
             <input type="file" name="pdf" id="pdf" accept=".pdf" required>
         </div>
         <br>
-        <button type="submit">Enviar PDF</button>
+        <button type="submit">Enviar PDF</button> <br>
+        <a href="Home.php">Voltar</a>
     </form>
 </body>
 </html>

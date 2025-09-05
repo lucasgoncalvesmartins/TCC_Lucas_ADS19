@@ -22,7 +22,7 @@ class UsuarioDAO{
         if ($stmt->execute()) {
             header('Location: ./../View/home.php');
         } else {
-           // header("Location: ".HOME."home/cadastroErro");
+          echo "Erro ao cadastrar usuário.";
         }
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class CategoriaModel
+class SecaoModel
 {
     private $id;
     private $nome;

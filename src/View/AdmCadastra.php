@@ -8,8 +8,8 @@ if (isset($_SESSION['id'])) {
 include_once __DIR__ . '/../Controller/UsuarioController.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuarioDAO = new UsuarioDAO();
-    $sucesso = $usuarioDAO->cadastrar($_POST);
+    $UsuarioDAO = new UsuarioDAO();
+    $sucesso = $UsuarioDAO->cadastrar($_POST);
     if ($sucesso) {
         header("Location: home.php?msg=sucesso");
         exit();
@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Cadastro de Usuário</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
 </head>
 <body>
 
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="email" name="email" id="email" class="form-control" required>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
             <label for="senha" class="form-label">Senha</label>
             <input type="password" name="senha" id="senha" class="form-control" required>
         </div>

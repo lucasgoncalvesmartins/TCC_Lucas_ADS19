@@ -5,64 +5,60 @@ include_once __DIR__ . '/../Model/LoginModel.php';
 
 class LoginDAO
 {
-	private $conexao;
+    private $conexao;
 
-	public function __construct()
-	{
-		$this->conexao = Conexao::getConexao();
-	}
+    public function __construct()
+    {
+        $this->conexao = Conexao::getConexao();
+    }
 
-	public function login()
-	{
-		$login = new LoginModel($_POST);
-		$stmt = $this->conexao->prepare("SELECT * FROM usuarios WHERE email = :email");
-		$stmt->bindValue(":email", $login->getEmail());
-		$stmt->execute();
+    public function login()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-		$linha = $stmt->fetch();
+        $login = new LoginModel($_POST);
+        $stmt = $this->conexao->prepare("SELECT * FROM usuarios WHERE email = :email");
+        $stmt->bindValue(":email", $login->getEmail());
+        $stmt->execute();
+        $linha = $stmt->fetch();
 
-		if ($linha != null) {
-			if ($linha['senha'] == $login->getSenha()) {
-				$login->atualizar($linha);
-				session_start();
-				session_regenerate_id();
+        if ($linha && $linha['senha'] === $login->getSenha()) {
 
-				$sessaoID = session_id();
+            session_regenerate_id();
+            $_SESSION['id'] = $linha['id'];
+            $_SESSION['tipo'] = $linha['tipo'];
+            $_SESSION['email'] = $linha['email'];
+            
+            // Se quiser armazenar o session_id no DB, crie a coluna sessaoID
+            // $sessaoID = session_id();
+            // $stmt = $this->conexao->prepare("UPDATE usuarios SET sessaoID = :sessaoID WHERE id = :id");
+            // $stmt->bindValue(":sessaoID", $sessaoID);
+            // $stmt->bindValue(":id", $linha['id']);
+            // $stmt->execute();
 
-				$stmt = $this->conexao->prepare("UPDATE usuarios SET sessaoID = :sessaoID WHERE id = :id");
-				$stmt->bindValue(":sessaoID", $sessaoID);
-				$stmt->bindValue(":id", $login->getId());
-				$stmt->execute();
+            header('Location: ./../View/Home.php');
+            exit;
+        } else {
+            echo "E-mail ou senha incorretos!";
+        }
+    }
 
-				
-				$_SESSION['id'] = $linha['id'];
-				$_SESSION['sessaoID'] = $sessaoID;
-				$_SESSION['tipo'] = $linha['tipo']; 
+    public function checkLogin()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-				header('Location: ./../View/Home.php');
-				exit;
-			} else {
-			echo "erro";
-			}
-		} else {
-		echo "erro AQUI";
-		}
-	}
+        // Se não tiver sessaoID no DB, só verifica se a sessão existe
+        if (isset($_SESSION['id'])) {
+            $data['saida'] = 'login';
+        } else {
+            $data['saida'] = 'logout';
+        }
 
-	public function checkLogin()
-	{
-		session_start();
-		$stmt = $this->conexao->prepare("SELECT sessaoID FROM usuarios WHERE id = :id");
-		$stmt->bindValue(":id", $_SESSION['id']);
-		$stmt->execute();
-		$linha = $stmt->fetch();
-		if ($linha != null) {
-			if ($_SESSION['sessaoID'] != $linha['sessaoID']) {
-				$data['saida'] = 'logout';
-			} else {
-				$data['saida'] = 'login';
-			}
-			echo json_encode($data);
-		}
-	}
+        echo json_encode($data);
+    }
 }
+
