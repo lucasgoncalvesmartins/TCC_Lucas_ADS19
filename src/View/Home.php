@@ -28,6 +28,8 @@ $categorias = $categoriaDAO->listarTodas();
 <body>
         <?php include_once __DIR__ . '/header.php'; ?>
 
+        <?php include __DIR__ . '/sumario.php'; ?>
+
         <main>
             <h1 class="text-center mb-5">Cartilha de Orientações para o ensino de Programação de Computadores para estudantes cegos</h1>
 

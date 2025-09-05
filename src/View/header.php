@@ -1,76 +1,45 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADS</title>
+   
+    <title></title>
 </head>
-
 <body>
     <header>
-        <div>
-            <div>
-                
-
-                <nav>
-                    <a href="home.php">Home</a>
-                    <?php if (!empty($categorias)): ?>
-                        <?php foreach ($categorias as $categoria): ?>
-                            <?php if ($categoria): ?>
-                                <a href="PostListarPorCategoria.php?categoria_id=<?= $categoria['id'] ?>">
-                                    <?= $categoria['nome'] ?>
-                                </a>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </nav>
-
-                <div>
-                    <?php if (isset($_SESSION['id'])): ?>
-                        <a href="Perfil.php">Perfil</a>
-                        <form action="logout.php" method="post">
-                            <button type="submit">Sair</button>
-                        </form>
-                    <?php endif; ?>
-                </div>
+        <nav aria-label="Menu principal">
+            <div class="nav-left">
+                <?php if (!isset($_SESSION['id'])): ?>
+                    <a href="UsuarioSugestao.php">Enviar Sugestões</a>
+                    <a href="#">Sobre Nós</a>
+                    <a href="#">Contato</a>
+                    <a href="#">Glossário</a>
+                <?php endif; ?>
             </div>
 
-            <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
-                <div>
-                    <a href="PostCadastrar.php">Adcionar Publicação</a>
-                </div>
-            <?php endif; ?>
-        </div>
-        <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
-            <div>
-                <a href="PostCadastrar.php">Adcionar Publicação</a>
-                <a href="PostEditar-Excluir.php">Editar Publicação</a>
-                <a href="CategoriaEditar.php">Editar Categoria</a>
-                <a href="UsuarioListar.php">Usuários</a>
+            <div class="nav-center">
+                <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
+                    <a href="PostCadastrar.php">Adicionar Publicação</a>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
+                    <a href="PostCadastrar.php">Adicionar Publicação</a>
+                    <a href="PostEditar-Excluir.php">Editar Publicação</a>
+                    <a href="CategoriaEditar.php">Editar Categoria</a>
+                    <a href="UsuarioListar.php">Usuários</a>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
-        </div>
 
-        </div>
-        <?php if (!isset($_SESSION['id'])): ?>
-            <div>
-                <a href="UsuarioSugestao.php">Enviar Sugestões</a>
-                <a href="">Sobre Nós</a>
-                <a href="">Contato</a>
-                <a href="">Glossário</a>
-                
+            <div class="nav-right">
+                <?php if (isset($_SESSION['id'])): ?>
+                    <a href="Perfil.php">Perfil</a>
+                    <form action="logout.php" method="post" style="display:inline;">
+                        <button type="submit">Sair</button>
+                    </form>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
-        </div>
-
-
-
+        </nav>
     </header>
-
-
 </body>
-
 </html>
