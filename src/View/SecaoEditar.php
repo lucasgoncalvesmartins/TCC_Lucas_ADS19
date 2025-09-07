@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8" />
     <title>Editar Seção</title>
+    <link rel="stylesheet" href="../Css/editaSecao.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>

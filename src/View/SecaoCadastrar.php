@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Seção</title>
+    <link rel="stylesheet" href="../Css/cadastroSecao.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

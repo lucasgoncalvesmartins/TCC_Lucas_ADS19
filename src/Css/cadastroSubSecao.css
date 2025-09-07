@@ -1,0 +1,52 @@
+/* centraliza todo o conteúdo da página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* alinhado ao topo */
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* centraliza o formulário e define largura máxima */
+form {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* inputs, select e textarea com largura total do formulário */
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+/* aumenta a altura da caixa de conteúdo */
+textarea#conteudo {
+    height: 200px; /* maior que o padrão de 6 linhas */
+}
+
+/* botões com padding maior e cursor pointer */
+button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* barra de botões de formatação */
+form div {
+    margin-bottom: 5px;
+}
+
+/* centraliza o título */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
