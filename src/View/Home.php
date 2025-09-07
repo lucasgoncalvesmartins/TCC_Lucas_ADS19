@@ -6,7 +6,7 @@ include_once __DIR__ . '/../Controller/SecaoDAO.php';
 $subSecaoDAO = new SubSecaoDAO();
 $subsecoes = $subSecaoDAO->listarTodas();
 
-// Opcional: carregar secoes (se quiser usar para outro fim)
+
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 

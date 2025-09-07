@@ -19,9 +19,10 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="nav-left">
                 <?php if (!isset($_SESSION['id'])): ?>
                     <a href="UsuarioSugestao.php">Enviar Sugestões</a>
-                    <a href="#">Sobre Nós</a>
-                    <a href="#">Contato</a>
+                    <a href="#">Sobre</a>
+                    <a href="#">Diretrizes</a>
                     <a href="#">Glossário</a>
+                    <a href="#">Contato</a>
                     <a href="AdmLogin.php">Login</a>
                 <?php endif; ?>
             </div>
