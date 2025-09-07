@@ -11,10 +11,9 @@ class SubSecaoDAO
         $this->conexao = Conexao::getConexao();
     }
 
-    // Cadastrar nova subseção
     public function cadastrar($postData)
 {
-    session_start(); // já iniciado na view, pode remover daqui
+    session_start(); 
     $subSecao = new SubSecaoModel($postData);
 
     if (!isset($_SESSION['id'])) {
@@ -49,27 +48,33 @@ class SubSecaoDAO
 
 
 
-    // Listar todas as subseções
-    public function listarTodas()
-    {
-        $stmt = $this->conexao->prepare("
-            SELECT 
-                s.id,
-                s.titulo,
-                s.conteudo,
-                u.nome_usuario AS autor,
-                sec.nome AS secao,
-                s.data_publicacao
-            FROM subsecoes s
-            JOIN usuarios u ON s.id_autor = u.id
-            JOIN secoes sec ON s.id_secao = sec.id
-            ORDER BY s.data_publicacao DESC
-        ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
-    // Buscar autores
+    public function listarTodas()
+{
+    $sql = "
+        SELECT
+            sec.id                 AS secao_id,
+            sec.nome               AS secao_nome,
+            sec.descricao          AS secao_descricao,
+            sub.id                 AS sub_id,
+            sub.titulo             AS sub_titulo,
+            sub.conteudo           AS sub_conteudo,
+            sub.data_publicacao    AS sub_data_publicacao,
+            u.nome_usuario         AS autor
+        FROM subsecoes sub
+        JOIN secoes sec   ON sub.id_secao = sec.id
+        JOIN usuarios u   ON sub.id_autor = u.id
+        ORDER BY sec.id ASC, sub.id ASC
+    ";
+
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+  
     public function buscaAutor()
     {
         $stmt = $this->conexao->prepare("SELECT id, nome_usuario FROM usuarios WHERE tipo = 'autor'");
@@ -77,7 +82,7 @@ class SubSecaoDAO
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Buscar seções
+  
     public function buscaSecao()
     {
         $stmt = $this->conexao->prepare("SELECT id, nome FROM secoes");
@@ -85,7 +90,6 @@ class SubSecaoDAO
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Buscar subseção por título
     public function buscarSubSecaoPorTitulo($titulo)
     {
         $stmt = $this->conexao->prepare("SELECT * FROM subsecoes WHERE titulo LIKE :titulo LIMIT 1");
@@ -94,7 +98,6 @@ class SubSecaoDAO
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Editar subseção
     public function editar()
     {
         $subSecao = new SubSecaoModel($_POST);
@@ -122,7 +125,6 @@ class SubSecaoDAO
         }
     }
 
-    // Buscar subseções por seção
     public function buscarPorSecao($id_secao)
     {
         $stmt = $this->conexao->prepare('
@@ -142,7 +144,7 @@ class SubSecaoDAO
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Excluir subseção
+
     public function excluir($id)
     {
         $stmt = $this->conexao->prepare("DELETE FROM subsecoes WHERE id = :id");
