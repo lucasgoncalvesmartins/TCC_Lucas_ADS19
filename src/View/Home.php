@@ -6,19 +6,16 @@ include_once __DIR__ . '/../Controller/SecaoDAO.php';
 $subSecaoDAO = new SubSecaoDAO();
 $subsecoes = $subSecaoDAO->listarTodas();
 
-
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// agrupar subseções por seção
+// Agrupar subseções por seção
 $agrupado = [];
 if (is_array($subsecoes)) {
     foreach ($subsecoes as $row) {
-
         $secaoId   = $row['secao_id'] ?? null;
         $secaoNome = $row['secao_nome'] ?? 'Sem título de seção';
         $secaoDesc = $row['secao_descricao'] ?? '';
-
 
         if (empty($secaoId)) {
             $secaoId = 'sec_undefined';
@@ -32,7 +29,6 @@ if (is_array($subsecoes)) {
             ];
         }
 
-        // normalizar dados da subseção para uso direto no template
         $agrupado[$secaoId]['subsecoes'][] = [
             'id' => $row['sub_id'] ?? null,
             'titulo' => $row['sub_titulo'] ?? 'Sem título',
@@ -67,7 +63,8 @@ if (is_array($subsecoes)) {
             <?php foreach ($agrupado as $secao): ?>
                 <section class="mb-5">
                     <h2><?= htmlspecialchars($secao['nome']) ?></h2>
-                    <p><?= nl2br(htmlspecialchars($secao['descricao'])) ?></p>
+                    <hr class="linha">
+                    <p><?= nl2br($secao['descricao']) ?></p>
 
                     <?php if (!empty($secao['subsecoes'])): ?>
                         <?php foreach ($secao['subsecoes'] as $sub): ?>
@@ -75,7 +72,7 @@ if (is_array($subsecoes)) {
                                 <div class="card-body">
                                     <h3 class="card-title"><?= htmlspecialchars($sub['titulo']) ?></h3>
 
-                                    <p class="card-text"><?= nl2br(htmlspecialchars($sub['conteudo'])) ?></p>
+                                    <p class="card-text"><?= nl2br($sub['conteudo']) ?></p>
 
                                     <p class="mt-3 text-muted">
                                         <strong>Autor:</strong> <?= htmlspecialchars($sub['autor']) ?> |
@@ -84,7 +81,6 @@ if (is_array($subsecoes)) {
                                     </p>
                                 </div>
                             </article>
-
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p class="text-muted">Nenhuma subseção nessa seção.</p>

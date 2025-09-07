@@ -14,6 +14,8 @@ $autores = $subSecaoDAO->buscaAutor();
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
+$erro = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sucesso = $subSecaoDAO->cadastrar($_POST);
     if ($sucesso) {
@@ -38,29 +40,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Cadastrar SubSeção</h1>
 
     <?php if (!empty($erro)): ?>
-        <p><?= htmlspecialchars($erro) ?></p>
+        <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
     <?php endif; ?>
 
     <form action="" method="post">
-    <label for="titulo">Título:</label><br>
-    <input type="text" name="titulo" id="titulo" required><br><br>
+        <label for="titulo">Título:</label><br>
+        <input type="text" name="titulo" id="titulo" required><br><br>
 
-    <label for="conteudo">Conteúdo:</label><br>
-    <textarea name="conteudo" id="conteudo" rows="6" required></textarea><br><br>
+        <label for="conteudo">Conteúdo:</label><br>
 
-    <label for="id_secao">Seção:</label><br>
-    <select name="id_secao" id="id_secao" required>
-        <option value="">-- Selecione uma seção --</option>
-        <?php
-        $secaoDAO = new SecaoDAO();
-        $secoes = $secaoDAO->listarTodas();
-        foreach ($secoes as $secao): ?>
-            <option value="<?= $secao['id'] ?>"><?= htmlspecialchars($secao['nome']) ?></option>
-        <?php endforeach; ?>
-    </select><br><br>
+        <!-- Barra de botões para formatação -->
+        <div>
+            <button type="button" onclick="wrapText('conteudo', '<b>', '</b>')"><b>B</b></button>
+            <button type="button" onclick="wrapText('conteudo', '<i>', '</i>')"><i>I</i></button>
+            <button type="button" onclick="insertLink('conteudo')">🔗 Link</button>
+        </div>
 
-    <button type="submit">Cadastrar</button>
-</form>
+        <textarea name="conteudo" id="conteudo" rows="6" required></textarea><br><br>
+
+        <label for="id_secao">Seção:</label><br>
+        <select name="id_secao" id="id_secao" required>
+            <option value="">-- Selecione uma seção --</option>
+            <?php foreach ($secoes as $secao): ?>
+                <option value="<?= $secao['id'] ?>"><?= htmlspecialchars($secao['nome']) ?></option>
+            <?php endforeach; ?>
+        </select><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+<script>
+function wrapText(textareaId, before, after) {
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    const selected = text.substring(start, end);
+    const replacement = before + selected + after;
+
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+    textarea.selectionStart = start + before.length;
+    textarea.selectionEnd = start + before.length + selected.length;
+}
+
+function insertLink(textareaId) {
+    const url = prompt("Digite a URL do link:");
+    if (!url) return;
+
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    const selected = text.substring(start, end) || "texto do link";
+    const replacement = `<a href="${url}" target="_blank">${selected}</a>`;
+
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+    textarea.selectionStart = start;
+    textarea.selectionEnd = start + replacement.length;
+}
+</script>
 
 </body>
 </html>

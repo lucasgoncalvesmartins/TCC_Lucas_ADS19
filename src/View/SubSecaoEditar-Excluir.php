@@ -61,7 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="titulo" id="titulo" value="<?= htmlspecialchars($subSecao['titulo']) ?>" required><br><br>
 
         <label for="conteudo">Conteúdo:</label><br>
-        <textarea name="conteudo" id="conteudo" rows="6" required><?= htmlspecialchars($subSecao['conteudo']) ?></textarea><br><br>
+
+        <!-- Barra de formatação -->
+        <div>
+            <button type="button" onclick="wrapText('conteudo', '<b>', '</b>')"><b>B</b></button>
+            <button type="button" onclick="wrapText('conteudo', '<i>', '</i>')"><i>I</i></button>
+            <button type="button" onclick="insertLink('conteudo')">🔗 Link</button>
+        </div>
+
+        <textarea name="conteudo" id="conteudo" rows="6" required><?= $subSecao['conteudo'] ?></textarea><br><br>
 
         <label for="id_secao">Seção:</label><br>
         <select name="id_secao" id="id_secao" required>
@@ -86,8 +94,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
 <?php if (!empty($erro)): ?>
-    <p><?= htmlspecialchars($erro) ?></p>
+    <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
 <?php endif; ?>
+
+<script>
+function wrapText(textareaId, before, after) {
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    const selected = text.substring(start, end);
+    const replacement = before + selected + after;
+
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+
+    textarea.selectionStart = start + before.length;
+    textarea.selectionEnd = start + before.length + selected.length;
+}
+
+function insertLink(textareaId) {
+    const url = prompt("Digite a URL do link:");
+    if (!url) return;
+
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    const selected = text.substring(start, end) || "texto do link";
+    const replacement = `<a href="${url}" target="_blank">${selected}</a>`;
+
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+
+    textarea.selectionStart = start;
+    textarea.selectionEnd = start + replacement.length;
+}
+</script>
 
 </body>
 </html>
