@@ -10,13 +10,48 @@ include_once __DIR__ . '/../Controller/UsuarioDAO.php';
 $usuarioDAO = new UsuarioDAO();
 $usuario = $usuarioDAO->buscarPorId($_SESSION['id']);
 
+$erro = '';
+$sucessoMsg = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $_POST['email'], $_POST['senha']);
-    if ($sucesso) {
-        header("Location: perfil.php?msg=sucesso");
-        exit();
+    $email = $_POST['email'] ?? '';
+    $senhaAtual = $_POST['senha_atual'] ?? '';
+    $novaSenha = $_POST['nova_senha'] ?? '';
+    $confSenha = $_POST['conf_senha'] ?? '';
+
+    // Validação do email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "E-mail inválido.";
     } else {
-        $erro = "Erro ao atualizar perfil.";
+        // Verifica se o usuário quer alterar a senha
+        if (!empty($senhaAtual) || !empty($novaSenha) || !empty($confSenha)) {
+            // Verifica senha atual
+            if (!password_verify($senhaAtual, $usuario['senha'])) {
+                $erro = "Senha atual incorreta.";
+            } elseif ($novaSenha !== $confSenha) {
+                $erro = "A nova senha e a confirmação não coincidem.";
+            } else {
+               
+                //$hashNova = password_hash($novaSenha, PASSWORD_DEFAULT);
+                $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $hashNova);
+                if ($sucesso) {
+                    $sucessoMsg = "Perfil e senha atualizados com sucesso!";
+                    $usuario['senha'] = $hashNova; // atualizar localmente
+                    $usuario['email'] = $email;
+                } else {
+                    $erro = "Erro ao atualizar perfil.";
+                }
+            }
+        } else {
+            // Apenas atualizar o email mantendo a senha antiga
+            $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $usuario['senha']);
+            if ($sucesso) {
+                $sucessoMsg = "Perfil atualizado com sucesso!";
+                $usuario['email'] = $email;
+            } else {
+                $erro = "Erro ao atualizar perfil.";
+            }
+        }
     }
 }
 ?>
@@ -27,6 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .erro { color: red; }
+        .sucesso { color: green; }
+        form div { margin-bottom: 10px; }
+    </style>
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -36,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if (!empty($erro)): ?>
             <div class="erro"><?= htmlspecialchars($erro) ?></div>
-        <?php elseif (!empty($_GET['msg']) && $_GET['msg'] === 'sucesso'): ?>
-            <div class="sucesso">Perfil atualizado com sucesso!</div>
+        <?php elseif (!empty($sucessoMsg)): ?>
+            <div class="sucesso"><?= htmlspecialchars($sucessoMsg) ?></div>
         <?php endif; ?>
 
         <form action="" method="POST">
@@ -47,25 +87,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     type="email" 
                     name="email" 
                     id="email" 
-                    value="<?= ($usuario['email']) ?>" 
+                    value="<?= htmlspecialchars($usuario['email']) ?>" 
                     required
                 >
             </div>
 
+            <h3>Alterar senha</h3>
             <div>
-                <label for="senha">Senha:</label>
-                <input 
-                    type="password" 
-                    name="senha" 
-                    id="senha" 
-                    value="<?= ($usuario['senha']) ?>" 
-                    required
-                >
+                <label for="senha_atual">Senha Atual:</label>
+                <input type="password" name="senha_atual" id="senha_atual" placeholder="Digite sua senha atual">
+            </div>
+
+            <div>
+                <label for="nova_senha">Nova Senha:</label>
+                <input type="password" name="nova_senha" id="nova_senha" placeholder="Digite a nova senha">
+            </div>
+
+            <div>
+                <label for="conf_senha">Confirmar Nova Senha:</label>
+                <input type="password" name="conf_senha" id="conf_senha" placeholder="Repita a nova senha">
             </div>
 
             <button type="submit">Atualizar</button>
         </form>
-        
     </main>
 </body>
 </html>

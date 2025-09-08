@@ -52,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label for="conteudo">Conteúdo:</label><br>
 
-        
         <div>
             <button type="button" onclick="wrapText('conteudo', '<b>', '</b>')"><b>B</b></button>
             <button type="button" onclick="wrapText('conteudo', '<i>', '</i>')"><i>I</i></button>
@@ -76,46 +75,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <script>
-        // envolve seleção com  negrito/itálico
         function wrapText(textareaId, before, after) {
             const textarea = document.getElementById(textareaId);
             const start = textarea.selectionStart;
             const end = textarea.selectionEnd;
             const text = textarea.value;
-
             const selected = text.substring(start, end);
             const replacement = before + selected + after;
 
             textarea.value = text.substring(0, start) + replacement + text.substring(end);
             textarea.focus();
-
-            // mantem seleção dentro do texto inserido
             textarea.selectionStart = start + before.length;
             textarea.selectionEnd = start + before.length + selected.length;
         }
 
-        // insere o link com prompt; 
         function insertLink(textareaId) {
             const url = prompt("Digite a URL do link:");
             if (!url) return;
-
             const textarea = document.getElementById(textareaId);
             const start = textarea.selectionStart;
             const end = textarea.selectionEnd;
             const text = textarea.value;
             const selected = text.substring(start, end) || "texto do link";
-
-            // escape pra evitar fechar atributo se o usuário colar aspas 
             const safeUrl = url.replace(/"/g, '%22');
-
             const replacement = `<a href="${safeUrl}" target="_blank">${selected}</a>`;
+
             textarea.value = text.substring(0, start) + replacement + text.substring(end);
             textarea.focus();
             textarea.selectionStart = start;
             textarea.selectionEnd = start + replacement.length;
         }
 
-        // insere nota
         function insertNota(textareaId) {
             const textarea = document.getElementById(textareaId);
             const start = textarea.selectionStart;
@@ -126,17 +116,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             textarea.value = text.substring(0, start) + replacement + text.substring(end);
             textarea.focus();
-
-            // posiciona seleção dentro da nota 
             const innerStart = start + 6;
             textarea.selectionStart = innerStart;
             textarea.selectionEnd = innerStart + selected.length;
         }
 
-        /**
-         * Insere lista no textarea.
-        
-         */
         function insertList(textareaId, type) {
             const textarea = document.getElementById(textareaId);
             const start = textarea.selectionStart;
@@ -144,7 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const full = textarea.value;
             const selected = full.substring(start, end);
 
-            
             let linesArr = [];
             if (selected.trim()) {
                 linesArr = selected.split(/\r?\n/).map(l => l.trim()).filter(l => l !== '');
@@ -152,40 +135,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             let items;
             if (linesArr.length) {
-                items = linesArr.map(l => '[li]' + l + '[/li]').join('\n');
+                // remove quebras de linha extras
+                items = linesArr.map(l => '[li]' + l + '[/li]').join('');
             } else {
-                
-                items = '[li]Item 1[/li]\n[li]Item 2[/li]';
+                items = '[li]Item 1[/li][li]Item 2[/li]';
             }
 
-            const replacement = '[' + type + ']\n' + items + '\n[/' + type + ']';
+            const replacement = '[' + type + ']' + items + '[/' + type + ']';
 
-            // atualiza textarea
             textarea.value = full.substring(0, start) + replacement + full.substring(end);
             textarea.focus();
 
-            // seleciona o conteúdo do primeiro item para facilitar edição
+            // seleciona o conteúdo do primeiro item
             const firstLiIndex = replacement.indexOf('[li]');
             if (firstLiIndex !== -1) {
-                const firstContentStart = start + firstLiIndex + 4; 
-                const firstContentLen = linesArr.length ? linesArr[0].length : 6; 
+                const firstContentStart = start + firstLiIndex + 4;
+                const firstContentLen = linesArr.length ? linesArr[0].length : 6;
                 textarea.selectionStart = firstContentStart;
                 textarea.selectionEnd = firstContentStart + firstContentLen;
             }
         }
 
-        
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.shiftKey) {
                 const active = document.activeElement;
                 if (active && active.tagName === 'TEXTAREA' && active.id === 'conteudo') {
-                    if (e.key.toLowerCase() === 'u') { // Ctrl+Shift+U -> ul
+                    if (e.key.toLowerCase() === 'u') {
                         e.preventDefault();
                         insertList('conteudo', 'ul');
-                    } else if (e.key.toLowerCase() === 'o') { // Ctrl+Shift+O -> ol
+                    } else if (e.key.toLowerCase() === 'o') {
                         e.preventDefault();
                         insertList('conteudo', 'ol');
-                    } else if (e.key.toLowerCase() === 'n') { // Ctrl+Shift+N -> nota
+                    } else if (e.key.toLowerCase() === 'n') {
                         e.preventDefault();
                         insertNota('conteudo');
                     }
@@ -195,5 +176,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 
 </body>
-
 </html>

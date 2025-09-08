@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -7,23 +7,26 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/header.css">
     <title></title>
 </head>
+
 <body>
     <header>
         <nav aria-label="Menu principal">
             <div class="nav-left">
-                <?php if (!isset($_SESSION['id'])): ?>
+                <?php if (!isset($_SESSION['id']) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'comum')): ?>
                     <a href="UsuarioSugestao.php">Enviar Sugestões</a>
                     <a href="#">Glossário</a>
                     <a href="#">Contato</a>
                     <a href="#">Sobre</a>
                     <a href="AdmLogin.php">Login</a>
                 <?php endif; ?>
+
             </div>
 
             <div class="nav-center">
@@ -54,4 +57,5 @@ if (session_status() === PHP_SESSION_NONE) {
         </nav>
     </header>
 </body>
+
 </html>

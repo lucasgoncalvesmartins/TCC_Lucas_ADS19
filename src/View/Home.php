@@ -54,26 +54,30 @@ if (is_array($subsecoes)) {
     }
 }
 
-function renderTexto($texto)
-{
+function renderTexto($texto) {
     // notas
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
 
-    // listas
-    $texto = preg_replace('/\[ul\](.*?)\[\/ul\]/s', '<ul>$1</ul>', $texto);
-    $texto = preg_replace('/\[ol\](.*?)\[\/ol\]/s', '<ol>$1</ol>', $texto);
-    $texto = preg_replace('/\[li\](.*?)\[\/li\]/s', '<li>$1</li>', $texto);
+    // trata todos os [li] primeiro
+    $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function($m) {
+        return '<li>' . $m[1] . '</li>';
+    }, $texto);
 
-    // remove quebras de linha dentro de listas
-    $texto = preg_replace_callback(
-        '/<(ul|ol)>.*?<\/\1>/s',
-        function ($matches) {
-            return str_replace(["\n", "\r"], '', $matches[0]);
-        },
-        $texto
-    );
+    // depois processa [ul] e [ol]
+    $texto = preg_replace_callback('/\[ul\](.*?)\[\/ul\]/s', function($m) {
+        return '<ul>' . $m[1] . '</ul>';
+    }, $texto);
 
-    // aplica nl2br fora das listas para n ficar muito espaçado
+    $texto = preg_replace_callback('/\[ol\](.*?)\[\/ol\]/s', function($m) {
+        return '<ol>' . $m[1] . '</ol>';
+    }, $texto);
+
+    // remove quebras de linha dentro das listas
+    $texto = preg_replace_callback('/<(ul|ol)>.*?<\/\1>/s', function($m) {
+        return str_replace(["\n", "\r"], '', $m[0]);
+    }, $texto);
+
+    // aplica nl2br fora das listas para não ter espaçamento excessivo
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
         function($matches) {
@@ -84,6 +88,8 @@ function renderTexto($texto)
 
     return $texto;
 }
+
+
 
 
 ?>
@@ -135,7 +141,8 @@ function renderTexto($texto)
                 <section id="secao-<?= $secao['id'] ?>" class="mb-5">
                     <h2><?= htmlspecialchars($secao['nome']) ?></h2>
                     <hr class="linha">
-                    <p><?= renderTexto($secao['descricao']) ?></p>
+                    <br>
+                    <p><?= renderTexto($secao['descricao']) ?></p><br>
 
                     <?php if (!empty($secao['subsecoes'])): ?>
                         <?php foreach ($secao['subsecoes'] as $sub): ?>
@@ -147,7 +154,7 @@ function renderTexto($texto)
                                         <strong>Autor:</strong> <?= htmlspecialchars($sub['autor']) ?> |
                                         <strong>Data:</strong>
                                         <?= $sub['data_publicacao'] ? date('d/m/Y H:i', strtotime($sub['data_publicacao'])) : '—' ?>
-                                    </p>
+                                    </p><br>
                                 </div>
                             </article>
                         <?php endforeach; ?>

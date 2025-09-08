@@ -18,6 +18,7 @@ $Secaoes = $SecaoDAO->listarSecaoComPosts();
 <body>
     
 <aside id="sumario" aria-label="Sumário de navegação">
+    <h2>SUMARIO</h2>
     <ul>
         <?php foreach ($Secaoes as $Secao): ?>
             <li>

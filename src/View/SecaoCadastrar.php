@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="descricao">Descrição:</label><br>
 
 
-        <<div>
+        <div>
             <button type="button" onclick="wrapText('descricao', '<b>', '</b>')"><b>B</b></button>
             <button type="button" onclick="wrapText('descricao', '<i>', '</i>')"><i>I</i></button>
             <button type="button" onclick="insertLink('descricao')">Link</button>

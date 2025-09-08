@@ -3,7 +3,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
 
 /* Espaço para não esconder o conteúdo atrás do header */
 body {
@@ -18,7 +20,7 @@ body {
 /* Main respeita o sumário lateral */
 main {
     flex: 1;
-    margin-left: 18rem; /* espaço do sumário */
+    margin-left: 18rem; 
     padding: 1.5rem;
 }
 
@@ -30,7 +32,7 @@ article.card {
 
 /* Rodapé */
 footer {
-    margin-left: 18rem; /* acompanha main */
+    margin-left: 18rem; 
     padding: 1.5rem;
 }
 /* Linha preta */
@@ -43,15 +45,15 @@ footer {
 
 /* listas */
 main ul, main ol {
-    margin: 0;           /* remove margin padrão */
-    padding-left: 1.2rem; /* indentação para itens */
+    margin: 0;           
+    padding-left: 1.2rem; 
     list-style-position: outside;
 }
 
 main li {
-    margin: 0;           /* remove margin extra entre itens */
-    padding: 0;          /* remove padding extra */
-    line-height: 1.4;    /* altura entre linhas */
+    margin: 0;           
+    padding: 0;          
+    line-height: 1.4;    
 }
 
 /* notas */
