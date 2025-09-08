@@ -19,24 +19,27 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="nav-left">
                 <?php if (!isset($_SESSION['id'])): ?>
                     <a href="UsuarioSugestao.php">Enviar Sugestões</a>
-                    <a href="#">Sobre</a>
                     <a href="#">Glossário</a>
                     <a href="#">Contato</a>
+                    <a href="#">Sobre</a>
                     <a href="AdmLogin.php">Login</a>
                 <?php endif; ?>
             </div>
 
             <div class="nav-center">
                 <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'autor'): ?>
-                    <a href="SubSecaoCadastrar.php">Adicionar Publicação</a>
+                    <a href="SecaoCadastrar.php">Adcionar Seção</a>
+                    <a href="SecaoEditar.php">Editar Seção</a>
+                    <a href="SubSecaoCadastrar.php">Adicionar SubSeção</a>
+                    <a href="SubSecaoEditar-Excluir.php">Editar SubSeção</a>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['id']) && $_SESSION['tipo'] === 'admin'): ?>
-                    <a href="SubSecaoCadastrar.php">Adicionar SubSeção</a>
-                    <a href="SubSecaoEditar-Excluir.php">Editar Publicação</a>
-                    <a href="SecaoEditar.php">Editar Seção</a>
-                    <a href="UsuarioListar.php">Usuários</a>
                     <a href="SecaoCadastrar.php">Adcionar Seção</a>
+                    <a href="SecaoEditar.php">Editar Seção</a>
+                    <a href="SubSecaoCadastrar.php">Adicionar SubSeção</a>
+                    <a href="SubSecaoEditar-Excluir.php">Editar SubSeção</a>
+                    <a href="UsuarioListar.php">Usuários</a>
                 <?php endif; ?>
             </div>
 
