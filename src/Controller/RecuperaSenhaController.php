@@ -76,9 +76,9 @@ try {
         echo json_encode(['status' => 'success', 'message' => 'Código enviado!']);
         exit;
 
-    // ======================
+    
     // 2) Verificar código
-    // ======================
+    
     } elseif ($function === 'verificarCodigo') {
         $email = $_POST['email'] ?? '';
         $codigo = $_POST['codigo'] ?? '';
@@ -109,10 +109,10 @@ try {
             exit;
         }
 
-        // ✅ Cria sessão temporária para redefinir senha
+        // Cria sessão temporária para redefinir senha
         $_SESSION['recuperar_email'] = $email;
 
-        // (opcional) limpa o código no banco para não reutilizar
+        //  limpa o código no banco para não reutilizar
         $stmt = $pdo->prepare("UPDATE usuarios 
                                SET codigo_recuperacao = NULL, codigo_expiracao = NULL 
                                WHERE id = :id");

@@ -21,7 +21,7 @@ $Secaoes = $SecaoDAO->listarSecaoComPosts();
     <ul>
         <?php foreach ($Secaoes as $Secao): ?>
             <li>
-                <!-- link interno para a seção -->
+                
                 <a href="#secao-<?= $Secao['id'] ?>">
                     <strong><?= htmlspecialchars($Secao['nome']) ?></strong>
                 </a>

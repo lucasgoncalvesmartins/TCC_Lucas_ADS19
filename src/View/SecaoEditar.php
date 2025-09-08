@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container my-5">
     <h1 class="mb-4 text-center">Editar Seção</h1>
 
-    <!-- Formulário de busca -->
+    
     <form method="get" action="" class="mb-4">
         <div class="mb-3">
             <label for="nomeBusca" class="form-label">Buscar por Nome:</label>
@@ -61,12 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 
-    <!-- Mensagem de sucesso -->
+    
     <?php if ($sucesso): ?>
         <div class="alert alert-success"><?= htmlspecialchars($sucesso) ?></div>
     <?php endif; ?>
 
-    <!-- Formulário de edição -->
+    
     <?php if ($secao): ?>
         <form method="post" class="mb-3">
             <input type="hidden" name="id" value="<?= ($secao['id']) ?>" />
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
 
-                <!-- Botões de formatação -->
+               
                 <div class="mb-2">
                     <button type="button" onclick="wrapText('descricao','<b>','</b>')"><b>B</b></button>
                     <button type="button" onclick="wrapText('descricao','<i>','</i>')"><i>I</i></button>
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn btn-success">Salvar Alterações</button>
         </form>
 
-        <!-- Botão de exclusão -->
+        
         <form method="post" onsubmit="return confirm('Tem certeza que deseja excluir esta seção?');">
             <input type="hidden" name="id" value="<?= ($secao['id']) ?>" />
             <button type="submit" name="excluir" class="btn btn-danger">Excluir</button>
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="alert alert-warning">Seção não encontrada.</div>
     <?php endif; ?>
 
-    <!-- Mensagem de erro -->
+  
     <?php if ($erro): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($erro) ?></div>
     <?php endif; ?>

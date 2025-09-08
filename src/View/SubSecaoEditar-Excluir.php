@@ -16,7 +16,7 @@ if ($titulo) {
     $subSecao = $subSecaoDAO->buscarSubSecaoPorTitulo($titulo);
 }
 
-// Busca seções para o select
+
 $secoes = $subSecaoDAO->buscaSecao();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="conteudo">Conteúdo:</label><br>
 
-            <!-- Botões de formatação -->
+           
             <div>
                 <button type="button" onclick="wrapText('conteudo', '<b>', '</b>')"><b>B</b></button>
                 <button type="button" onclick="wrapText('conteudo', '<i>', '</i>')"><i>I</i></button>

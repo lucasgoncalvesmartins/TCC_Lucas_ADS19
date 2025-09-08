@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpf   = $_POST['cpf'] ?? '';
     $email = $_POST['email'] ?? '';
 
-    // Validação básica
+  
     if (!$nome || !$cpf || !$email) {
         $msg = 'Preencha todos os campos.';
     } elseif (!isset($_FILES['pdf'])) {

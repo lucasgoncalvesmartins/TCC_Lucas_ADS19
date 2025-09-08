@@ -19,7 +19,7 @@ $subSecaoDAO = new SubSecaoDAO();
 $subsecoes = $subSecaoDAO->buscarPorSecao($secao_id);
 
 $secaoDAO = new SecaoDAO();
-$secao = $secaoDAO->buscarPorId($secao_id); // ajustar método para buscar pelo id
+$secao = $secaoDAO->buscarPorId($secao_id); 
 ?>
 
 <!DOCTYPE html>

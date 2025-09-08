@@ -73,7 +73,7 @@ function renderTexto($texto)
         $texto
     );
 
-    // aplica nl2br fora das listas
+    // aplica nl2br fora das listas para n ficar muito espaçado
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
         function($matches) {

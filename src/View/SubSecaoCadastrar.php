@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label for="conteudo">Conteúdo:</label><br>
 
-        <!-- Barra de botões para formatação (usa textarea id="conteudo") -->
+        
         <div>
             <button type="button" onclick="wrapText('conteudo', '<b>', '</b>')"><b>B</b></button>
             <button type="button" onclick="wrapText('conteudo', '<i>', '</i>')"><i>I</i></button>
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <script>
-        // envolve seleção com before/after (negrito/itálico)
+        // envolve seleção com  negrito/itálico
         function wrapText(textareaId, before, after) {
             const textarea = document.getElementById(textareaId);
             const start = textarea.selectionStart;
@@ -89,12 +89,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             textarea.value = text.substring(0, start) + replacement + text.substring(end);
             textarea.focus();
 
-            // manter seleção dentro do texto inserido
+            // mantem seleção dentro do texto inserido
             textarea.selectionStart = start + before.length;
             textarea.selectionEnd = start + before.length + selected.length;
         }
 
-        // insere link com prompt; se não houver seleção usa texto padrão
+        // insere o link com prompt; 
         function insertLink(textareaId) {
             const url = prompt("Digite a URL do link:");
             if (!url) return;
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const text = textarea.value;
             const selected = text.substring(start, end) || "texto do link";
 
-            // escape simples para evitar fechar atributo se o usuário colar aspas (opcional)
+            // escape pra evitar fechar atributo se o usuário colar aspas 
             const safeUrl = url.replace(/"/g, '%22');
 
             const replacement = `<a href="${safeUrl}" target="_blank">${selected}</a>`;
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             textarea.selectionEnd = start + replacement.length;
         }
 
-        // insere [nota]...[/nota]
+        // insere nota
         function insertNota(textareaId) {
             const textarea = document.getElementById(textareaId);
             const start = textarea.selectionStart;
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             textarea.value = text.substring(0, start) + replacement + text.substring(end);
             textarea.focus();
 
-            // posiciona seleção dentro da nota (após [nota])
+            // posiciona seleção dentro da nota 
             const innerStart = start + 6;
             textarea.selectionStart = innerStart;
             textarea.selectionEnd = innerStart + selected.length;
@@ -135,9 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /**
          * Insere lista no textarea.
-         * type = 'ul' ou 'ol'
-         * Se houver seleção: cada linha vira um [li]...[/li]
-         * Se não houver seleção: insere template com dois itens.
+        
          */
         function insertList(textareaId, type) {
             const textarea = document.getElementById(textareaId);
@@ -146,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const full = textarea.value;
             const selected = full.substring(start, end);
 
-            // monta array de linhas a partir da seleção (se houver)
+            
             let linesArr = [];
             if (selected.trim()) {
                 linesArr = selected.split(/\r?\n/).map(l => l.trim()).filter(l => l !== '');
@@ -156,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (linesArr.length) {
                 items = linesArr.map(l => '[li]' + l + '[/li]').join('\n');
             } else {
-                // template padrão caso não haja seleção
+                
                 items = '[li]Item 1[/li]\n[li]Item 2[/li]';
             }
 
@@ -169,14 +167,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // seleciona o conteúdo do primeiro item para facilitar edição
             const firstLiIndex = replacement.indexOf('[li]');
             if (firstLiIndex !== -1) {
-                const firstContentStart = start + firstLiIndex + 4; // 4 = length of "[li]"
-                const firstContentLen = linesArr.length ? linesArr[0].length : 6; // "Item 1" ~ 6 chars
+                const firstContentStart = start + firstLiIndex + 4; 
+                const firstContentLen = linesArr.length ? linesArr[0].length : 6; 
                 textarea.selectionStart = firstContentStart;
                 textarea.selectionEnd = firstContentStart + firstContentLen;
             }
         }
 
-        // opcional: atalhos de teclado (Ctrl+Shift+U / Ctrl+Shift+O / Ctrl+Shift+N para nota)
+        
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.shiftKey) {
                 const active = document.activeElement;

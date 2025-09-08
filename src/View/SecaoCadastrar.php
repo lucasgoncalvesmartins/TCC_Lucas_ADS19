@@ -13,7 +13,6 @@ $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // O método cadastrar já redireciona em caso de sucesso
         $SecaoDAO->cadastrar();
     } catch (Exception $e) {
         $erro = "Erro ao cadastrar Seção: " . $e->getMessage();
