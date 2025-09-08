@@ -40,13 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include 'header.php'; ?>
 
-    <h1>Cadastrar SubSeção</h1>
+    
 
     <?php if (!empty($erro)): ?>
         <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
     <?php endif; ?>
 
     <form action="" method="post">
+        <h1>Cadastrar SubSeção</h1>
         <label for="titulo">Título:</label><br>
         <input type="text" name="titulo" id="titulo" required><br><br>
 

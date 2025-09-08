@@ -6,9 +6,11 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../Css/usuarioSugestao.css">
     <title>Enviar PDF</title>
 </head>
 <body>
+    <?php include_once __DIR__ . '/header.php'; ?>
     <h1>Enviar PDF por Email</h1>
 
     <?php if (!empty($msg)): ?>

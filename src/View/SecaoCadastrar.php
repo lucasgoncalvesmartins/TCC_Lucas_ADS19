@@ -32,14 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'header.php'; ?>
-
-    <h1>Cadastrar Seção</h1>
-
     <?php if (!empty($erro)): ?>
         <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
     <?php endif; ?>
 
     <form action="" method="post">
+        <h1>Cadastrar Seção</h1>
         <label for="nome">Nome da Seção:</label><br>
         <input type="text" name="nome" id="nome" required><br><br>
 

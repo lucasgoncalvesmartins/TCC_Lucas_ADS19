@@ -25,25 +25,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Verifica se o usuário quer alterar a senha
         if (!empty($senhaAtual) || !empty($novaSenha) || !empty($confSenha)) {
-            // Verifica senha atual
-            if (!password_verify($senhaAtual, $usuario['senha'])) {
+            // Verifica senha atual (texto puro)
+            if ($senhaAtual !== $usuario['senha']) {
                 $erro = "Senha atual incorreta.";
             } elseif ($novaSenha !== $confSenha) {
                 $erro = "A nova senha e a confirmação não coincidem.";
             } else {
-               
-                //$hashNova = password_hash($novaSenha, PASSWORD_DEFAULT);
-                $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $hashNova);
+                // Atualiza email e senha 
+                $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $novaSenha);
                 if ($sucesso) {
                     $sucessoMsg = "Perfil e senha atualizados com sucesso!";
-                    $usuario['senha'] = $hashNova; // atualizar localmente
+                    $usuario['senha'] = $novaSenha; 
                     $usuario['email'] = $email;
                 } else {
                     $erro = "Erro ao atualizar perfil.";
                 }
             }
         } else {
-            // Apenas atualizar o email mantendo a senha antiga
+            // Apenas atualiza o email mantendo a senha antiga
             $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $usuario['senha']);
             if ($sucesso) {
                 $sucessoMsg = "Perfil atualizado com sucesso!";
@@ -54,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
+    <link rel="stylesheet" href="../Css/perfil.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         .erro { color: red; }

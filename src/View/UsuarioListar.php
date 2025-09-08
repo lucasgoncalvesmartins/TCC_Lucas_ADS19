@@ -25,11 +25,12 @@ $usuarios = $usuarioDAO->listarTodos();
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <Link rel="stylesheet" href="../Css/usuariosListar.css">
     <title> Usuários</title>
 </head>
 <body>
     <?php include_once __DIR__ . '/header.php'; ?>
-    <h1> Usuários</h1>
+    <h1> Lista de Usuários</h1>
     <table>
         <thead>
             <tr>
@@ -52,6 +53,7 @@ $usuarios = $usuarioDAO->listarTodos();
                             <select name="nova_role">
                                 <option value="autor" <?= $usuario['tipo']=='autor'?'selected':'' ?>>Autor</option>
                                 <option value="admin" <?= $usuario['tipo']=='admin'?'selected':'' ?>>Admin</option>
+                                <option value="comum" <?= $usuario['tipo']=='comum'?'selected':'' ?>>Comum</option>
                             </select>
                             <button type="submit">Atualizar</button>
                         </form>

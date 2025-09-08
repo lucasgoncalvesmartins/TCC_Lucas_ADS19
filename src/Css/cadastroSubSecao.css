@@ -2,7 +2,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* alinhado ao topo */
+    align-items: flex-start; 
     flex-direction: column;
     min-height: 100vh;
     font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@ textarea {
 
 /* aumenta a altura da caixa de conteúdo */
 textarea#conteudo {
-    height: 200px; /* maior que o padrão de 6 linhas */
+    height: 200px; 
 }
 
 /* botões com padding maior e cursor pointer */
@@ -45,12 +45,13 @@ form div {
     margin-bottom: 5px;
 }
 
-/* centraliza o título */
+
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/*nota roxa*/
 .nota {
   background-color: rgba(72, 61, 139, 0.15);
   border: solid 8px transparent;

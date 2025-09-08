@@ -50,11 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include 'header.php'; ?>
 
 <div class="container my-5">
-    <h1 class="mb-4 text-center">Editar Seção</h1>
+    
 
     
     <form method="get" action="" class="mb-4">
         <div class="mb-3">
+            <h1 class="mb-4 text-center">Editar Seção</h1>
             <label for="nomeBusca" class="form-label">Buscar por Nome:</label>
             <input type="text" name="nome" id="nomeBusca" class="form-control" placeholder="Digite o nome da seção" required />
         </div>

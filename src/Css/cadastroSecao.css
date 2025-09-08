@@ -2,14 +2,14 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* alinha ao topo */
+    align-items: flex-start; 
     flex-direction: column;
     min-height: 100vh;
     font-family: Arial, sans-serif;
     padding: 20px;
 }
 
-/* centraliza o formulário e define largura máxima */
+/*  formulário  */
 form {
     max-width: 700px;
     width: 100%;
@@ -29,10 +29,10 @@ textarea {
 
 /* aumenta o tamanho da caixa de descrição */
 textarea#descricao {
-    height: 200px; /* maior que o padrão de 6 linhas */
+    height: 200px; 
 }
 
-/* botão com padding maior */
+/* botão  */
 button {
     padding: 8px 16px;
     font-size: 1rem;
@@ -50,7 +50,7 @@ h1 {
     text-align: center;
     margin-bottom: 20px;
 }
-
+/*nota roxa*/
 .nota {
   background-color: rgba(72, 61, 139, 0.15);
   border: solid 8px transparent;

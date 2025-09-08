@@ -47,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include 'header.php'; ?>
 
-    <h1>Editar SubSeção</h1>
-
+    
     <form method="get" action="">
+        <h1>Editar SubSeção</h1>
         <label for="tituloBusca">Buscar por Título:</label><br>
         <input type="text" name="titulo" id="tituloBusca" required><br><br>
         <button type="submit">Buscar</button>

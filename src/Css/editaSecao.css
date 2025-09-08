@@ -2,7 +2,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* alinhado ao topo */
+    align-items: flex-start; 
     flex-direction: column;
     min-height: 100vh;
     font-family: Arial, sans-serif;
@@ -34,14 +34,13 @@ textarea {
 
 /* aumenta a altura da caixa de descrição */
 textarea#descricao {
-    height: 200px; /* maior que o padrão de 4 linhas */
+    height: 200px; 
 }
 
-/* botão com padding e cursor pointer */
+/* botão */
 button {
     padding: 8px 16px;
     font-size: 1rem;
-    cursor: pointer;
     margin-top: 10px;
 }
 
