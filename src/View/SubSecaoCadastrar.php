@@ -54,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div>
             <button type="button" onclick="wrapText('conteudo', '<b>', '</b>')"><b>B</b></button>
             <button type="button" onclick="wrapText('conteudo', '<i>', '</i>')"><i>I</i></button>
-            <button type="button" onclick="insertLink('conteudo')">🔗 Link</button>
+            <button type="button" onclick="insertLink('conteudo')"> Link</button>
+            <button type="button" onclick="insertNota('conteudo')">Nota</button>
         </div>
 
         <textarea name="conteudo" id="conteudo" rows="6" required></textarea><br><br>
@@ -95,13 +96,28 @@ function insertLink(textareaId) {
     const end = textarea.selectionEnd;
     const text = textarea.value;
 
-    const selected = text.substring(start, end) || "texto do link";
+    const selected = text.substring(start, end) || "";
     const replacement = `<a href="${url}" target="_blank">${selected}</a>`;
 
     textarea.value = text.substring(0, start) + replacement + text.substring(end);
     textarea.focus();
     textarea.selectionStart = start;
     textarea.selectionEnd = start + replacement.length;
+}
+
+function insertNota(textareaId) {
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    const selected = text.substring(start, end) || "";
+    const replacement = `[nota]${selected}[/nota]`;
+
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+    textarea.selectionStart = start + 6; // Posição dentro da nota
+    textarea.selectionEnd = start + 6 + selected.length;
 }
 </script>
 

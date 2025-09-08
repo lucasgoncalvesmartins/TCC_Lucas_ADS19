@@ -48,7 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div>
         <button type="button" onclick="wrapText('descricao', '<b>', '</b>')"><b>B</b></button>
         <button type="button" onclick="wrapText('descricao', '<i>', '</i>')"><i>I</i></button>
-        <button type="button" onclick="insertLink('descricao')">🔗 Link</button>
+        <button type="button" onclick="insertLink('descricao')"> Link</button>
+        <button type="button" onclick="wrapText('descricao', '[nota]', '[/nota]')">Nota</button>
+
     </div>
 
     <textarea name="descricao" id="descricao" rows="6" required></textarea><br><br>

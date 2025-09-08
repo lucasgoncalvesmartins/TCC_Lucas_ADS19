@@ -50,3 +50,12 @@ h1 {
     text-align: center;
     margin-bottom: 20px;
 }
+
+.nota {
+  background-color: rgba(72, 61, 139, 0.15);
+  border: solid 8px transparent;
+  border-left-color: #483d8b;
+  padding: 0.2vw;
+  margin-top: 2vh;
+  display: block;
+}

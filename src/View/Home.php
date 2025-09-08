@@ -9,12 +9,12 @@ $subsecoes = $subSecaoDAO->listarTodas();
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// Ordena seções pelo id ou data de criação (ascendente)
+// Ordenar seções pelo ID (ordem de inserção)
 usort($secoes, function($a, $b) {
     return ($a['id'] ?? 0) <=> ($b['id'] ?? 0);
 });
 
-// Inicializa todas as seções no array agrupado
+// Inicializa todas as seções
 $agrupado = [];
 foreach ($secoes as $sec) {
     $secaoId = $sec['id'] ?? 'sec_undefined';
@@ -26,9 +26,8 @@ foreach ($secoes as $sec) {
     ];
 }
 
-// Agrupar subseções por seção
+// Ordenar subseções pelo ID (ordem de inserção)
 if (is_array($subsecoes)) {
-    // Ordena subseções pelo id ou data de criação (ascendente)
     usort($subsecoes, function($a, $b) {
         return ($a['sub_id'] ?? 0) <=> ($b['sub_id'] ?? 0);
     });
@@ -54,12 +53,17 @@ if (is_array($subsecoes)) {
         ];
     }
 }
-?>
 
+// Função para renderizar descrição e conteúdo com notas
+function renderTexto($texto) {
+    $texto = nl2br($texto);
+    $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
+    return $texto;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,13 +71,17 @@ if (is_array($subsecoes)) {
     <link rel="stylesheet" href="../Css/home.css">
     <link rel="stylesheet" href="../Css/sumario.css">
     <style>
-        /* Rolagem suave para links internos */
-        html {
-            scroll-behavior: smooth;
+        html { scroll-behavior: smooth; }
+        .nota {
+            background-color: rgba(72, 61, 139, 0.15);
+            border: solid 8px transparent;
+            border-left-color: #483d8b;
+            padding: 0.2vw;
+            margin-top: 2vh;
+            display: block;
         }
     </style>
 </head>
-
 <body>
     <?php include_once __DIR__ . '/header.php'; ?>
 
@@ -111,16 +119,14 @@ if (is_array($subsecoes)) {
                 <section id="secao-<?= $secao['id'] ?>" class="mb-5">
                     <h2><?= htmlspecialchars($secao['nome']) ?></h2>
                     <hr class="linha">
-                    <!-- Permite HTML em descrição -->
-                    <p><?= nl2br($secao['descricao']) ?></p>
+                    <p><?= renderTexto($secao['descricao']) ?></p>
 
                     <?php if (!empty($secao['subsecoes'])): ?>
                         <?php foreach ($secao['subsecoes'] as $sub): ?>
                             <article id="subsecao-<?= $sub['id'] ?>" class="card mb-3">
                                 <div class="card-body">
                                     <h3 class="card-title"><?= htmlspecialchars($sub['titulo']) ?></h3>
-                                    <!-- Permite HTML em conteúdo -->
-                                    <p class="card-text"><?= nl2br($sub['conteudo']) ?></p>
+                                    <p class="card-text"><?= renderTexto($sub['conteudo']) ?></p>
                                     <p class="mt-3 text-muted">
                                         <strong>Autor:</strong> <?= htmlspecialchars($sub['autor']) ?> |
                                         <strong>Data:</strong>
@@ -129,17 +135,12 @@ if (is_array($subsecoes)) {
                                 </div>
                             </article>
                         <?php endforeach; ?>
-                    <?php else: ?>
-                        <p class="text-muted">Nenhuma subseção nessa seção.</p>
                     <?php endif; ?>
                 </section>
             <?php endforeach; ?>
-        <?php else: ?>
-            <p class="text-center text-muted">Nenhuma seção encontrada.</p>
         <?php endif; ?>
     </main>
 
     <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
-
 </html>
