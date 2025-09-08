@@ -18,33 +18,33 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
     <header>
         <nav aria-label="Menu principal">
-    <div class="nav-container">
-        <?php if (!isset($_SESSION['id']) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'comum')): ?>
-            <a href="Home.php">Home</a>
-            <a href="UsuarioSugestao.php">Enviar Sugestões</a>
-            <a href="#">Contato</a>
-            <a href="#">Sobre</a>
-            <a href="AdmLogin.php">Login</a>
-        <?php endif; ?>
+            <div class="nav-container">
+                <?php if (!isset($_SESSION['id']) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'comum')): ?>
+                    <a href="Home.php">Home</a>
+                    <a href="UsuarioSugestao.php">Enviar Sugestões</a>
+                    <a href="#">Contato</a>
+                    <a href="#">Sobre</a>
+                    <a href="AdmLogin.php">Login</a>
+                <?php endif; ?>
 
-        <?php if (isset($_SESSION['id']) && ($_SESSION['tipo'] === 'autor' || $_SESSION['tipo'] === 'admin')): ?>
-            <a href="SecaoCadastrar.php">Adicionar Seção</a>
-            <a href="SecaoEditar.php">Editar Seção</a>
-            <a href="SubSecaoCadastrar.php">Adicionar SubSeção</a>
-            <a href="SubSecaoEditar-Excluir.php">Editar SubSeção</a>
-            <?php if ($_SESSION['tipo'] === 'admin'): ?>
-                <a href="UsuarioListar.php">Usuários</a>
-            <?php endif; ?>
-        <?php endif; ?>
+                <?php if (isset($_SESSION['id']) && ($_SESSION['tipo'] === 'autor' || $_SESSION['tipo'] === 'admin')): ?>
+                    <a href="SecaoCadastrar.php">Adicionar Seção</a>
+                    <a href="SecaoEditar.php">Editar Seção</a>
+                    <a href="SubSecaoCadastrar.php">Adicionar SubSeção</a>
+                    <a href="SubSecaoEditar-Excluir.php">Editar SubSeção</a>
+                    <?php if ($_SESSION['tipo'] === 'admin'): ?>
+                        <a href="UsuarioListar.php">Usuários</a>
+                    <?php endif; ?>
+                <?php endif; ?>
 
-        <?php if (isset($_SESSION['id'])): ?>
-            <a href="Perfil.php">Perfil</a>
-            <form action="logout.php" method="post" style="display:inline;">
-                <button type="submit">Sair</button>
-            </form>
-        <?php endif; ?>
-    </div>
-</nav>
+                <?php if (isset($_SESSION['id'])): ?>
+                    <a href="Perfil.php">Perfil</a>
+                    <form action="logout.php" method="post" style="display:inline;">
+                        <button type="submit">Sair</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+        </nav>
 
     </header>
 </body>
