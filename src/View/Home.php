@@ -54,12 +54,38 @@ if (is_array($subsecoes)) {
     }
 }
 
-// Função para renderizar descrição e conteúdo com notas
-function renderTexto($texto) {
-    $texto = nl2br($texto);
+function renderTexto($texto)
+{
+    // notas
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
+
+    // listas
+    $texto = preg_replace('/\[ul\](.*?)\[\/ul\]/s', '<ul>$1</ul>', $texto);
+    $texto = preg_replace('/\[ol\](.*?)\[\/ol\]/s', '<ol>$1</ol>', $texto);
+    $texto = preg_replace('/\[li\](.*?)\[\/li\]/s', '<li>$1</li>', $texto);
+
+    // remove quebras de linha dentro de listas
+    $texto = preg_replace_callback(
+        '/<(ul|ol)>.*?<\/\1>/s',
+        function ($matches) {
+            return str_replace(["\n", "\r"], '', $matches[0]);
+        },
+        $texto
+    );
+
+    // aplica nl2br fora das listas
+    $texto = preg_replace_callback(
+        '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
+        function($matches) {
+            return nl2br($matches[0]);
+        },
+        $texto
+    );
+
     return $texto;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -70,17 +96,7 @@ function renderTexto($texto) {
     <title>Página Inicial</title>
     <link rel="stylesheet" href="../Css/home.css">
     <link rel="stylesheet" href="../Css/sumario.css">
-    <style>
-        html { scroll-behavior: smooth; }
-        .nota {
-            background-color: rgba(72, 61, 139, 0.15);
-            border: solid 8px transparent;
-            border-left-color: #483d8b;
-            padding: 0.2vw;
-            margin-top: 2vh;
-            display: block;
-        }
-    </style>
+    
 </head>
 <body>
     <?php include_once __DIR__ . '/header.php'; ?>

@@ -10,6 +10,9 @@ include_once __DIR__ . '/../Controller/SecaoController.php';
 $secaoDAO = new SecaoDAO();
 $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
 $secao = null;
+$erro = '';
+$sucesso = '';
+
 if ($nome) {
     $secao = $secaoDAO->buscarPorNome($nome);
 }
@@ -40,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8" />
     <title>Editar Seção</title>
-    <link rel="stylesheet" href="../Css/editaSecao.css" >
+    <link rel="stylesheet" href="../Css/editaSecao.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <!-- Mensagem de sucesso -->
-    <?php if (@$sucesso): ?>
+    <?php if ($sucesso): ?>
         <div class="alert alert-success"><?= htmlspecialchars($sucesso) ?></div>
     <?php endif; ?>
 
@@ -70,12 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
-                <input type="text" name="nome" id="nome" value="<?=($secao['nome']) ?>" class="form-control" required />
+                <input type="text" name="nome" id="nome" value="<?= htmlspecialchars($secao['nome']) ?>" class="form-control" required />
             </div>
 
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
-                <textarea name="descricao" id="descricao" rows="4" class="form-control" required><?= ($secao['descricao']) ?></textarea>
+
+                <!-- Botões de formatação -->
+                <div class="mb-2">
+                    <button type="button" onclick="wrapText('descricao','<b>','</b>')"><b>B</b></button>
+                    <button type="button" onclick="wrapText('descricao','<i>','</i>')"><i>I</i></button>
+                    <button type="button" onclick="insertLink('descricao')">Link</button>
+                    <button type="button" onclick="insertNota('descricao')">Nota</button>
+                    <button type="button" onclick="insertList('descricao','ul')">Lista UL</button>
+                    <button type="button" onclick="insertList('descricao','ol')">Lista OL</button>
+                </div>
+
+                <textarea name="descricao" id="descricao" rows="6" class="form-control" required><?= htmlspecialchars($secao['descricao']) ?></textarea>
             </div>
 
             <button type="submit" class="btn btn-success">Salvar Alterações</button>
@@ -87,14 +101,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" name="excluir" class="btn btn-danger">Excluir</button>
         </form>
 
-    <?php elseif (@$nome): ?>
+    <?php elseif ($nome): ?>
         <div class="alert alert-warning">Seção não encontrada.</div>
     <?php endif; ?>
 
     <!-- Mensagem de erro -->
-    <?php if (@$erro): ?>
+    <?php if ($erro): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($erro) ?></div>
     <?php endif; ?>
 </div>
+
+<script>
+function wrapText(textareaId, before, after) {
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.substring(start, end);
+    const replacement = before + selected + after;
+    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+    textarea.focus();
+    textarea.selectionStart = start + before.length;
+    textarea.selectionEnd = start + before.length + selected.length;
+}
+
+function insertLink(textareaId) {
+    const url = prompt("Digite a URL do link:");
+    if (!url) return;
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.substring(start, end) || "texto do link";
+    const safeUrl = url.replace(/"/g, '%22');
+    const replacement = `<a href="${safeUrl}" target="_blank">${selected}</a>`;
+    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+    textarea.focus();
+    textarea.selectionStart = start;
+    textarea.selectionEnd = start + replacement.length;
+}
+
+function insertNota(textareaId) {
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.substring(start, end) || "Escreva sua nota aqui";
+    const replacement = `[nota]${selected}[/nota]`;
+    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+    textarea.focus();
+    const innerStart = start + 6;
+    textarea.selectionStart = innerStart;
+    textarea.selectionEnd = innerStart + selected.length;
+}
+
+function insertList(textareaId, type) {
+    const textarea = document.getElementById(textareaId);
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.substring(start, end);
+    let linesArr = selected.trim() ? selected.split(/\r?\n/).map(l => l.trim()).filter(l => l) : [];
+    let items = linesArr.length ? linesArr.map(l => '[li]' + l + '[/li]').join('\n') : '[li]Item 1[/li]\n[li]Item 2[/li]';
+    const replacement = `[${type}]\n${items}\n[/${type}]`;
+    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+    textarea.focus();
+    const firstLiIndex = replacement.indexOf('[li]');
+    if(firstLiIndex !== -1) {
+        const firstContentStart = start + firstLiIndex + 4;
+        const firstContentLen = linesArr.length ? linesArr[0].length : 6;
+        textarea.selectionStart = firstContentStart;
+        textarea.selectionEnd = firstContentStart + firstContentLen;
+    }
+}
+</script>
+
 </body>
 </html>

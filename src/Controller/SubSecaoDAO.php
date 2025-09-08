@@ -99,31 +99,43 @@ class SubSecaoDAO
     }
 
     public function editar()
-    {
-        $subSecao = new SubSecaoModel($_POST);
+{
+    // Pega os valores diretamente do POST
+    $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+    $titulo = isset($_POST['titulo']) ? trim($_POST['titulo']) : '';
+    $conteudo = isset($_POST['conteudo']) ? trim($_POST['conteudo']) : '';
+    $id_secao = isset($_POST['id_secao']) ? (int)$_POST['id_secao'] : null;
 
-        $stmt = $this->conexao->prepare('
-            UPDATE subsecoes
-            SET titulo = :titulo,
-                conteudo = :conteudo,
-                id_secao = :id_secao,
-                data_publicacao = :data_publicacao
-            WHERE id = :id
-        ');
-
-        $stmt->bindValue(':titulo', $subSecao->getTitulo());
-        $stmt->bindValue(':conteudo', $subSecao->getConteudo());
-        $stmt->bindValue(':id_secao', $subSecao->getId_Secao());
-        $stmt->bindValue(':data_publicacao', date('Y-m-d H:i:s'));
-        $stmt->bindValue(':id', $subSecao->getId_Secao());
-
-        if ($stmt->execute()) {
-            header('Location: ./../View/home.php');
-            exit();
-        } else {
-            echo "Erro ao editar subseção";
-        }
+    if (!$id || !$titulo || !$id_secao) {
+        echo "Dados incompletos para editar a subseção.";
+        return;
     }
+
+    $stmt = $this->conexao->prepare('
+        UPDATE subsecoes
+        SET titulo = :titulo,
+            conteudo = :conteudo,
+            id_secao = :id_secao,
+            data_publicacao = :data_publicacao
+        WHERE id = :id
+    ');
+
+    $stmt->bindValue(':titulo', $titulo);
+    $stmt->bindValue(':conteudo', $conteudo);
+    $stmt->bindValue(':id_secao', $id_secao);
+    $stmt->bindValue(':data_publicacao', date('Y-m-d H:i:s'));
+    $stmt->bindValue(':id', $id);
+
+    if ($stmt->execute()) {
+        header('Location: ./../View/home.php?msg=editado');
+        exit();
+    } else {
+        $error = $stmt->errorInfo();
+        echo "Erro ao editar subseção: " . $error[2];
+    }
+}
+
+
 
     public function buscarPorSecao($id_secao)
     {
