@@ -4,4 +4,4 @@ session_unset();
 session_destroy();
 
 
-header('Location: TelaLogin.php');
+header('Location: Home.php');

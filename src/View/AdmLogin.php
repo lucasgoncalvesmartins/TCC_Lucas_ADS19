@@ -49,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Entrar</button>
         </div>
 
-        <a href="Solicitar_Recuperacao.php">Esqueci a senha</a>
+        <a href="Solicitar_Recuperacao.php">Esqueci a senha</a> <br>
+        <a href="AdmCadastra.php">Quero Me Cadastrar</a>
         
     </form>
 </body>
