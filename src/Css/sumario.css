@@ -9,7 +9,7 @@
     padding: 1.5rem;
     font-size: 1rem;
     line-height: 1.6;
-   /* background-color: gray; */
+   background-color: #f2f2f2;
 }
 
 /* Listas e sublistas do sumário */
@@ -23,5 +23,11 @@
 }
 
 #sumario li ul {
-    padding-left: 1rem; /* recuo para subcategorias */
+    padding-left: 1rem; 
+}
+
+#sumario h2{
+    color: gray;
+    margin-bottom: 1rem;
+
 }

@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../Css/RecuperarSenha.css" />
   <title>Recuperar Senha</title>
 </head>
+
 <body>
-  <h1>Recuperar Senha</h1>
+
+  <?php
+  include_once __DIR__ . '/header.php';
+
+  ?>
+  
 
   <form id="formSolicitarRecuperacao">
-      <label for="email">Email cadastrado:</label><br>
-      <input type="email" id="email" name="email" required>
-      <br><br>
-      <button type="submit">Enviar Código</button>
+    <h1>Recuperar Senha</h1>
+    <label for="email">Email cadastrado:</label><br>
+    <input type="email" id="email" name="email" required>
+    <br><br>
+    <button type="submit">Enviar Código</button>
   </form>
 
   <div id="codigoContainer" style="display:none; margin-top:20px;">
-      <label for="codigo">Insira o código recebido:</label><br>
-      <input type="text" id="codigo" name="codigo" maxlength="6">
-      <br><br>
-      <button id="btnVerificarCodigo">Verificar Código</button>
+    <label for="codigo">Insira o código recebido:</label><br>
+    <input type="text" id="codigo" name="codigo" maxlength="6">
+    <br><br>
+    <button id="btnVerificarCodigo">Verificar Código</button>
   </div>
 
   <div id="mensagem" style="margin-top: 20px; color: red;"></div>
@@ -35,23 +45,23 @@
       const formData = new FormData(this);
 
       fetch('../Controller/RecuperaSenhaController.php?function=solicitarRecuperacao', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
-        mensagemDiv.innerHTML = data.message;
+          method: 'POST',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
+          mensagemDiv.innerHTML = data.message;
 
-        if (data.status === 'success') {
-          codigoContainer.style.display = 'block';
-        }
-      })
-      .catch(err => {
-        mensagemDiv.style.color = 'red';
-        mensagemDiv.textContent = 'Erro na requisição';
-        console.error(err);
-      });
+          if (data.status === 'success') {
+            codigoContainer.style.display = 'block';
+          }
+        })
+        .catch(err => {
+          mensagemDiv.style.color = 'red';
+          mensagemDiv.textContent = 'Erro na requisição';
+          console.error(err);
+        });
     });
 
     btnVerificar.addEventListener('click', function(e) {
@@ -66,25 +76,26 @@
       formData.append('codigo', codigo);
 
       fetch('../Controller/RecuperaSenhaController.php?function=verificarCodigo', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
-        mensagemDiv.textContent = data.message;
+          method: 'POST',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
+          mensagemDiv.textContent = data.message;
 
-        if (data.status === 'success') {
-  
-    window.location.href = 'RedefinirSenha.php?email=' + encodeURIComponent(email);
-}
-      })
-      .catch(err => {
-        mensagemDiv.style.color = 'red';
-        mensagemDiv.textContent = 'Erro na verificação';
-        console.error(err);
-      });
+          if (data.status === 'success') {
+
+            window.location.href = 'RedefinirSenha.php?email=' + encodeURIComponent(email);
+          }
+        })
+        .catch(err => {
+          mensagemDiv.style.color = 'red';
+          mensagemDiv.textContent = 'Erro na verificação';
+          console.error(err);
+        });
     });
   </script>
 </body>
+
 </html>

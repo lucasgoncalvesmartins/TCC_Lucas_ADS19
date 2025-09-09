@@ -18,35 +18,28 @@ $Secaoes = $SecaoDAO->listarSecaoComPosts();
 <body>
     
 <aside id="sumario" aria-label="Sumário de navegação">
-    <h2>SUMARIO</h2>
-    <ul>
-        <?php foreach ($Secaoes as $Secao): ?>
-            <li>
-                
-                <a href="#secao-<?= $Secao['id'] ?>">
-                    <strong><?= htmlspecialchars($Secao['nome']) ?></strong>
-                </a>
-
-                <?php if (!empty($Secao['posts'])): ?>
-                    <ul>
-                        <?php 
-                        $SubSecoes = $Secao['posts'];
-                        
-                        $SubSecoes = array_reverse($Secao['posts']);
-                        foreach ($SubSecoes as $SubSecao): 
-                        ?>
-                            <li>
-                                <a href="#subsecao-<?= $SubSecao['id'] ?>">
-                                    <?= htmlspecialchars($SubSecao['titulo']) ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</aside>
+    <h2>Sumario</h2>
+        <ul>
+            <?php foreach ($agrupado as $secao): ?>
+                <li>
+                    <a href="#secao-<?= $secao['id'] ?>">
+                        <strong><?= htmlspecialchars($secao['nome']) ?></strong>
+                    </a>
+                    <?php if (!empty($secao['subsecoes'])): ?>
+                        <ul>
+                            <?php foreach ($secao['subsecoes'] as $sub): ?>
+                                <li>
+                                    <a href="#subsecao-<?= $sub['id'] ?>">
+                                        <?= htmlspecialchars($sub['titulo']) ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </aside>
 
 </body>
 </html>

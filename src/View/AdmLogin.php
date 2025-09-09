@@ -19,14 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/AdmLogin.css">
     <title>Login Administrador</title>
-    
+
 </head>
+
 <body>
+
+    <?php
+    include_once __DIR__ . '/header.php';
+
+    ?>
     <form action="" method="post">
         <h2>Login</h2>
 
@@ -52,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <a href="Solicitar_Recuperacao.php">Esqueci a senha</a> <br>
         <a href="AdmCadastra.php">Quero Me Cadastrar</a>
-        
+
     </form>
 </body>
+
 </html>

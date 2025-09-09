@@ -1,0 +1,40 @@
+/* Centraliza o conteúdo na tela */
+body {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    height: 100vh;            
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff; 
+}
+
+/* Formulário */
+form {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    width: 300px;
+}
+
+/* Espaçamento dos elementos */
+form label, 
+form input, 
+form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+/* Div do código */
+#codigoContainer {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    width: 300px;
+    margin: 20px auto;
+}

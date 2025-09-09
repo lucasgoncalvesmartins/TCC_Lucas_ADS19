@@ -100,36 +100,19 @@ function renderTexto($texto) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
-    <link rel="stylesheet" href="../Css/home.css">
     <link rel="stylesheet" href="../Css/sumario.css">
+    <link rel="stylesheet" href="../Css/home.css">
+    
     
 </head>
 <body>
-    <?php include_once __DIR__ . '/header.php'; ?>
+    <?php 
+        include_once __DIR__ . '/header.php'; 
+        include_once __DIR__ . '/sumario.php';
+    ?>
 
-    <!-- Sumário -->
-    <aside id="sumario" aria-label="Sumário de navegação">
-        <ul>
-            <?php foreach ($agrupado as $secao): ?>
-                <li>
-                    <a href="#secao-<?= $secao['id'] ?>">
-                        <strong><?= htmlspecialchars($secao['nome']) ?></strong>
-                    </a>
-                    <?php if (!empty($secao['subsecoes'])): ?>
-                        <ul>
-                            <?php foreach ($secao['subsecoes'] as $sub): ?>
-                                <li>
-                                    <a href="#subsecao-<?= $sub['id'] ?>">
-                                        <?= htmlspecialchars($sub['titulo']) ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </aside>
+    
+    
 
     <main>
         <h1 class="text-center mb-5">

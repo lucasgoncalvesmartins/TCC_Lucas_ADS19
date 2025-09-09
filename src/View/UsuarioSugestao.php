@@ -11,7 +11,7 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
 </head>
 <body>
     <?php include_once __DIR__ . '/header.php'; ?>
-    <h1>Enviar PDF por Email</h1>
+    
 
     <?php if (!empty($msg)): ?>
         <p style="color: <?= strpos($msg, 'sucesso') !== false ? 'green' : 'red' ?>;">
@@ -20,6 +20,7 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
     <?php endif; ?>
 
     <form action="" method="POST" enctype="multipart/form-data">
+        <h1>Enviar Sugestão</h1>
         <div>
             <label for="nome">Nome completo:</label><br>
             <input type="text" name="nome" id="nome" required>
