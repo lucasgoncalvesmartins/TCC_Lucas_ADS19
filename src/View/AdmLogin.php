@@ -22,12 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/AdmLogin.css">
     <title>Login Administrador</title>
     
 </head>
 <body>
     <form action="" method="post">
-        <h2>Login Administrador</h2>
+        <h2>Login</h2>
 
         <?php if (!empty($_GET['msg']) && $_GET['msg'] === 'erro'): ?>
             <div class="msg erro">Email ou senha incorretos.</div>
