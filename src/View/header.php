@@ -38,7 +38,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['id'])): ?>
-                    <a href="Perfil.php">Perfil</a>
+                    <a href="Perfil.php"  tabindex="0">Perfil</a>
                     <form action="logout.php" method="post" style="display:inline;">
                         <button type="submit">Sair</button>
                     </form>

@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
 
             <div class="text-center mt-3">
-                <a href="AdmLogin.php" class="btn btn-link">Voltar para Login</a>
+                <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar para Login</a>
             </div>
         </form>
     </div>
