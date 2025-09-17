@@ -10,7 +10,7 @@ $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
 // Ordenar seções pelo ID (ordem de inserção)
-usort($secoes, function($a, $b) {
+usort($secoes, function ($a, $b) {
     return ($a['id'] ?? 0) <=> ($b['id'] ?? 0);
 });
 
@@ -28,7 +28,7 @@ foreach ($secoes as $sec) {
 
 // Ordenar subseções pelo ID (ordem de inserção)
 if (is_array($subsecoes)) {
-    usort($subsecoes, function($a, $b) {
+    usort($subsecoes, function ($a, $b) {
         return ($a['sub_id'] ?? 0) <=> ($b['sub_id'] ?? 0);
     });
 
@@ -54,33 +54,34 @@ if (is_array($subsecoes)) {
     }
 }
 
-function renderTexto($texto) {
+function renderTexto($texto)
+{
     // notas
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
 
     // trata todos os [li] primeiro
-    $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function($m) {
+    $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function ($m) {
         return '<li>' . $m[1] . '</li>';
     }, $texto);
 
     // depois processa [ul] e [ol]
-    $texto = preg_replace_callback('/\[ul\](.*?)\[\/ul\]/s', function($m) {
+    $texto = preg_replace_callback('/\[ul\](.*?)\[\/ul\]/s', function ($m) {
         return '<ul>' . $m[1] . '</ul>';
     }, $texto);
 
-    $texto = preg_replace_callback('/\[ol\](.*?)\[\/ol\]/s', function($m) {
+    $texto = preg_replace_callback('/\[ol\](.*?)\[\/ol\]/s', function ($m) {
         return '<ol>' . $m[1] . '</ol>';
     }, $texto);
 
     // remove quebras de linha dentro das listas
-    $texto = preg_replace_callback('/<(ul|ol)>.*?<\/\1>/s', function($m) {
+    $texto = preg_replace_callback('/<(ul|ol)>.*?<\/\1>/s', function ($m) {
         return str_replace(["\n", "\r"], '', $m[0]);
     }, $texto);
 
     // aplica nl2br fora das listas para não ter espaçamento excessivo
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
-        function($matches) {
+        function ($matches) {
             return nl2br($matches[0]);
         },
         $texto
@@ -96,23 +97,25 @@ function renderTexto($texto) {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
     <link rel="stylesheet" href="../Css/sumario.css">
     <link rel="stylesheet" href="../Css/home.css">
-    
-    
+
+
 </head>
+
 <body>
-    <?php 
-        include_once __DIR__ . '/header.php'; 
-        include_once __DIR__ . '/sumario.php';
+    <?php
+    include_once __DIR__ . '/header.php';
+    include_once __DIR__ . '/sumario.php';
     ?>
 
-    
-    
+
+
 
     <main>
         <h1 class="text-center mb-5">
@@ -121,7 +124,8 @@ function renderTexto($texto) {
 
         <?php if (!empty($agrupado)): ?>
             <?php foreach ($agrupado as $secao): ?>
-                <section id="secao-<?= $secao['id'] ?>" class="mb-5">
+                <section id="secao-<?= $secao['id'] ?>" tabindex="-1" class="mb-5">
+                    
                     <h2><?= htmlspecialchars($secao['nome']) ?></h2>
                     <hr class="linha">
                     <br>
@@ -149,4 +153,5 @@ function renderTexto($texto) {
 
     <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
+
 </html>

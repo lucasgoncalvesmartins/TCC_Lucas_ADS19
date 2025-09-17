@@ -22,8 +22,6 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php if (!isset($_SESSION['id']) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'comum')): ?>
                     <a href="Home.php"  tabindex="0">Home</a>
                     <a href="UsuarioSugestao.php"  tabindex="0">Enviar Sugestões</a>
-                    <a href="#"  tabindex="0">Contato</a>
-                    <a href="#"  tabindex="0">Sobre</a>
                     <a href="AdmLogin.php"  tabindex="0">Login</a>
                 <?php endif; ?>
 
@@ -33,7 +31,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a href="SubSecaoCadastrar.php"  tabindex="0">Adicionar SubSeção</a>
                     <a href="SubSecaoEditar-Excluir.php"  tabindex="0">Editar SubSeção</a>
                     <?php if ($_SESSION['tipo'] === 'admin'): ?>
-                        <a href="UsuarioListar.php"  tabindex="0">Usuários</a>
+                        <a href="UsuarioListar.php"  tabindex="0">Listar Usuários</a>
                     <?php endif; ?>
                 <?php endif; ?>
 
