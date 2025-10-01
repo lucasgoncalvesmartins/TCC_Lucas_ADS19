@@ -60,6 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="nome" id="nomeBusca" class="form-control" placeholder="Digite o nome da seção" required />
         </div>
         <button type="submit" class="btn btn-primary">Buscar</button>
+        <br><br>
+        <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
     </form>
 
     

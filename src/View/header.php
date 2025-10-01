@@ -26,6 +26,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['id']) && ($_SESSION['tipo'] === 'autor' || $_SESSION['tipo'] === 'admin')): ?>
+                    <a href="Home.php"  tabindex="0">Home</a>
                     <a href="SecaoCadastrar.php"  tabindex="0">Adicionar Seção</a>
                     <a href="SecaoEditar.php"  tabindex="0">Editar Seção</a>
                     <a href="SubSecaoCadastrar.php"  tabindex="0">Adicionar SubSeção</a>

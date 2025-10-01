@@ -81,3 +81,16 @@ form a {
         font-size: 0.9rem;
     }
 }
+
+/* Formulario */
+.erro {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 3px;
+}
+
+.sucesso {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 3px;
+}

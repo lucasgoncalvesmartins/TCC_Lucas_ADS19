@@ -66,6 +66,7 @@ $usuarios = $usuarioDAO->listarTodos();
                     </td>
                 </tr>
             <?php endforeach; ?>
+            
 
             <?php if(empty($usuarios)): ?>
                 <tr>
@@ -74,5 +75,7 @@ $usuarios = $usuarioDAO->listarTodos();
             <?php endif; ?>
         </tbody>
     </table>
+    <br><br>
+            <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
 </body>
 </html>

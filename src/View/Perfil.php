@@ -109,7 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="conf_senha" id="conf_senha" placeholder="Repita a nova senha">
             </div>
 
-            <button type="submit">Atualizar</button>
+            <button type="submit">Atualizar</button> <br>
+            <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
         </form>
     </main>
 </body>

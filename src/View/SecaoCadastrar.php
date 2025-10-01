@@ -55,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <textarea name="descricao" id="descricao" rows="6" required></textarea><br><br>
 
-            <button type="submit">Cadastrar Seção</button>
+            <button type="submit">Cadastrar Seção</button><br><br>
+            <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
     </form>
 
     <script>

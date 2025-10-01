@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="tituloBusca">Buscar por Título:</label><br>
         <input type="text" name="titulo" id="tituloBusca" required><br><br>
         <button type="submit">Buscar</button>
+        <br><br>
+            <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
     </form>
 
     <?php if ($subSecao): ?>

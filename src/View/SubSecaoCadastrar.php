@@ -73,6 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select><br><br>
 
         <button type="submit">Cadastrar</button>
+        <br><br>
+            <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
     </form>
 
     <script>
