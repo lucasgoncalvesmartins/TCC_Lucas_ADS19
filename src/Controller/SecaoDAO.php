@@ -13,16 +13,25 @@ class SecaoDAO {
 
     // Cadastrar nova seção
     public function cadastrar() {
-        $Secao = new SecaoModel($_POST);
-        $stmt = $this->conexao->prepare('INSERT INTO secoes (nome, descricao) VALUES (:nome, :descricao)');
-        $stmt->bindValue(":nome", $Secao->getNome());
-        $stmt->bindValue(":descricao", $Secao->getDescricao());
-        if ($stmt->execute()) {
-            header('Location: ./../View/home.php');
-        } else {
-            echo "Erro ao cadastrar seção";
-        }
+    // Recebe os dados do formulário
+    $Secao = new SecaoModel($_POST);
+
+    // Preparar a query para inserir
+    $stmt = $this->conexao->prepare('INSERT INTO secoes (nome, descricao) VALUES (:nome, :descricao)');
+    $stmt->bindValue(":nome", $Secao->getNome());
+
+    // Aqui passamos o HTML do editor diretamente
+    $stmt->bindValue(":descricao", $Secao->getDescricao());
+
+    if ($stmt->execute()) {
+        // Redireciona para a home
+        header('Location: ./../View/home.php');
+        exit;
+    } else {
+        echo "Erro ao cadastrar seção";
     }
+}
+
 
     // Listar todas as seções
     public function listarTodas() {
