@@ -9,12 +9,12 @@ $subsecoes = $subSecaoDAO->listarTodas();
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// Ordenar seções pela ordem definida (campo 'ordem')
+// Ordenar seções pela ordem 
 usort($secoes, function ($a, $b) {
     return ($a['ordem'] ?? 0) <=> ($b['ordem'] ?? 0);
 });
 
-// Inicializa todas as seções
+// Inicializa  as seções
 $agrupado = [];
 foreach ($secoes as $sec) {
     $secaoId = $sec['id'] ?? 'sec_undefined';
@@ -26,7 +26,7 @@ foreach ($secoes as $sec) {
     ];
 }
 
-// Ordenar subseções pelo ID (ordem de inserção)
+// Ordenar subseções pelo ID 
 if (is_array($subsecoes)) {
     usort($subsecoes, function ($a, $b) {
         return ($a['sub_id'] ?? 0) <=> ($b['sub_id'] ?? 0);
@@ -58,12 +58,12 @@ function renderTexto($texto) {
     // notas
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
 
-    // trata todos os [li] primeiro
+    // trata [li] primeiro
     $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function ($m) {
         return '<li>' . $m[1] . '</li>';
     }, $texto);
 
-    // depois processa [ul] e [ol]
+    // depois [ul] e [ol]
     $texto = preg_replace_callback('/\[ul\](.*?)\[\/ul\]/s', function ($m) {
         return '<ul>' . $m[1] . '</ul>';
     }, $texto);
@@ -72,7 +72,7 @@ function renderTexto($texto) {
         return '<ol>' . $m[1] . '</ol>';
     }, $texto);
 
-    // aplica nl2br apenas fora de listas
+    // aplica nl2br fora de listas
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
         function ($matches) {

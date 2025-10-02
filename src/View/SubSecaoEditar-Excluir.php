@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" onclick="insertNota()">Nota</button>
     </div><br>
 
-    <!-- Removido htmlspecialchars para renderizar HTML -->
+    
     <div id="editor" contenteditable="true"><?= $subSecao['conteudo'] ?></div>
     <input type="hidden" name="conteudo_html" id="conteudo_html"><br><br>
 

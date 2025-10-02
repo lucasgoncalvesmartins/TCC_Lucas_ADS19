@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link rel="stylesheet" href="../Css/cadastroSecao.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* Apenas para visualizar o editor */
+/* visualizar o editor */
 #editor {
     border: 1px solid #ccc;
     padding: 5px;
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="button" onclick="insertLink()">Link</button>
 </div><br>
 
-<!-- Editor contenteditable -->
+<!-- Editor contenteditable isso aqui faz aparecer as bolinhas e tals -->
 <div id="editor" contenteditable="true"></div>
 
 <!-- Input hidden para enviar -->

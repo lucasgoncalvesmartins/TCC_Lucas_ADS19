@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 e.preventDefault(); // bloqueia envio
                 msgCpfDiv.textContent = "CPF inválido!";
             } else {
-                msgCpfDiv.textContent = ""; // limpa mensagem se válido
+                msgCpfDiv.textContent = ""; // limpa mensagem
             }
         });
     </script>

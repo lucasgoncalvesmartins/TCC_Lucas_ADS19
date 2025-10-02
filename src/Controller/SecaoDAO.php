@@ -16,7 +16,7 @@ public function cadastrar() {
     // Recebe os dados do formulário
     $Secao = new SecaoModel($_POST);
 
-    // Definir a ordem
+    // Defini a ordem
     if (!isset($_POST['ordem']) || empty($_POST['ordem'])) {
         // Se não enviou ordem, coloca no final
         $stmtMax = $this->conexao->query("SELECT MAX(ordem) AS max_ordem FROM secoes");
@@ -144,11 +144,11 @@ public function editarOrdem($dados) {
 
     if ($nova_ordem != $ordem_antiga) {
         if ($nova_ordem < $ordem_antiga) {
-            // Subir seção: desloca outras para baixo
+            // Subir seção
             $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :nova AND ordem < :antiga");
             $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
         } else {
-            // Descer seção: desloca outras para cima
+            // Descer seção
             $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem - 1 WHERE ordem <= :nova AND ordem > :antiga");
             $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
         }
