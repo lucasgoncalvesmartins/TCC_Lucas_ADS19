@@ -5,7 +5,7 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
-include_once __DIR__ . '/../Controller/SecaoController.php';
+include_once __DIR__ . '/../Controller/SecaoDAO.php';
 
 $secaoDAO = new SecaoDAO();
 $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $erro = "Erro ao excluir seção.";
         }
     } else {
+        // Copia o conteúdo do editor para $_POST['descricao']
+        $_POST['descricao'] = $_POST['descricao_html'] ?? '';
         $sucesso = $secaoDAO->editar($_POST);
         if ($sucesso) {
             header("Location: home.php?msg=editado");
@@ -45,14 +47,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Editar Seção</title>
     <link rel="stylesheet" href="../Css/editaSecao.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        /* Estilo do editor */
+        #editor {
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 150px;
+        }
+        .editor-buttons button {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #editor ul { list-style-type: disc; padding-left: 1.5rem; }
+        #editor ol { list-style-type: decimal; padding-left: 1.5rem; }
+        #editor li { margin-bottom: 0.3rem; }
+    </style>
 </head>
 <body>
 <?php include 'header.php'; ?>
 
 <div class="container my-5">
-    
 
-    
     <form method="get" action="" class="mb-4">
         <div class="mb-3">
             <h1 class="mb-4 text-center">Editar Seção</h1>
@@ -64,15 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
     </form>
 
-    
     <?php if ($sucesso): ?>
         <div class="alert alert-success"><?= htmlspecialchars($sucesso) ?></div>
     <?php endif; ?>
 
-    
     <?php if ($secao): ?>
-        <form method="post" class="mb-3">
+        <form method="post" onsubmit="document.getElementById('descricao_html').value = document.getElementById('editor').innerHTML;">
             <input type="hidden" name="id" value="<?= ($secao['id']) ?>" />
+            <input type="hidden" name="descricao_html" id="descricao_html" />
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
@@ -81,24 +95,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
-
-               
-                <div class="mb-2">
-                    <button type="button" onclick="wrapText('descricao','<b>','</b>')"><b>B</b></button>
-                    <button type="button" onclick="wrapText('descricao','<i>','</i>')"><i>I</i></button>
-                    <button type="button" onclick="insertLink('descricao')">Link</button>
-                    <button type="button" onclick="insertNota('descricao')">Nota</button>
-                    <button type="button" onclick="insertList('descricao','ul')">Lista UL</button>
-                    <button type="button" onclick="insertList('descricao','ol')">Lista OL</button>
+                <div class="mb-2 editor-buttons">
+                    <button type="button" onclick="execCommand('bold')"><b>B</b></button>
+                    <button type="button" onclick="execCommand('italic')"><i>I</i></button>
+                    <button type="button" onclick="execCommand('insertUnorderedList')">UL</button>
+                    <button type="button" onclick="execCommand('insertOrderedList')">OL</button>
+                    <button type="button" onclick="insertLink()">Link</button>
+                    <button type="button" onclick="insertNota()">Nota</button>
                 </div>
-
-                <textarea name="descricao" id="descricao" rows="6" class="form-control" required><?= htmlspecialchars($secao['descricao']) ?></textarea>
+                <div id="editor" contenteditable="true"><?= $secao['descricao'] ?></div>
             </div>
 
             <button type="submit" class="btn btn-success">Salvar Alterações</button>
         </form>
 
-        
         <form method="post" onsubmit="return confirm('Tem certeza que deseja excluir esta seção?');">
             <input type="hidden" name="id" value="<?= ($secao['id']) ?>" />
             <button type="submit" name="excluir" class="btn btn-danger">Excluir</button>
@@ -108,70 +118,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="alert alert-warning">Seção não encontrada.</div>
     <?php endif; ?>
 
-  
     <?php if ($erro): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($erro) ?></div>
     <?php endif; ?>
 </div>
 
 <script>
-function wrapText(textareaId, before, after) {
-    const textarea = document.getElementById(textareaId);
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selected = textarea.value.substring(start, end);
-    const replacement = before + selected + after;
-    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
-    textarea.focus();
-    textarea.selectionStart = start + before.length;
-    textarea.selectionEnd = start + before.length + selected.length;
+function execCommand(command) {
+    document.execCommand(command, false, null);
 }
 
-function insertLink(textareaId) {
+function insertLink() {
     const url = prompt("Digite a URL do link:");
     if (!url) return;
-    const textarea = document.getElementById(textareaId);
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selected = textarea.value.substring(start, end) || "texto do link";
-    const safeUrl = url.replace(/"/g, '%22');
-    const replacement = `<a href="${safeUrl}" target="_blank">${selected}</a>`;
-    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
-    textarea.focus();
-    textarea.selectionStart = start;
-    textarea.selectionEnd = start + replacement.length;
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = "_blank";
+    link.textContent = range.toString() || "Texto do link";
+    range.deleteContents();
+    range.insertNode(link);
 }
 
-function insertNota(textareaId) {
-    const textarea = document.getElementById(textareaId);
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selected = textarea.value.substring(start, end) || "Escreva sua nota aqui";
-    const replacement = `[nota]${selected}[/nota]`;
-    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
-    textarea.focus();
-    const innerStart = start + 6;
-    textarea.selectionStart = innerStart;
-    textarea.selectionEnd = innerStart + selected.length;
-}
-
-function insertList(textareaId, type) {
-    const textarea = document.getElementById(textareaId);
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selected = textarea.value.substring(start, end);
-    let linesArr = selected.trim() ? selected.split(/\r?\n/).map(l => l.trim()).filter(l => l) : [];
-    let items = linesArr.length ? linesArr.map(l => '[li]' + l + '[/li]').join('\n') : '[li]Item 1[/li]\n[li]Item 2[/li]';
-    const replacement = `[${type}]\n${items}\n[/${type}]`;
-    textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
-    textarea.focus();
-    const firstLiIndex = replacement.indexOf('[li]');
-    if(firstLiIndex !== -1) {
-        const firstContentStart = start + firstLiIndex + 4;
-        const firstContentLen = linesArr.length ? linesArr[0].length : 6;
-        textarea.selectionStart = firstContentStart;
-        textarea.selectionEnd = firstContentStart + firstContentLen;
-    }
+function insertNota() {
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    const span = document.createElement('span');
+    span.textContent = "[nota]" + (range.toString() || "Texto da nota") + "[/nota]";
+    range.deleteContents();
+    range.insertNode(span);
 }
 </script>
 
