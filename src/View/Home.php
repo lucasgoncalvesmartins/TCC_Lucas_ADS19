@@ -54,8 +54,7 @@ if (is_array($subsecoes)) {
     }
 }
 
-function renderTexto($texto)
-{
+function renderTexto($texto) {
     // notas
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
 
@@ -73,12 +72,7 @@ function renderTexto($texto)
         return '<ol>' . $m[1] . '</ol>';
     }, $texto);
 
-    // remove quebras de linha dentro das listas
-    $texto = preg_replace_callback('/<(ul|ol)>.*?<\/\1>/s', function ($m) {
-        return str_replace(["\n", "\r"], '', $m[0]);
-    }, $texto);
-
-    // aplica nl2br fora das listas para não ter espaçamento excessivo
+    // aplica nl2br apenas fora de listas
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
         function ($matches) {
@@ -89,6 +83,8 @@ function renderTexto($texto)
 
     return $texto;
 }
+
+
 
 
 
