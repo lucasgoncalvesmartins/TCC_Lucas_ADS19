@@ -12,19 +12,39 @@ class UsuarioDAO{
     }
 
     public function cadastrar() {
-        $Usuario = new UsuarioModel($_POST);
+    // cria objeto usuário a partir do POST
+    $Usuario = new UsuarioModel($_POST);
+
+    // verifica se já existe algum usuário no banco
+    $check = $this->conexao->query("SELECT COUNT(*) as total FROM usuarios");
+    $count = $check->fetch(PDO::FETCH_ASSOC)['total'];
+
+    // se for o primeiro, vira adm
+    if ($count == 0) {
+        $Usuario->setTipo('admin');
+    } else {
         $Usuario->setTipo('comum');
-        $stmt = $this->conexao->prepare('insert into usuarios (nome_usuario, email, senha, tipo) values (:nome_usuario, :email, :senha, :tipo)');
-        $stmt->bindValue(":nome_usuario", $Usuario->getNome());
-        $stmt->bindValue(":email", $Usuario->getEmail());
-        $stmt->bindValue(":senha", $Usuario->getSenha());
-        $stmt->bindValue(":tipo", $Usuario->getTipo());
-        if ($stmt->execute()) {
-            header('Location: ./../View/home.php');
-        } else {
-          echo "Erro ao cadastrar usuário.";
-        }
     }
+
+    // prepara o insert
+    $stmt = $this->conexao->prepare(
+        'INSERT INTO usuarios (nome_usuario, email, senha, tipo) 
+         VALUES (:nome_usuario, :email, :senha, :tipo)'
+    );
+
+    $stmt->bindValue(":nome_usuario", $Usuario->getNome());
+    $stmt->bindValue(":email", $Usuario->getEmail());
+    $stmt->bindValue(":senha", $Usuario->getSenha());
+    $stmt->bindValue(":tipo", $Usuario->getTipo());
+
+    if ($stmt->execute()) {
+        header('Location: ./../View/home.php');
+        exit;
+    } else {
+        echo "Erro ao cadastrar usuário.";
+    }
+}
+
 
   
 
