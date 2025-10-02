@@ -11,17 +11,29 @@ class SecaoDAO {
         $this->conexao = Conexao::getConexao();
     }
 
-    // Cadastrar nova seção
-    public function cadastrar() {
+   // Cadastrar nova seção
+public function cadastrar() {
     // Recebe os dados do formulário
     $Secao = new SecaoModel($_POST);
 
-    // Preparar a query para inserir
-    $stmt = $this->conexao->prepare('INSERT INTO secoes (nome, descricao) VALUES (:nome, :descricao)');
-    $stmt->bindValue(":nome", $Secao->getNome());
+    // Definir a ordem
+    if (!isset($_POST['ordem']) || empty($_POST['ordem'])) {
+        // Se não enviou ordem, coloca no final
+        $stmtMax = $this->conexao->query("SELECT MAX(ordem) AS max_ordem FROM secoes");
+        $max = $stmtMax->fetch(PDO::FETCH_ASSOC)['max_ordem'];
+        $ordem = $max + 1;
+    } else {
+        $ordem = (int) $_POST['ordem'];
+        // Desloca as outras seções para abrir espaço
+        $stmtShift = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :ordem");
+        $stmtShift->execute([':ordem' => $ordem]);
+    }
 
-    // Aqui passamos o HTML do editor diretamente
+    // Preparar a query para inserir
+    $stmt = $this->conexao->prepare('INSERT INTO secoes (nome, descricao, ordem) VALUES (:nome, :descricao, :ordem)');
+    $stmt->bindValue(":nome", $Secao->getNome());
     $stmt->bindValue(":descricao", $Secao->getDescricao());
+    $stmt->bindValue(":ordem", $ordem, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
         // Redireciona para a home
@@ -31,6 +43,7 @@ class SecaoDAO {
         echo "Erro ao cadastrar seção";
     }
 }
+
 
 
     // Listar todas as seções
@@ -119,4 +132,38 @@ class SecaoDAO {
 
     return $resultado ?: null;
 }
+
+public function editarOrdem($dados) {
+    $id = $dados['id'];
+    $nova_ordem = $dados['ordem'];
+
+    // Pega a ordem antiga
+    $stmt = $this->conexao->prepare("SELECT ordem FROM secoes WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    $ordem_antiga = $stmt->fetch(PDO::FETCH_ASSOC)['ordem'];
+
+    if ($nova_ordem != $ordem_antiga) {
+        if ($nova_ordem < $ordem_antiga) {
+            // Subir seção: desloca outras para baixo
+            $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :nova AND ordem < :antiga");
+            $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
+        } else {
+            // Descer seção: desloca outras para cima
+            $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem - 1 WHERE ordem <= :nova AND ordem > :antiga");
+            $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
+        }
+    }
+
+    // Atualiza a seção
+    $stmt = $this->conexao->prepare("UPDATE secoes SET nome = :nome, descricao = :descricao, ordem = :ordem WHERE id = :id");
+    $stmt->execute([
+        ':nome' => $dados['nome'],
+        ':descricao' => $dados['descricao'],
+        ':ordem' => $nova_ordem,
+        ':id' => $id
+    ]);
+
+    return $stmt->rowCount() > 0;
+}
+
 }

@@ -9,9 +9,9 @@ $subsecoes = $subSecaoDAO->listarTodas();
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// Ordenar seções pelo ID (ordem de inserção)
+// Ordenar seções pela ordem definida (campo 'ordem')
 usort($secoes, function ($a, $b) {
-    return ($a['id'] ?? 0) <=> ($b['id'] ?? 0);
+    return ($a['ordem'] ?? 0) <=> ($b['ordem'] ?? 0);
 });
 
 // Inicializa todas as seções
@@ -83,35 +83,22 @@ function renderTexto($texto) {
 
     return $texto;
 }
-
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
     <link rel="stylesheet" href="../Css/sumario.css">
     <link rel="stylesheet" href="../Css/home.css">
-
-
 </head>
-
 <body>
     <?php
     include_once __DIR__ . '/header.php';
     include_once __DIR__ . '/sumario.php';
     ?>
-
-
-
 
     <main>
         <h1 class="text-center mb-5">
@@ -121,10 +108,8 @@ function renderTexto($texto) {
         <?php if (!empty($agrupado)): ?>
             <?php foreach ($agrupado as $secao): ?>
                 <section id="secao-<?= $secao['id'] ?>" tabindex="-1" class="mb-5">
-                    
                     <h2><?= htmlspecialchars($secao['nome']) ?></h2>
-                    <hr class="linha">
-                    <br>
+                    <hr class="linha"><br>
                     <p><?= renderTexto($secao['descricao']) ?></p><br>
 
                     <?php if (!empty($secao['subsecoes'])): ?>
@@ -149,5 +134,4 @@ function renderTexto($texto) {
 
     <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
-
 </html>
