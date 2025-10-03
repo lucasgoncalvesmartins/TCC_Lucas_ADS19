@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="" method="post">
         <h2>Login</h2>
 
-        <?php if (!empty($_GET['msg']) && $_GET['msg'] === 'erro'): ?>
+        <?php 
+        if (!empty($_GET['msg']) && $_GET['msg'] === 'erro'): ?>
             <div class="msg erro">Email ou senha incorretos.</div>
         <?php elseif (!empty($_GET['msg']) && $_GET['msg'] === 'senhaAtualizada'): ?>
             <div class="msg sucesso">Senha redefinida com sucesso! Faça login.</div>

@@ -58,7 +58,7 @@ function renderTexto($texto) {
     // notas
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
 
-    // trata [li] primeiro
+    // trata [li] 
     $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function ($m) {
         return '<li>' . $m[1] . '</li>';
     }, $texto);
@@ -72,7 +72,7 @@ function renderTexto($texto) {
         return '<ol>' . $m[1] . '</ol>';
     }, $texto);
 
-    // aplica nl2br fora de listas
+    // aplica nl2br fora de listas (se aplicar dentro de listas quebra o layout)
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
         function ($matches) {

@@ -122,19 +122,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script>
 function execCommand(command) {
+    // Executa um comando de edição no documento 
+    // API document.execCommand
     document.execCommand(command, false, null);
 }
 
 function insertLink() {
     const url = prompt("Digite a URL do link:");
     if (!url) return;
+
+     // aqui ta capturando a seleção de texto feita pelo usuário
     const sel = window.getSelection();
     if (!sel.rangeCount) return;
+    // Pega o texto selecionado 
     const range = sel.getRangeAt(0);
     const link = document.createElement('a');
     link.href = url;
     link.target = "_blank";
     link.textContent = range.toString() || "Texto do link";
+    // texto vira o link;
+    
+     // Substitui o conteúdo selecionado pelo link criado
     range.deleteContents();
     range.insertNode(link);
 }

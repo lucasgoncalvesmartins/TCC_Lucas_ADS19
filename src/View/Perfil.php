@@ -19,13 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $novaSenha = $_POST['nova_senha'] ?? '';
     $confSenha = $_POST['conf_senha'] ?? '';
 
-    // Validação do email
+    // Valida o email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "E-mail inválido.";
     } else {
         // Verifica se o usuário quer alterar a senha
         if (!empty($senhaAtual) || !empty($novaSenha) || !empty($confSenha)) {
-            // Verifica senha atual (texto puro)
+            // Verifica senha atual 
             if ($senhaAtual !== $usuario['senha']) {
                 $erro = "Senha atual incorreta.";
             } elseif ($novaSenha !== $confSenha) {

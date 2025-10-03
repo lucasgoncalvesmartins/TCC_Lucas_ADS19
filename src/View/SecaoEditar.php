@@ -124,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script>
+    //mesma coisa documentada em subseção cadastrar 
 function execCommand(command) {
     document.execCommand(command, false, null);
 }
