@@ -13,30 +13,28 @@ class SecaoDAO {
 
    // Cadastrar nova seção
 public function cadastrar() {
-    // Recebe os dados do formulário
+
     $Secao = new SecaoModel($_POST);
 
     // Defini a ordem
     if (!isset($_POST['ordem']) || empty($_POST['ordem'])) {
-        // Se não enviou ordem, coloca no final
         $stmtMax = $this->conexao->query("SELECT MAX(ordem) AS max_ordem FROM secoes");
         $max = $stmtMax->fetch(PDO::FETCH_ASSOC)['max_ordem'];
         $ordem = $max + 1;
     } else {
         $ordem = (int) $_POST['ordem'];
-        // Desloca as outras seções para abrir espaço
+        // meche nas outras seções para abrir espaço
         $stmtShift = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :ordem");
         $stmtShift->execute([':ordem' => $ordem]);
     }
 
-    // Preparar a query para inserir
+    
     $stmt = $this->conexao->prepare('INSERT INTO secoes (nome, descricao, ordem) VALUES (:nome, :descricao, :ordem)');
     $stmt->bindValue(":nome", $Secao->getNome());
     $stmt->bindValue(":descricao", $Secao->getDescricao());
     $stmt->bindValue(":ordem", $ordem, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        // Redireciona para a home
         header('Location: ./../View/home.php');
         exit;
     } else {
@@ -124,6 +122,8 @@ public function cadastrar() {
         return $secoes;
     }
 
+
+    //buascar seção por id (n esta sendo usada)
     public function buscarPorId($id) {
     $stmt = $this->conexao->prepare("SELECT * FROM secoes WHERE id = :id LIMIT 1");
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -133,6 +133,8 @@ public function cadastrar() {
     return $resultado ?: null;
 }
 
+
+    // Editar ordem da seção
 public function editarOrdem($dados) {
     $id = $dados['id'];
     $nova_ordem = $dados['ordem'];
@@ -144,11 +146,11 @@ public function editarOrdem($dados) {
 
     if ($nova_ordem != $ordem_antiga) {
         if ($nova_ordem < $ordem_antiga) {
-            // Subir seção
+            // Sobe seção
             $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :nova AND ordem < :antiga");
             $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
         } else {
-            // Descer seção
+            // Desce seção
             $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem - 1 WHERE ordem <= :nova AND ordem > :antiga");
             $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
         }

@@ -31,7 +31,7 @@ class LoginDAO
             $_SESSION['tipo'] = $linha['tipo'];
             $_SESSION['email'] = $linha['email'];
             
-            // Se quiser armazenar o session_id no DB, crie a coluna sessaoID
+            // Ia armazenar o session_id no bd mas desisti
             // $sessaoID = session_id();
             // $stmt = $this->conexao->prepare("UPDATE usuarios SET sessaoID = :sessaoID WHERE id = :id");
             // $stmt->bindValue(":sessaoID", $sessaoID);
@@ -51,7 +51,7 @@ class LoginDAO
             session_start();
         }
 
-        // Se não tiver sessaoID no DB, só verifica se a sessão existe
+        // só verificando  se a sessão existe
         if (isset($_SESSION['id'])) {
             $data['saida'] = 'login';
         } else {

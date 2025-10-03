@@ -27,7 +27,7 @@ try {
             exit;
         }
 
-        // Verifica se existe usuário com este email
+        
         $stmt = $pdo->prepare("SELECT id, nome_usuario FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ try {
             exit;
         }
 
-        // Gera código de 6 dígitos e define expiração
+        // aqui gera o código de 6 dígitos e define expiração
         $codigo = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
         $expiracao = date('Y-m-d H:i:s', strtotime('+15 minutes'));
 
@@ -77,7 +77,7 @@ try {
         exit;
 
     
-    // 2) Verificar código
+    // Verificar código
     
     } elseif ($function === 'verificarCodigo') {
         $email = $_POST['email'] ?? '';
@@ -109,7 +109,7 @@ try {
             exit;
         }
 
-        // Cria sessão temporária para redefinir senha
+        // só uma sessão temporária para redefinir senha
         $_SESSION['recuperar_email'] = $email;
 
         //  limpa o código no banco para não reutilizar
