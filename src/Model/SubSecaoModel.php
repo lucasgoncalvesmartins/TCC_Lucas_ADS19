@@ -6,15 +6,15 @@ class SubSecaoModel
     private $titulo;
     private $conteudo;
     private $id_autor;       // ID do usuário logado
-    private $id_secao;       // ID da seção à qual a subseção pertence
+    private $id_secao;       // ID da seção que a subseção pertence
     private $data_publicacao;
 
     public function __construct($data = [])
     {
         $this->titulo = $data['titulo'] ?? '';
         $this->conteudo = $data['conteudo'] ?? '';
-        $this->id_secao = $data['id_secao'] ?? null; // corrigido
-        // id_autor será setado manualmente pelo DAO
+        $this->id_secao = $data['id_secao'] ?? null; 
+        // id_autor é setado manualmente pelo DAO
     }
 
     public function atualizar($atributos)
@@ -26,7 +26,7 @@ class SubSecaoModel
         }
     }
 
-    // ID da subseção
+    
     public function getId()
     {
         return $this->id;
