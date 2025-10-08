@@ -6,15 +6,15 @@ if (!isset($_SESSION['id'])) {
 }
 
 include_once __DIR__ . '/../Controller/SecaoDAO.php';
-
 $secaoDAO = new SecaoDAO();
-$nome = isset($_GET['nome']) ? $_GET['nome'] : '';
+
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $secao = null;
 $erro = '';
 $sucesso = '';
 
-if ($nome) {
-    $secao = $secaoDAO->buscarPorNome($nome);
+if ($id) {
+    $secao = $secaoDAO->buscarPorId($id);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -68,17 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="container my-5">
 
-    <form method="get" action="" class="mb-4">
-        <div class="mb-3">
-            <h1 class="mb-4 text-center">Editar Seção</h1>
-            <label for="nomeBusca" class="form-label">Buscar por Nome:</label>
-            <input type="text" name="nome" id="nomeBusca" class="form-control" placeholder="Digite o nome da seção" required />
-        </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
-        <br><br>
-        <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
-    </form>
-
     <?php if ($sucesso): ?>
         <div class="alert alert-success"><?= htmlspecialchars($sucesso) ?></div>
     <?php endif; ?>
@@ -109,13 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn btn-success">Salvar Alterações</button>
         </form>
 
-        <form method="post" onsubmit="return confirm('Tem certeza que deseja excluir esta seção?');">
-            <input type="hidden" name="id" value="<?= ($secao['id']) ?>" />
-            <button type="submit" name="excluir" class="btn btn-danger">Excluir</button>
-        </form>
+        
 
-    <?php elseif ($nome): ?>
-        <div class="alert alert-warning">Seção não encontrada.</div>
+    <?php else: ?>
+        <?php if ($id): ?>
+            <div class="alert alert-warning">Seção não encontrada.</div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($erro): ?>
@@ -124,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script>
-    //mesma coisa documentada em subseção cadastrar 
 function execCommand(command) {
     document.execCommand(command, false, null);
 }

@@ -1,0 +1,94 @@
+<?php
+include_once __DIR__ . '/../Controller/SecaoDAO.php';
+
+$secaoDAO = new SecaoDAO();
+$secoes = $secaoDAO->listarTodas();
+
+// Ordena pelo campo "ordem"
+usort($secoes, function($a, $b) {
+    return $a['ordem'] <=> $b['ordem'];
+});
+
+$erro = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['excluir']) && isset($_POST['id'])) {
+        $id = (int) $_POST['id'];
+        if ($secaoDAO->excluir($id)) {
+            header('Location: home.php?msg=excluido');
+            exit();
+        } else {
+            $erro = "Erro ao excluir seção.";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Seções</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            padding: 4px 8px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        .button.delete {
+            background-color: #f44336;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Lista de Seções</h2>
+
+<?php if ($erro): ?>
+    <p style="color:red; text-align:center;"><?= htmlspecialchars($erro) ?></p>
+<?php endif; ?>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ordem</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($secoes as $secao): ?>
+        <tr>
+            <td><?= $secao['ordem'] ?></td>
+            <td><?= htmlspecialchars($secao['nome']) ?></td>
+            <td>
+                <a class="button" href="SecaoEditar.php?id=<?= $secao['id'] ?>">Editar</a>
+                <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta seção?');">
+                    <input type="hidden" name="id" value="<?= $secao['id'] ?>" />
+                    <button type="submit" name="excluir" class="button delete">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+</body>
+</html>

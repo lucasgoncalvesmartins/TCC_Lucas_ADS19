@@ -123,7 +123,7 @@ public function cadastrar() {
     }
 
 
-    //buascar seção por id (n esta sendo usada)
+    //buascar seção por id 
     public function buscarPorId($id) {
     $stmt = $this->conexao->prepare("SELECT * FROM secoes WHERE id = :id LIMIT 1");
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
