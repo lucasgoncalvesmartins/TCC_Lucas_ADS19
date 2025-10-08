@@ -1,5 +1,9 @@
 <?php
-require_once __DIR__ . '/../Controller/EnviarPdfController.php';
+require_once __DIR__ . '/../Controller/FaleConoscoController.php';
+
+$controller = new Controller\FaleConoscoController();
+$controller->enviarMensagem();
+$msg = $controller->msg;
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +11,12 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/usuarioSugestao.css">
-    <title>Enviar PDF</title>
+    <title>Fale Conosco</title>
 </head>
 <body>
-    <h1>Enviar Material</h1>
+    <h1>Fale Conosco</h1>
 
-    <?php if (!empty($msg)): ?>
+    <?php if ($msg): ?>
         <p style="color: <?= strpos($msg, 'sucesso') !== false ? 'green' : 'red' ?>;">
             <?= htmlspecialchars($msg) ?>
         </p>
@@ -34,18 +38,13 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
             <input type="email" name="email" id="email" required>
         </div>
         <br>
-       
         <div>
-            <label for="descricao">Descrição:</label><br>
-            <textarea name="descricao" id="descricao" rows="4" cols="50"></textarea>
+            <label for="sugestoes">Sugestões:</label><br>
+            <textarea name="sugestoes" id="sugestoes" rows="4" cols="50"></textarea>
         </div>
         <br>
-        <div>
-            <label for="pdf">Selecione o PDF:</label><br>
-            <input type="file" name="pdf" id="pdf" accept=".pdf">
-        </div>
-        <br>
-        <button type="submit">Enviar PDF</button>
+        
+        <button type="submit">Enviar</button>
     </form>
 </body>
 </html>

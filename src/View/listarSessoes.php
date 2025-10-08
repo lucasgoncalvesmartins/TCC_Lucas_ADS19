@@ -55,6 +55,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: none;
             cursor: pointer;
         }
+
+        .button.ordenar {
+    background-color: grey; /* azul */
+    color: white;
+    border: none;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.button.ordenar:hover {
+    background-color: #1976D2; /* azul mais escuro ao passar o mouse */
+}
+
     </style>
 </head>
 <body>
@@ -80,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <td><?= htmlspecialchars($secao['nome']) ?></td>
             <td>
                 <a class="button" href="SecaoEditar.php?id=<?= $secao['id'] ?>">Editar</a>
+                <a class="button ordenar" href="SecaoEditar.php?id=<?= $secao['id'] ?>">Redefinir numeração</a>
                 <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta seção?');">
                     <input type="hidden" name="id" value="<?= $secao['id'] ?>" />
                     <button type="submit" name="excluir" class="button delete">Excluir</button>

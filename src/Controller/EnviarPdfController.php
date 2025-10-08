@@ -11,11 +11,12 @@ $senhaApp   = 'uiox oilt nhgy mpxi';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nome  = $_POST['nome'] ?? '';
-    $cpf   = $_POST['cpf'] ?? '';
+    $profissao   = $_POST['profissao'] ?? '';
     $email = $_POST['email'] ?? '';
+    $descricao = $_POST['descricao'] ?? '';
 
   
-    if (!$nome || !$cpf || !$email) {
+    if (!$nome || !$profissao || !$email || !$descricao) {
         $msg = 'Preencha todos os campos.';
     } elseif (!isset($_FILES['pdf'])) {
         $msg = 'Nenhum arquivo PDF enviado.';
@@ -43,8 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p>Um novo PDF foi enviado pelo usuário:</p>
                     <ul>
                         <li><strong>Nome completo:</strong> {$nome}</li>
-                        <li><strong>CPF:</strong> {$cpf}</li>
+                        <li><strong>profissao:</strong> {$profissao}</li>
                         <li><strong>Email:</strong> {$email}</li>
+                        <li><strong>Descrição:</strong> {$descricao}</li>
                     </ul>
                     <p>O PDF está em anexo.</p>
                 ";

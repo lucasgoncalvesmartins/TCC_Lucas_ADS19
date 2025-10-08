@@ -24,7 +24,8 @@ if (session_status() === PHP_SESSION_NONE) {
                 // para usuários não logados ou do tipo comum
                 if (!isset($_SESSION['id']) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'comum')): ?>
                     <a href="Home.php"  tabindex="0">Home</a>
-                    <a href="UsuarioSugestao.php"  tabindex="0">Enviar Sugestões</a>
+                    <a href="UsuarioSugestao.php"  tabindex="0">Enviar Material</a>
+                    <a href="FaleConosco.php"  tabindex="0">Fale Conosco</a>
                     <a href="AdmLogin.php"  tabindex="0">Login</a>
                 <?php endif; ?>
 
@@ -32,11 +33,12 @@ if (session_status() === PHP_SESSION_NONE) {
                 // para autores e admins
                 if (isset($_SESSION['id']) && ($_SESSION['tipo'] === 'autor' || $_SESSION['tipo'] === 'admin')): ?>
                     <a href="Home.php"  tabindex="0">Home</a>
-                    <a href="SecaoCadastrar.php"  tabindex="0">Adicionar Sessão</a>
-                    <a href="listarsessoes.php"  tabindex="0">Listar Sessão</a>
-                    <a href="Ordenarsecoes.php"  tabindex="0">Ordenar sessões</a>
+                    <a href="SecaoCadastrar.php"  tabindex="0">Adicionar Seção</a>
+                    <a href="listarsessoes.php"  tabindex="0">Listar Seção</a>
+                    <a href="Ordenarsecoes.php"  tabindex="0">Ordenar Seção</a>
                     <a href="SubSecaoCadastrar.php"  tabindex="0">Adicionar SubSeção</a>
-                    <a href="SubSecaoEditar-Excluir.php"  tabindex="0">Editar SubSeção</a>
+                    <a href="SubSecaoEditar-Excluir.php"  tabindex="0">Listar SubSeção</a>
+                    <a href="Ordenarsecoes.php"  tabindex="0">Ordenar Subseção</a>
                     <?php if ($_SESSION['tipo'] === 'admin'): ?>
                         <a href="UsuarioListar.php"  tabindex="0">Listar Usuários</a>
                     <?php endif; ?>
