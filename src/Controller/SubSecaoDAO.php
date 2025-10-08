@@ -165,4 +165,12 @@ class SubSecaoDAO
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function buscarSubSecaoPorId($id)
+{
+    $stmt = $this->conexao->prepare('SELECT * FROM subsecoes WHERE id = :id');
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 }

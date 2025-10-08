@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <td><?= htmlspecialchars($secao['nome']) ?></td>
             <td>
                 <a class="button" href="SecaoEditar.php?id=<?= $secao['id'] ?>">Editar</a>
-                <a class="button ordenar" href="SecaoEditar.php?id=<?= $secao['id'] ?>">Redefinir numeração</a>
+                <a class="button ordenar" href="OrdenarSecoes.php?id=<?= $secao['id'] ?>">Redefinir numeração</a>
                 <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta seção?');">
                     <input type="hidden" name="id" value="<?= $secao['id'] ?>" />
                     <button type="submit" name="excluir" class="button delete">Excluir</button>

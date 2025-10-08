@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['id'])) {
     header('Location: TelaLogin.php');
@@ -8,34 +9,37 @@ if (!isset($_SESSION['id'])) {
 require_once __DIR__ . '/../Controller/SubSecaoDAO.php';
 
 $subSecaoDAO = new SubSecaoDAO();
-$titulo = isset($_GET['titulo']) ? $_GET['titulo'] : '';
-$subSecao = null;
 $erro = '';
+$subSecao = null;
 
-if ($titulo) {
-    $subSecao = $subSecaoDAO->buscarSubSecaoPorTitulo($titulo);
+// Busca pelo id passado via GET do link "Editar"
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+if ($id) {
+    $subSecao = $subSecaoDAO->buscarSubSecaoPorId($id); // precisa criar esse método
 }
 
 $secoes = $subSecaoDAO->buscaSecao();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Copia o conteúdo do editor contenteditable para POST
+    // Copia conteúdo do editor contenteditable para POST
     $_POST['conteudo'] = $_POST['conteudo_html'] ?? '';
-    
+
     if (isset($_POST['excluir']) && isset($_POST['id'])) {
         $id = (int)$_POST['id'];
         if ($subSecaoDAO->excluir($id)) {
-            header('Location: ./../View/home.php');
+            header('Location: SubSecaoListar.php?msg=excluido');
             exit();
         } else {
             $erro = "Erro ao excluir a subseção.";
         }
     } else {
         $subSecaoDAO->editar();
-        header("Location: home.php?msg=editado");
+        header("Location: SubSecaoListar.php?msg=editado");
         exit();
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -62,15 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php include 'header.php'; ?>
-
-<form method="get" action="">
-    <h1>Editar SubSeção</h1>
-    <label for="tituloBusca">Buscar por Título:</label><br>
-    <input type="text" name="titulo" id="tituloBusca" required><br><br>
-    <button type="submit">Buscar</button>
-    <br><br>
-    <a href="AdmLogin.php" class="btn btn-link" tabindex="0">Voltar</a>
-</form>
 
 <?php if ($subSecao): ?>
 <form method="post" onsubmit="document.getElementById('conteudo_html').value = document.getElementById('editor').innerHTML;">
@@ -107,10 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit">Salvar</button>
 </form>
 
-<form method="post" onsubmit="return confirm('Tem certeza que deseja excluir?');">
-    <input type="hidden" name="id" value="<?= $subSecao['id'] ?>">
-    <button type="submit" name="excluir">Excluir</button>
-</form>
+
 
 <?php elseif ($titulo): ?>
 <p>SubSeção não encontrada.</p>

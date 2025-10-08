@@ -34,11 +34,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 if (isset($_SESSION['id']) && ($_SESSION['tipo'] === 'autor' || $_SESSION['tipo'] === 'admin')): ?>
                     <a href="Home.php"  tabindex="0">Home</a>
                     <a href="SecaoCadastrar.php"  tabindex="0">Adicionar Seção</a>
-                    <a href="listarsessoes.php"  tabindex="0">Listar Seção</a>
-                    <a href="Ordenarsecoes.php"  tabindex="0">Ordenar Seção</a>
+                    <a href="ListarSecoes.php"  tabindex="0">Listar Seção</a>
                     <a href="SubSecaoCadastrar.php"  tabindex="0">Adicionar SubSeção</a>
-                    <a href="SubSecaoEditar-Excluir.php"  tabindex="0">Listar SubSeção</a>
-                    <a href="Ordenarsecoes.php"  tabindex="0">Ordenar Subseção</a>
+                    <a href="ListarSubsecao.php"  tabindex="0">Listar SubSeção</a>
                     <?php if ($_SESSION['tipo'] === 'admin'): ?>
                         <a href="UsuarioListar.php"  tabindex="0">Listar Usuários</a>
                     <?php endif; ?>
