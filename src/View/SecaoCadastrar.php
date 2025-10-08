@@ -74,16 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Input hidden para enviar -->
 <input type="hidden" name="descricao_html" id="descricao_html"><br><br>
 
-
+<!-- 
 <label for="ordem">Posição:</label>
 <select name="ordem" id="ordem">
-    <?php
-    $total = count($secoes);
-    for ($i = 1; $i <= $total + 1; $i++) {
-        echo "<option value='$i'>$i</option>";
-    }
-    ?>
+    <php
+   // $total = count($secoes);
+   // for ($i = 1; $i <= $total + 1; $i++) {
+     //   echo "<option value='$i'>$i</option>";
+    //}
+    //?>
 </select>
+-->
 <button type="submit">Cadastrar Seção</button><br><br>
 <a href="AdmLogin.php" class="btn btn-link" tabindex="0">Voltar</a>
 </form>
