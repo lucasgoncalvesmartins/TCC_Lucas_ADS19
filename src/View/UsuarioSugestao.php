@@ -6,9 +6,11 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../Css/usuarioSugestao.css">
     <title>Enviar PDF</title>
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <h1>Enviar PDF por Email</h1>
 
     <?php if (!empty($msg)): ?>
@@ -24,8 +26,8 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
         </div>
         <br>
         <div>
-            <label for="cpf">CPF:</label><br>
-            <input type="text" name="cpf" id="cpf" required>
+            <label for="profissao">Profissão:</label><br>
+            <input type="text" name="profissao" id="profissao" required>
         </div>
         <br>
         <div>
@@ -33,9 +35,15 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
             <input type="email" name="email" id="email" required>
         </div>
         <br>
+       
+        <div>
+            <label for="sugestoes">Sugestões:</label><br>
+            <textarea name="sugestoes" id="sugestoes" rows="4" cols="50" placeholder=""></textarea>
+        </div>
+        <br>
         <div>
             <label for="pdf">Selecione o PDF:</label><br>
-            <input type="file" name="pdf" id="pdf" accept=".pdf" required>
+            <input type="file" name="pdf" id="pdf" accept=".pdf">
         </div>
         <br>
         <button type="submit">Enviar PDF</button>
