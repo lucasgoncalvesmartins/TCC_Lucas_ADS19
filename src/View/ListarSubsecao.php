@@ -78,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <td><?= date('d/m/Y H:i', strtotime($sub['data_publicacao'])) ?></td>
                     <td>
                         <a class="btn edit" href="SubSecaoEditar.php?id=<?= $sub['id'] ?>">Editar</a>
+                        <a class="btn edit" href="OrdenarSubSecao.php?secao=<?= $id_secao_selecionada ?>">Ordenar Subseção</a>
                         <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta subseção?');">
                             <input type="hidden" name="id" value="<?= $sub['id'] ?>">
                             <button type="submit" name="excluir" class="btn delete">Excluir</button>

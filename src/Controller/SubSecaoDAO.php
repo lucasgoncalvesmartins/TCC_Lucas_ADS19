@@ -140,23 +140,23 @@ class SubSecaoDAO
 
     // Buscar subseções por seção
     public function buscarPorSecao($id_secao)
-    {
-        $stmt = $this->conexao->prepare('
-            SELECT 
-                s.*, 
-                u.nome_usuario AS autor, 
-                sec.nome AS secao
-            FROM subsecoes s
-            INNER JOIN usuarios u ON s.id_autor = u.id
-            INNER JOIN secoes sec ON s.id_secao = sec.id
-            WHERE s.id_secao = :id_secao
-            ORDER BY s.data_publicacao DESC
-        ');
+{
+    $stmt = $this->conexao->prepare('
+        SELECT 
+            s.*, 
+            u.nome_usuario AS autor, 
+            sec.nome AS secao
+        FROM subsecoes s
+        INNER JOIN usuarios u ON s.id_autor = u.id
+        INNER JOIN secoes sec ON s.id_secao = sec.id
+        WHERE s.id_secao = :id_secao
+        ORDER BY s.ordem ASC
+    ');
 
-        $stmt->bindValue(':id_secao', $id_secao, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $stmt->bindValue(':id_secao', $id_secao, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
     public function excluir($id)
@@ -173,4 +173,18 @@ class SubSecaoDAO
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+public function atualizarOrdem($ordemArray)
+{
+    foreach ($ordemArray as $item) {
+        $stmt = $this->conexao->prepare('UPDATE subsecoes SET ordem = :ordem WHERE id = :id');
+        $stmt->bindValue(':ordem', $item['ordem'], PDO::PARAM_INT);
+        $stmt->bindValue(':id', $item['id'], PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    return true;
+}
+
+
+
 }

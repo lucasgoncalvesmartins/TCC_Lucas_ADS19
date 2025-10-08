@@ -55,7 +55,7 @@ const lista = document.getElementById('listaSessoes');
 const sortable = new Sortable(lista, {
     animation: 150,
     onEnd: () => {
-        // Atualiza visualmente os números
+        
         Array.from(lista.children).forEach((li, index) => {
             li.querySelector('.numero').textContent = index + 1;
         });
