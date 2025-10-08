@@ -16,7 +16,7 @@ $erro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['excluir']) && isset($_POST['id'])) {
         $id = (int) $_POST['id'];
-        if ($subSecaoDAO->excluir($id)) { // corrigido aqui
+        if ($subSecaoDAO->excluir($id)) { 
             header('Location: home.php?msg=excluido');
             exit();
         } else {
