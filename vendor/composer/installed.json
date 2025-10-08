@@ -32,7 +32,7 @@
             },
             "time": "2025-04-09T20:32:01+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Firebase\\JWT\\": "src"
@@ -68,23 +68,23 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.9.3",
-            "version_normalized": "7.9.3.0",
+            "version": "7.10.0",
+            "version_normalized": "7.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "7b2f29fe81dc4da0ca0ea7d42107a0845946ea77"
+                "reference": "b51ac707cfa420b7bfd4e4d5e510ba8008e822b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7b2f29fe81dc4da0ca0ea7d42107a0845946ea77",
-                "reference": "7b2f29fe81dc4da0ca0ea7d42107a0845946ea77",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b51ac707cfa420b7bfd4e4d5e510ba8008e822b4",
+                "reference": "b51ac707cfa420b7bfd4e4d5e510ba8008e822b4",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5.3 || ^2.0.3",
-                "guzzlehttp/psr7": "^2.7.0",
+                "guzzlehttp/promises": "^2.3",
+                "guzzlehttp/psr7": "^2.8",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0"
@@ -105,7 +105,7 @@
                 "ext-intl": "Required for Internationalized Domain Name (IDN) support",
                 "psr/log": "Required for using the Log middleware"
             },
-            "time": "2025-03-27T13:37:11+00:00",
+            "time": "2025-08-23T22:36:01+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -113,7 +113,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/functions_include.php"
@@ -177,7 +177,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.9.3"
+                "source": "https://github.com/guzzle/guzzle/tree/7.10.0"
             },
             "funding": [
                 {
@@ -197,17 +197,17 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.2.0",
-            "version_normalized": "2.2.0.0",
+            "version": "2.3.0",
+            "version_normalized": "2.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c"
+                "reference": "481557b130ef3790cf82b713667b43030dc9c957"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/7c69f28996b0a6920945dd20b3857e499d9ca96c",
-                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/481557b130ef3790cf82b713667b43030dc9c957",
+                "reference": "481557b130ef3790cf82b713667b43030dc9c957",
                 "shasum": ""
             },
             "require": {
@@ -215,9 +215,9 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25"
             },
-            "time": "2025-03-27T13:27:01+00:00",
+            "time": "2025-08-22T14:34:08+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -225,7 +225,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\Promise\\": "src/"
@@ -263,7 +263,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.2.0"
+                "source": "https://github.com/guzzle/promises/tree/2.3.0"
             },
             "funding": [
                 {
@@ -283,17 +283,17 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.7.1",
-            "version_normalized": "2.7.1.0",
+            "version": "2.8.0",
+            "version_normalized": "2.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16"
+                "reference": "21dc724a0583619cd1652f673303492272778051"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c2270caaabe631b3b44c85f99e5a04bbb8060d16",
-                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/21dc724a0583619cd1652f673303492272778051",
+                "reference": "21dc724a0583619cd1652f673303492272778051",
                 "shasum": ""
             },
             "require": {
@@ -309,12 +309,12 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "http-interop/http-factory-tests": "0.9.0",
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "time": "2025-03-27T12:30:47+00:00",
+            "time": "2025-08-23T21:21:41+00:00",
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -322,7 +322,7 @@
                     "forward-command": false
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\Psr7\\": "src/"
@@ -382,7 +382,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.7.1"
+                "source": "https://github.com/guzzle/psr7/tree/2.8.0"
             },
             "funding": [
                 {
@@ -428,7 +428,7 @@
             },
             "time": "2025-02-26T04:37:30+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\OAuth2\\Client\\": "src/"
@@ -494,7 +494,7 @@
             },
             "time": "2023-03-17T15:20:52+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "League\\OAuth2\\Client\\": "src/"
@@ -528,17 +528,17 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.10.0",
-            "version_normalized": "6.10.0.0",
+            "version": "v6.11.1",
+            "version_normalized": "6.11.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144"
+                "reference": "d9e3b36b47f04b497a0164c5a20f92acb4593284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144",
-                "reference": "bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/d9e3b36b47f04b497a0164c5a20f92acb4593284",
+                "reference": "d9e3b36b47f04b497a0164c5a20f92acb4593284",
                 "shasum": ""
             },
             "require": {
@@ -559,6 +559,7 @@
             },
             "suggest": {
                 "decomplexity/SendOauth2": "Adapter for using XOAUTH2 authentication",
+                "ext-imap": "Needed to support advanced email address parsing according to RFC822",
                 "ext-mbstring": "Needed to send email in multibyte encoding charset or decode encoded addresses",
                 "ext-openssl": "Needed for secure SMTP sending and DKIM signing",
                 "greew/oauth2-azure-provider": "Needed for Microsoft Azure XOAUTH2 authentication",
@@ -568,9 +569,9 @@
                 "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)",
                 "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication"
             },
-            "time": "2025-04-24T15:19:31+00:00",
+            "time": "2025-09-30T11:54:53+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PHPMailer\\PHPMailer\\": "src/"
@@ -600,7 +601,7 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.10.0"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.11.1"
             },
             "funding": [
                 {
@@ -636,7 +637,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Client\\": "src/"
@@ -691,7 +692,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -748,7 +749,7 @@
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -803,7 +804,7 @@
             },
             "time": "2019-03-08T08:55:37+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "src/getallheaders.php"
@@ -851,7 +852,7 @@
             },
             "time": "2017-06-07T13:42:47+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Stevenmaguire\\OAuth2\\Client\\": "src/"
@@ -912,7 +913,7 @@
                     "dev-main": "3.6-dev"
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "files": [
                     "function.php"
@@ -980,7 +981,7 @@
             },
             "time": "2023-12-19T12:10:48+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "TheNetworg\\OAuth2\\Client\\": "src/"
