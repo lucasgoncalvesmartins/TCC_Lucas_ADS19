@@ -36,6 +36,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a href="SecaoEditar.php"  tabindex="0">Editar Seção</a>
                     <a href="SubSecaoCadastrar.php"  tabindex="0">Adicionar SubSeção</a>
                     <a href="SubSecaoEditar-Excluir.php"  tabindex="0">Editar SubSeção</a>
+                    <a href="Ordenarsessoes.php"  tabindex="0">Ordenar sessões</a>
                     <?php if ($_SESSION['tipo'] === 'admin'): ?>
                         <a href="UsuarioListar.php"  tabindex="0">Listar Usuários</a>
                     <?php endif; ?>
