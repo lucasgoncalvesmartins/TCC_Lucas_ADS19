@@ -4,7 +4,7 @@ include_once __DIR__ . '/../Controller/SecaoDAO.php';
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// Ordena pelo campo "ordem"
+
 usort($secoes, function($a, $b) {
     return $a['ordem'] <=> $b['ordem'];
 });

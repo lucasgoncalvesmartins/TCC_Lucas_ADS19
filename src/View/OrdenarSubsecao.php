@@ -11,7 +11,7 @@ if (!$id_secao) {
 
 $subsecoes = $subSecaoDAO->buscarPorSecao((int)$id_secao);
 
-// Ordenar pelo campo 'ordem' caso já exista
+
 usort($subsecoes, function($a, $b) {
     return $a['ordem'] <=> $b['ordem'];
 });
