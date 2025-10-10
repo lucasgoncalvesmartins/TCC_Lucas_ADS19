@@ -9,12 +9,12 @@ $subsecoes = $subSecaoDAO->listarTodas();
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// Ordenar seções pela ordem 
+
 usort($secoes, function ($a, $b) {
     return ($a['ordem'] ?? 0) <=> ($b['ordem'] ?? 0);
 });
 
-// Inicializa  as seções
+
 $agrupado = [];
 foreach ($secoes as $sec) {
     $secaoId = $sec['id'] ?? 'sec_undefined';
@@ -26,7 +26,7 @@ foreach ($secoes as $sec) {
     ];
 }
 
-// Ordenar subseções pelo ID 
+
 if (is_array($subsecoes)) {
     usort($subsecoes, function ($a, $b) {
         return ($a['sub_id'] ?? 0) <=> ($b['sub_id'] ?? 0);
@@ -55,15 +55,11 @@ if (is_array($subsecoes)) {
 }
 
 function renderTexto($texto) {
-    // notas
-    $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
-
-    // trata [li] 
+    // Tratamento de notas e listas
+    $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);  
     $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function ($m) {
         return '<li>' . $m[1] . '</li>';
-    }, $texto);
-
-    // depois [ul] e [ol]
+    }, $texto); 
     $texto = preg_replace_callback('/\[ul\](.*?)\[\/ul\]/s', function ($m) {
         return '<ul>' . $m[1] . '</ul>';
     }, $texto);
