@@ -28,50 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Listar Seções</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 20px auto;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .button {
-            padding: 4px 8px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 3px;
-            margin-right: 5px;
-        }
-        .button.delete {
-            background-color: #f44336;
-            border: none;
-            cursor: pointer;
-        }
-
-        .button.ordenar {
-    background-color: grey; /* azul */
-    color: white;
-    border: none;
-    text-decoration: none;
-    padding: 4px 8px;
-    border-radius: 3px;
-    margin-right: 5px;
-    cursor: pointer;
-}
-
-.button.ordenar:hover {
-    background-color: #1976D2; /* azul mais escuro ao passar o mouse */
-}
-
-    </style>
+    
 </head>
 <body>
 
