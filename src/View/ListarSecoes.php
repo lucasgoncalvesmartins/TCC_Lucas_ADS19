@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 </head>
 <body>
-
+<?php include 'header.php'; ?>
 <h2 style="text-align:center;">Lista de Seções</h2>
 
 <?php if ($erro): ?>

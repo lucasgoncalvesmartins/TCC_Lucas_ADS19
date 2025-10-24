@@ -27,6 +27,7 @@ usort($subsecoes, function($a, $b) {
 </style>
 </head>
 <body>
+    <?php include 'header.php'; ?>
 <h2>Arraste as subseções para reordenar</h2>
 <ul id="listaSub">
 <?php foreach($subsecoes as $sub): ?>
@@ -58,9 +59,11 @@ document.getElementById('salvar').addEventListener('click', () => {
     .then(res => res.json())
     .then(data => {
         if(data.status === 'sucesso') {
-            alert('Ordem salva com sucesso!');
+            //alert('Ordem salva com sucesso!');
+            window.location.href = 'home.php';
         } else {
-            alert('Erro ao salvar ordem!');
+          //alert('Ordem salva com sucesso!');
+          window.location.href = 'home.php';
         }
     });
 });

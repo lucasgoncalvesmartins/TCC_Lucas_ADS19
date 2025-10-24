@@ -35,7 +35,7 @@ usort($secoes, function($a, $b) {
 </style>
 </head>
 <body>
-
+<?php include 'header.php'; ?>
 <h2>Arraste as seções para reordenar</h2>
 
 <ul id="listaSessoes">
@@ -76,9 +76,11 @@ document.getElementById('salvar').addEventListener('click', () => {
     .then(res => res.json())
     .then(data => {
         if (data.status === 'sucesso') {
-            alert('Ordem salva com sucesso!');
+           // alert('Ordem salva com sucesso!');
+            window.location.href = 'home.php';
         } else {
-            alert('Ordem salva com sucesso!');
+           // alert('Ordem salva com sucesso!');
+            window.location.href = 'home.php';
         }
     });
 });

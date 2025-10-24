@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-
+<?php include 'header.php'; ?>
 <h2 style="text-align:center;">Sub-seções por Seção</h2>
 
 <?php if (!empty($erro)): ?>
