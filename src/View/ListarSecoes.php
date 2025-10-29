@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/listarsecoes.css">
     <title>Listar Seções</title>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
 </head>
 

@@ -50,10 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         #editor ol { list-style-type: decimal; padding-left: 1.5rem; }
         #editor li { margin-bottom: 0.3rem; }
     </style>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 <body>
     <?php include 'header.php'; ?>
-
+<main>
     <?php if (!empty($erro)): ?>
         <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
     <?php endif; ?>
@@ -89,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
         <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
     </form>
-
+            </main>
 <script>
 function execCommand(command) {
     // Executa um comando de edição no documento 

@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 #editor ol { list-style-type: decimal; padding-left: 1.5rem; }
 #editor li { margin-bottom: 0.3rem; }
 </style>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 <body>
 <?php include 'header.php'; ?>

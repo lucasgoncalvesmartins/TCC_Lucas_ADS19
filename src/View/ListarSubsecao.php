@@ -39,9 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .btn.edit { background-color: #4CAF50; }
         .btn.delete { background-color: #f44336; border: none; cursor: pointer; }
     </style>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 <body>
 <?php include 'header.php'; ?>
+<main>
+    <h1>Listar SubSeções</h1>
 <h2 style="text-align:center;">Sub-seções por Seção</h2>
 
 <?php if (!empty($erro)): ?>
@@ -92,6 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php elseif ($id_secao_selecionada): ?>
     <p style="text-align:center;">Nenhuma subseção encontrada para esta seção.</p>
 <?php endif; ?>
-
+</main>
 </body>
 </html>
