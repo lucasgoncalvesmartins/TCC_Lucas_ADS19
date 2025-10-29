@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../Css/RecuperarSenha.css" />
   <title>Recuperar Senha</title>
+   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
 
   ?>
   
-
+<main>
   <form id="formSolicitarRecuperacao">
     <h1>Recuperar Senha</h1>
     <label for="email">Email cadastrado:</label><br>
@@ -50,7 +51,7 @@
         })
         .then(res => res.json())
         .then(data => {
-          mensagemDiv.style.color = data.status === 'success' ? 'green' : 'red';
+          mensagemDiv.style.color = data.status === 'success' ? '#247f4b' : 'red';
           mensagemDiv.innerHTML = data.message;
 
           if (data.status === 'success') {
@@ -98,5 +99,5 @@
   </script>
 </body>
     <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
-
+  </main>
 </html>

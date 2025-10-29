@@ -8,7 +8,7 @@ body {
     font-family: Arial, sans-serif;
     background: #fff; 
 }
-
+/* Formulário  */
 form {
     padding: 20px;
     border: 1px solid #ccc;
@@ -17,24 +17,47 @@ form {
     text-align: center;
     width: 300px;
 }
-
+ /* campos do formulário */
 form div {
     margin-bottom: 15px;
 }
 
+/* Rótulos */
 label {
     display: block;
     margin-bottom: 5px;
     text-align: left;
 }
 
+/* Campos de entrada */
 input {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
 }
 
+/* Botão */
 button {
     padding: 10px 15px;
     cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px; 
+    min-height: 44px; 
+    min-width: 44px; 
+    text-decoration: none;
+    text-align: center;
+}
+
+
+.btn-link,a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    min-height: 44px;
+    min-width: 44px;
+    margin: 8px 0; 
 }

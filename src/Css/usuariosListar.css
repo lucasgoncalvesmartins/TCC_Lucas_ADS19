@@ -1,4 +1,4 @@
-/* Espaço  header fixo */
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,13 +8,13 @@ body {
     padding-top: 4.5rem; 
 }
 
-/* Título centralizado */
+/* Título */
 h1 {
     text-align: center;
     margin-bottom: 1.5rem;
 }
 
-/* Tabela centralizada */
+/* Tabela  */
 table {
     border-collapse: collapse;
     width: 80%;

@@ -59,9 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Redefinir Senha</title>
+    <link rel="stylesheet" href="../Css/RedefinirSenha.css">
+     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
    
 </head>
 <body>
+    <main>
     <h1>Redefinir Senha</h1>
 
     <?php if ($erro): ?>
@@ -78,5 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Salvar Nova Senha</button>
     </form>
     <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+    </main>
 </body>
 </html>

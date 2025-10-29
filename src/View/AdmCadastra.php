@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Cadastro de Usuário</title>
     <link rel="stylesheet" href="../Css/AdmCadastra.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
 <body>
@@ -34,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once __DIR__ . '/header.php';
 
     ?>
+    <main>
     <div class="container my-5">
         <div class="text-center mb-4">
             <h1>Criar Conta</h1>
@@ -63,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </div>
+    </main>
 </body>
 
 </html>

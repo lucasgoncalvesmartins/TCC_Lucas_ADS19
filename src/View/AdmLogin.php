@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/AdmLogin.css">
     <title>Login Administrador</title>
-
+ <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
 <body>
@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once __DIR__ . '/header.php';
 
     ?>
+    <main>
     <form action="" method="post">
-        <h2>Login</h2>
+        <h1>Login</h1>
 
         <?php 
         if (!empty($_GET['msg']) && $_GET['msg'] === 'erro'): ?>
@@ -62,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="AdmCadastra.php"  tabindex="0">Quero Me Cadastrar</a>
 
     </form>
+        </main>
 </body>
 
 </html>

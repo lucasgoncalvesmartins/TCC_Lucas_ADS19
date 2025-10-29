@@ -1,4 +1,4 @@
-/* centraliza todo o conteúdo da página */
+
 body {
     display: flex;
     justify-content: center;
@@ -9,14 +9,14 @@ body {
     padding: 20px;
 }
 
-/* centraliza o formulário e define largura máxima */
+/* formulário  */
 form {
     max-width: 700px;
     width: 100%;
     margin: 0 auto;
 }
 
-/* inputs, select e textarea com largura total do formulário */
+/* inputs, select e textarea do formulário */
 input[type="text"],
 select,
 textarea {
@@ -27,7 +27,7 @@ textarea {
     margin-top: 5px;
 }
 
-/* aumenta a altura da caixa de conteúdo */
+/*  caixa de conteúdo */
 textarea#conteudo {
     height: 200px; 
 }
@@ -39,7 +39,7 @@ button {
     margin-top: 10px;
 }
 
-/* barra de botões de formatação */
+/* botões de formatação */
 form div {
     margin-bottom: 5px;
 }

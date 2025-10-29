@@ -1,4 +1,4 @@
-/* Centraliza todo o conteúdo da página */
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -25,7 +25,7 @@ h1 {
     margin-top: 4rem;
 }
 
-/* Mensagens de erro e sucesso  */
+/* Mensagens  */
 .erro,
 .sucesso {
     text-align: center;
@@ -40,7 +40,7 @@ form {
     align-items: center;
 }
 
-/* Cada campo com espaçamento */
+/* espaçamento do formulario*/
 form div {
     width: 100%;
     margin-bottom: 10px;
@@ -49,7 +49,7 @@ form div {
     align-items: flex-start;
 }
 
-/* Labels e inputs ocupa toda a largura disponível */
+/* Labels e inputs do formulario */
 form label {
     margin-bottom: 5px;
 }

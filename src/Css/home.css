@@ -6,7 +6,6 @@
 }
 
 
-/* Espaço para não esconder o conteúdo atrás do header */
 body {
     padding-top: 4.5rem; 
     font-size: 1rem;
@@ -16,7 +15,7 @@ body {
     flex-direction: column;
 }
 
-/* Main respeita o sumário lateral */
+/* Main  */
 main {
     flex: 1;
     margin-left: 18rem; 
@@ -70,15 +69,17 @@ main li {
     margin: 0;        
     padding: 0;       
 }
+
+ /* listas */
 ul, ol {
-    margin: 0 0 1rem 1.5rem; /* espaço antes e depois da lista, recuando à esquerda */
+    margin: 0 0 1rem 1.5rem; 
 }
 
 li {
     line-height: 1.4;
-    margin-bottom: 0.3rem; /* controla espaço entre itens */
+    margin-bottom: 0.3rem; 
 }
 
 p {
-    margin-bottom: 0.5rem; /* espaço entre parágrafos */
+    margin-bottom: 0.5rem; 
 }

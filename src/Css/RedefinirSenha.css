@@ -1,0 +1,87 @@
+/* Centraliza todo o conteúdo */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container principal */
+        main {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Título */
+        h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        /* Formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Labels e inputs */
+        label {
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="password"] {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Botão */
+        /* Botão - azul mais escuro */
+button {
+    padding: 0.75rem;
+    background-color: #0056b3; /* AZUL MAIS ESCURO */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: bold; /* Adiciona peso à fonte para melhor contraste */
+}
+
+button:hover {
+    background-color: #004494; /* Ainda mais escuro no hover */
+}
+
+/* Link voltar - azul mais escuro */
+.btn-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #0056b3; /* AZUL MAIS ESCURO */
+    text-decoration: none;
+    border: 1px solid #0056b3; /* AZUL MAIS ESCURO */
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-weight: bold; /* Adiciona peso à fonte */
+}
+
+.btn-link:hover {
+    background-color: #0056b3;
+    color: white;
+}

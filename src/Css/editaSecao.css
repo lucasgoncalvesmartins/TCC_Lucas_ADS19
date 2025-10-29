@@ -1,4 +1,4 @@
-/* centraliza todo o conteúdo da página */
+
 body {
     display: flex;
     justify-content: center;
@@ -9,7 +9,7 @@ body {
     padding: 20px;
 }
 
-/* container centralizado com largura máxima */
+/* container */
 .container {
     max-width: 700px;
     width: 100%;
@@ -22,7 +22,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* inputs e textarea ocupam toda a largura do container */
+/* inputs e textarea do container */
 input[type="text"],
 textarea {
     width: 100%;
@@ -32,7 +32,7 @@ textarea {
     margin-top: 5px;
 }
 
-/* aumenta a altura da caixa de descrição */
+/*  caixa de descrição */
 textarea#descricao {
     height: 200px; 
 }
@@ -44,7 +44,7 @@ button {
     margin-top: 10px;
 }
 
-/* espaçamento entre formulários */
+/* formulários */
 form {
     margin-bottom: 20px;
 }

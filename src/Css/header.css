@@ -1,4 +1,4 @@
-/* Header fixo no topo */
+
 header {
     position: fixed;
     top: 0;
@@ -14,7 +14,7 @@ header {
     box-sizing: border-box;
 }
 
-/* Nav com blocos */
+/* blocos */
 header nav {
     display: flex;
     align-items: center;
@@ -39,7 +39,7 @@ header .nav-right {
     
 }
 
-/* Links e botões do header */
+/* Links e botões*/
 header a,
 header .nav-right button {
     text-decoration: none;
@@ -76,7 +76,7 @@ header .nav-right button:hover {
 
     header a,
     header .nav-right button {
-        width: 100%; /* botão ocupa toda a largura no mobile */
+        width: 100%; 
         text-align: center;
     }
 }

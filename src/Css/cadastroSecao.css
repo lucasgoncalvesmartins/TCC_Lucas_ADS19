@@ -1,4 +1,4 @@
-/* centraliza todo o conteúdo da página */
+
 body {
     display: flex;
     justify-content: center;
@@ -16,7 +16,7 @@ form {
     margin: 0 auto;
 }
 
-/* inputs e select com largura total do formulário */
+/* inputs e select do formulário */
 input[type="text"],
 select,
 textarea {
@@ -27,7 +27,7 @@ textarea {
     margin-top: 5px;
 }
 
-/* aumenta o tamanho da caixa de descrição */
+/*  caixa de descrição */
 textarea#descricao {
     height: 200px; 
 }
@@ -40,17 +40,17 @@ button {
     margin-top: 10px;
 }
 
-/* barra de botões de formatação */
+/*  botões de formatação */
 form div {
     margin-bottom: 5px;
 }
 
-/* centraliza o título */
+/*  título */
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
-/*nota roxa*/
+/*nota */
 .nota {
   background-color: rgba(72, 61, 139, 0.15);
   border: solid 8px transparent;
@@ -63,7 +63,7 @@ h1 {
 #editor {
     border: 1px solid #ccc;
     padding: 10px;
-    min-height: 300px;   /* antes era 150px */
+    min-height: 300px;   
     width: 100%;
     box-sizing: border-box;
     background-color: #fff;
