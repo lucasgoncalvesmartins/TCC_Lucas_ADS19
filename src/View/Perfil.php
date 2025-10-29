@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .sucesso { color: green; }
         form div { margin-bottom: 10px; }
     </style>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -93,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 >
             </div>
 
-            <h3>Alterar senha</h3>
+            <h2>Alterar senha</h2>
             <div>
                 <label for="senha_atual">Senha Atual:</label>
                 <input type="password" name="senha_atual" id="senha_atual" placeholder="Digite sua senha atual">

@@ -8,11 +8,15 @@ $msg = $controller->msg;
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/usuarioSugestao.css">
     <title>Fale Conosco</title>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
 </head>
+
 <body>
     <?php include 'header.php'; ?>
     <h1>Fale Conosco</h1>
@@ -44,9 +48,10 @@ $msg = $controller->msg;
             <textarea name="sugestoes" id="sugestoes" rows="4" cols="50"></textarea>
         </div>
         <br>
-        
+
         <button type="submit">Enviar</button>
-         <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
     </form>
 </body>
+
 </html>

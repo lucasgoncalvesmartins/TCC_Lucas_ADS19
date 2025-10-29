@@ -8,8 +8,13 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/usuarioSugestao.css">
     <title>Enviar PDF</title>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
 </head>
 <body>
+     <?php
+    include_once __DIR__ . '/header.php';
+    ?>
     <h1>Enviar Material</h1>
 
     <?php if (!empty($msg)): ?>

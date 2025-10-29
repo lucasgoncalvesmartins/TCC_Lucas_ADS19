@@ -36,8 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
         th { background-color: #f2f2f2; }
         .btn { padding: 4px 8px; margin-right: 5px; border-radius: 3px; text-decoration: none; color: white; }
-        .btn.edit { background-color: #4CAF50; }
-        .btn.delete { background-color: #f44336; border: none; cursor: pointer; }
+        .btn.edit { background-color: #1e5e3a; }
+        .btn.delete { background-color: #8B0000; border: none; cursor: pointer; }
+        .btn.ordenar { background-color: #5a0099; }
     </style>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
@@ -81,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <td><?= date('d/m/Y H:i', strtotime($sub['data_publicacao'])) ?></td>
                     <td>
                         <a class="btn edit" href="SubSecaoEditar.php?id=<?= $sub['id'] ?>">Editar</a>
-                        <a class="btn edit" href="OrdenarSubSecao.php?secao=<?= $id_secao_selecionada ?>">Ordenar Subseção</a>
+                        <a class="btn ordenar" href="OrdenarSubSecao.php?secao=<?= $id_secao_selecionada ?>">Ordenar Subseção</a>
                         <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta subseção?');">
                             <input type="hidden" name="id" value="<?= $sub['id'] ?>">
                             <button type="submit" name="excluir" class="btn delete">Excluir</button>

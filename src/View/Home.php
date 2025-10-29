@@ -54,12 +54,13 @@ if (is_array($subsecoes)) {
     }
 }
 
-function renderTexto($texto) {
+function renderTexto($texto)
+{
     // Tratamento de notas e listas
-    $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);  
+    $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
     $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function ($m) {
         return '<li>' . $m[1] . '</li>';
-    }, $texto); 
+    }, $texto);
     $texto = preg_replace_callback('/\[ul\](.*?)\[\/ul\]/s', function ($m) {
         return '<ul>' . $m[1] . '</ul>';
     }, $texto);
@@ -83,13 +84,17 @@ function renderTexto($texto) {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>
     <link rel="stylesheet" href="../Css/sumario.css">
     <link rel="stylesheet" href="../Css/home.css">
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
 </head>
+
 <body>
     <?php
     include_once __DIR__ . '/header.php';
@@ -130,4 +135,5 @@ function renderTexto($texto) {
 
     <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
+
 </html>
