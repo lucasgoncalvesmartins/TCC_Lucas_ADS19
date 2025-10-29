@@ -15,6 +15,7 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
      <?php
     include_once __DIR__ . '/header.php';
     ?>
+    <main>
     <h1>Enviar Material</h1>
 
     <?php if (!empty($msg)): ?>
@@ -53,6 +54,6 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
         <button type="submit">Enviar PDF</button>
     </form>
     <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
-
+</main>
 </body>
 </html>
