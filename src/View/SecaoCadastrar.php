@@ -62,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <label for="descricao">Descrição:</label><br>
 
 <div class="editor-buttons">
-    <button type="button" onclick="execCommand('bold')"><b>B</b></button>
-    <button type="button" onclick="execCommand('italic')"><i>I</i></button>
-    <button type="button" onclick="execCommand('insertUnorderedList')">UL</button>
-    <button type="button" onclick="execCommand('insertOrderedList')">OL</button>
-    <button type="button" onclick="insertLink()">Link</button>
+    <button type="button" onclick="execCommand('bold')" aria-label="Aplicar negrito ao texto"><b>B</b></button>
+    <button type="button" onclick="execCommand('italic')" aria-label="Aplicar italico ao texto"><i>I</i></button>
+    <button type="button" onclick="execCommand('insertUnorderedList')" aria-label="Aplicar lista bolinha">UL</button>
+    <button type="button" onclick="execCommand('insertOrderedList')" aria-label="Aplicar lista numerada">OL</button>
+    <button type="button" onclick="insertLink()" aria-label="inserir link">Link</button>
 </div><br>
 
 <!-- Editor contenteditable isso aqui faz aparecer as bolinhas e tals -->
