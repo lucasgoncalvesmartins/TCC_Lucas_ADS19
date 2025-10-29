@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php include 'header.php'; ?>
-
+<main id="conteudo-principal">
 <?php if (!empty($erro)): ?>
 <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
 <?php endif; ?>
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <button type="submit">Cadastrar Seção</button><br><br>
  <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
 </form>
-
+</main>
 <script>
 function execCommand(command) {
     document.execCommand(command, false, null);
