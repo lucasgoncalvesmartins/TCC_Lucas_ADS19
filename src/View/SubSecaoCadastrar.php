@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Cadastrar</button>
         <br><br>
-        <a href="AdmLogin.php" class="btn btn-link" tabindex="0">Voltar</a>
+        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
     </form>
 
 <script>
@@ -128,5 +128,6 @@ function insertNota() {
     range.insertNode(span);
 }
 </script>
+  
 </body>
 </html>

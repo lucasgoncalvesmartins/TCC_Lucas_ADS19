@@ -97,5 +97,6 @@
     });
   </script>
 </body>
+    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
 
 </html>

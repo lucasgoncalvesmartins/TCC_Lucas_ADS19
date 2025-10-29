@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </select>
 -->
 <button type="submit">Cadastrar Seção</button><br><br>
-<a href="AdmLogin.php" class="btn btn-link" tabindex="0">Voltar</a>
+ <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
 </form>
 
 <script>
@@ -100,5 +100,7 @@ function insertLink() {
     document.execCommand('createLink', false, url);
 }
 </script>
+   
+
 </body>
 </html>

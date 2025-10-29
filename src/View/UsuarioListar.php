@@ -76,6 +76,7 @@ $usuarios = $usuarioDAO->listarTodos();
         </tbody>
     </table>
     <br><br>
-            <a href="AdmLogin.php" class="btn btn-link"  tabindex="0">Voltar</a>
+                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+
 </body>
 </html>

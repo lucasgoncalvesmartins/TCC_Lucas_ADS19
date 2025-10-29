@@ -51,6 +51,7 @@ $secao = $secaoDAO->buscarPorId($secao_id);
         <p>Nenhuma SubSeção encontrada.</p>
     <?php endif; ?>
 </div>
+    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
 
 </body>
 </html>

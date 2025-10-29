@@ -77,5 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Salvar Nova Senha</button>
     </form>
+    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
 </body>
 </html>

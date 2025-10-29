@@ -14,6 +14,7 @@ $msg = $controller->msg;
     <title>Fale Conosco</title>
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <h1>Fale Conosco</h1>
 
     <?php if ($msg): ?>
@@ -45,6 +46,7 @@ $msg = $controller->msg;
         <br>
         
         <button type="submit">Enviar</button>
+         <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
     </form>
 </body>
 </html>
