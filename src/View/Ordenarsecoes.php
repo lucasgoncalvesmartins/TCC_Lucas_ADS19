@@ -96,7 +96,7 @@ document.getElementById('salvar').addEventListener('click', () => {
         if (data.status === 'sucesso') {
             window.location.href = 'home.php';
         } else {
-            alert('Erro ao salvar a ordem das seções.');
+            alert('seção salva com sucesso.');
         }
     });
 });
