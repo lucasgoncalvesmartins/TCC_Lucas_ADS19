@@ -4,7 +4,7 @@ include_once __DIR__ . '/../Controller/SubSecaoDAO.php';
 include_once __DIR__ . '/../Controller/SecaoDAO.php';
 
 $subSecaoDAO = new SubSecaoDAO();
-$subsecoes = $subSecaoDAO->listarTodas();
+$subsecoes = $subSecaoDAO->listarTodasemOrdem();
 
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
@@ -28,10 +28,6 @@ foreach ($secoes as $sec) {
 
 
 if (is_array($subsecoes)) {
-    usort($subsecoes, function ($a, $b) {
-        return ($a['sub_id'] ?? 0) <=> ($b['sub_id'] ?? 0);
-    });
-
     foreach ($subsecoes as $row) {
         $secaoId = $row['secao_id'] ?? 'sec_undefined';
 
@@ -53,7 +49,6 @@ if (is_array($subsecoes)) {
         ];
     }
 }
-
 function renderTexto($texto)
 {
     // Tratamento de notas e listas

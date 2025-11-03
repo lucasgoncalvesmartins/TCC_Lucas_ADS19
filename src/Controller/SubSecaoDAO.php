@@ -49,10 +49,10 @@ class SubSecaoDAO
 
 
 
-    // Listar todas as subseções com detalhes
-    public function listarTodas()
-    {
-        $sql = "
+   
+    public function listarTodasemOrdem()
+{
+    $sql = "
         SELECT
             sec.id                 AS secao_id,
             sec.nome               AS secao_nome,
@@ -61,17 +61,19 @@ class SubSecaoDAO
             sub.titulo             AS sub_titulo,
             sub.conteudo           AS sub_conteudo,
             sub.data_publicacao    AS sub_data_publicacao,
-            u.nome_usuario         AS autor
+            u.nome_usuario         AS autor,
+            sub.ordem              AS sub_ordem
         FROM subsecoes sub
         JOIN secoes sec   ON sub.id_secao = sec.id
         JOIN usuarios u   ON sub.id_autor = u.id
-        ORDER BY sec.id ASC, sub.id ASC
+        ORDER BY sec.ordem ASC, sub.ordem ASC
     ";
 
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 
 
@@ -184,7 +186,6 @@ public function atualizarOrdem($ordemArray)
     }
     return true;
 }
-
 
 
 }
