@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;     
+    align-items: center;         
+    flex-direction: column;      
+    min-height: 100vh;           
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #fafafa;
+    text-align: center;          
+}
+
+#listaSessoes {
+    list-style: none;
+    padding: 0;
+    width: 400px;
+    margin: 20px auto;           
+}
+
+#listaSessoes li { 
+    padding: 10px; 
+    margin: 5px 0; 
+    background: #f0f0f0; 
+    cursor: grab; 
+    border: 1px solid #ccc; 
+    display: flex; 
+    align-items: center;
+    border-radius: 6px;
+    justify-content: flex-start; 
+}
+
+#listaSessoes li span.numero {
+    width: 30px;
+    font-weight: bold;
+}
+
+#listaSessoes li:focus {
+    outline: 3px solid #0056b3;
+    background: #e8f2ff;
+}
+
+
+button#salvar, 
+a.btn.btn-link {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #0056b3;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.btn.btn-link {
+    background: transparent;
+    color: #0056b3;
+}
+
+button#salvar:hover {
+    background: #005fd1;
+}

@@ -2,13 +2,12 @@
 include_once __DIR__ . '/../Controller/SecaoDAO.php';
 
 $secaoDAO = new SecaoDAO();
-$secoes = $secaoDAO->listarTodas(); // Lista todas as seções
+$secoes = $secaoDAO->listarTodas();
 
 // Ordena pelo campo "ordem"
 usort($secoes, function($a, $b) {
     return $a['ordem'] <=> $b['ordem'];
 });
-
 ?>
 
 <!DOCTYPE html>
@@ -16,31 +15,19 @@ usort($secoes, function($a, $b) {
 <head>
 <meta charset="UTF-8">
 <title>Reordenar Seções</title>
+<link rel="stylesheet" href="../Css/ordenarsecao.css">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<style>
-    #listaSessoes { list-style: none; padding: 0; width: 400px; }
-    #listaSessoes li { 
-        padding: 10px; 
-        margin: 5px 0; 
-        background: #f0f0f0; 
-        cursor: move; 
-        border: 1px solid #ccc; 
-        display: flex; 
-        align-items: center;
-    }
-    #listaSessoes li span.numero {
-        width: 30px;
-        font-weight: bold;
-    }
-</style>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
 </head>
 <body>
 <?php include 'header.php'; ?>
-<h2>Arraste as seções para reordenar</h2>
+<main>
+<h1>Arraste as seções ou use as setas para reordenar as seções</h1>
 
 <ul id="listaSessoes">
     <?php foreach ($secoes as $secao): ?>
-        <li data-id="<?= $secao['id'] ?>">
+        <li tabindex="0" data-id="<?= $secao['id'] ?>">
             <span class="numero"><?= $secao['ordem'] ?></span>
             <span class="titulo"><?= htmlspecialchars($secao['nome']) ?></span>
         </li>
@@ -48,20 +35,51 @@ usort($secoes, function($a, $b) {
 </ul>
 
 <button id="salvar">Salvar Ordem</button>
+<a href="home.php" class="btn btn-link" tabindex="0">Voltar</a>
 
 <script>
 const lista = document.getElementById('listaSessoes');
 
+//  arrastar
 const sortable = new Sortable(lista, {
     animation: 150,
-    onEnd: () => {
-        
-        Array.from(lista.children).forEach((li, index) => {
-            li.querySelector('.numero').textContent = index + 1;
-        });
+    onEnd: atualizarNumeros
+});
+
+// Atualiza numeração 
+function atualizarNumeros() {
+    Array.from(lista.children).forEach((li, index) => {
+        li.querySelector('.numero').textContent = index + 1;
+    });
+}
+
+//  teclado setas
+lista.addEventListener('keydown', e => {
+    const foco = document.activeElement;
+    if (!foco || !foco.matches('li[data-id]')) return;
+
+    if (e.key === 'ArrowUp') {
+        const anterior = foco.previousElementSibling;
+        if (anterior) {
+            lista.insertBefore(foco, anterior);
+            foco.focus();
+            atualizarNumeros();
+        }
+        e.preventDefault();
+    }
+
+    if (e.key === 'ArrowDown') {
+        const proximo = foco.nextElementSibling;
+        if (proximo) {
+            lista.insertBefore(proximo, foco);
+            foco.focus();
+            atualizarNumeros();
+        }
+        e.preventDefault();
     }
 });
 
+// Salvar nova ordem 
 document.getElementById('salvar').addEventListener('click', () => {
     const ordem = Array.from(lista.children).map((li, index) => ({
         id: li.dataset.id,
@@ -76,15 +94,13 @@ document.getElementById('salvar').addEventListener('click', () => {
     .then(res => res.json())
     .then(data => {
         if (data.status === 'sucesso') {
-           // alert('Ordem salva com sucesso!');
             window.location.href = 'home.php';
         } else {
-           // alert('Ordem salva com sucesso!');
-            window.location.href = 'home.php';
+            alert('Erro ao salvar a ordem das seções.');
         }
     });
 });
 </script>
-    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+</main>
 </body>
 </html>
