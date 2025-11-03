@@ -34,7 +34,7 @@ usort($secoes, function($a, $b) {
     <?php endforeach; ?>
 </ul>
 
-<button id="salvar">Salvar Ordem</button>
+<button id="salvar">Salvar Ordem</button><br><br>
 <a href="home.php" class="btn btn-link" tabindex="0">Voltar</a>
 
 <script>
