@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div><br>
 
 <!-- Editor contenteditable isso aqui faz aparecer as bolinhas e tals -->
-<div id="editor" contenteditable="true"></div>
+<div id="editor" contenteditable="true" aria-label="Escrever descrição da seção"></div>
 
 <!-- Input hidden para enviar -->
 <input type="hidden" name="descricao_html" id="descricao_html"><br><br>
