@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     
     <div id="editor" contenteditable="true"><?= $subSecao['conteudo'] ?></div>
-    <input type="hidden" name="conteudo_html" id="conteudo_html"><br><br>
+    <input type="hidden" name="conteudo_html" id="conteudo_html" aria-label="Editar descrição da subseção"><br><br>
 
     <label for="id_secao">Seção:</label><br>
     <select name="id_secao" id="id_secao" required>

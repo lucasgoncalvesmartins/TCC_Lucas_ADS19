@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="button" onclick="insertNota()" aria-label="inserir nota">Nota</button>
         </div><br>
 
-        <div id="editor" contenteditable="true"></div>
+        <div id="editor" contenteditable="true" aria-label="Escrever descrição da subseção"></div>
         <input type="hidden" name="conteudo_html" id="conteudo_html"><br><br>
 
         <label for="id_secao">Selicione a Seção pertecente:</label><br>
