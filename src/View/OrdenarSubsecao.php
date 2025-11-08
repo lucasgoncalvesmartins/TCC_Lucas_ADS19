@@ -25,45 +25,66 @@ usort($subsecoes, function($a, $b) {
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 <body>
+
+   
+    <div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+
     <?php include 'header.php'; ?>
 
     <h1>Arraste ou use as setas para reordenar as SubSeções</h1>
 
-    <ul id="listaSub">
+    <ul id="listaSub" role="listbox">
         <?php foreach($subsecoes as $sub): ?>
-            <li tabindex="0" data-id="<?= $sub['id'] ?>">
+            <li tabindex="0"
+                role="option"
+                aria-grabbed="false"
+                data-id="<?= $sub['id'] ?>">
                 <?= htmlspecialchars($sub['titulo']) ?>
             </li>
         <?php endforeach; ?>
     </ul>
 
     <button id="salvar">Salvar Ordem</button>
-            <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
 
     <script>
     const lista = document.getElementById('listaSub');
+    const avisos = document.getElementById('avisos');
 
-    // --- Ativa o arrastar com o mouse ---
+    // Arrastar com o mouse
     const sortable = new Sortable(lista, {
         animation: 150,
-        onEnd: atualizarNumeros
+        onEnd: function(evt) {
+            atualizarNumeros();
+            const item = evt.item;
+            const titulo = item.innerText.trim();
+            const novaPos = evt.newIndex + 1;
+
+            avisos.textContent = titulo + " movida para a posição " + novaPos;
+        }
     });
 
-    // Atualiza visualmente se quiser mostrar números futuramente
     function atualizarNumeros() {
-        // Exemplo: poderia atualizar índices visuais se houver número
+        // Caso você queira numerar visualmente depois
     }
 
-    // --- Permite movimentar via teclado ---
+    // Movimentar via teclado com feedback para leitor de tela
     lista.addEventListener('keydown', e => {
         const foco = document.activeElement;
         if (!foco || !foco.matches('li[data-id]')) return;
+
+        const titulo = foco.innerText.trim();
 
         if (e.key === 'ArrowUp') {
             const anterior = foco.previousElementSibling;
             if (anterior) {
                 lista.insertBefore(foco, anterior);
                 foco.focus();
+                foco.setAttribute('aria-grabbed', 'true');
+
+                avisos.textContent = titulo + " movida para cima";
+
+                foco.setAttribute('aria-grabbed', 'false');
                 atualizarNumeros();
             }
             e.preventDefault();
@@ -74,13 +95,18 @@ usort($subsecoes, function($a, $b) {
             if (proximo) {
                 lista.insertBefore(proximo, foco);
                 foco.focus();
+                foco.setAttribute('aria-grabbed', 'true');
+
+                avisos.textContent = titulo + " movida para baixo";
+
+                foco.setAttribute('aria-grabbed', 'false');
                 atualizarNumeros();
             }
             e.preventDefault();
         }
     });
 
-    // --- Envia a nova ordem pro backend ---
+    // Salvar ordem
     document.getElementById('salvar').addEventListener('click', () => {
         const ordem = Array.from(lista.children).map((li, index) => ({
             id: li.dataset.id,
@@ -95,7 +121,8 @@ usort($subsecoes, function($a, $b) {
         .then(res => res.json())
         .then(data => {
             if (data.status === 'sucesso') {
-                window.location.href = 'home.php';
+                avisos.textContent = "Ordem salva com sucesso";
+                setTimeout(() => window.location.href = 'home.php', 600);
             } else {
                 alert('Erro ao salvar a ordem das subseções.');
             }

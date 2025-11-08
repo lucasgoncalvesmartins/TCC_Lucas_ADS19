@@ -18,16 +18,24 @@ usort($secoes, function($a, $b) {
 <link rel="stylesheet" href="../Css/ordenarsecao.css">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-
 </head>
 <body>
+
+
+<div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+
 <?php include 'header.php'; ?>
+
 <main>
 <h1>Arraste as seções ou use as setas para reordenar as seções</h1>
 
-<ul id="listaSessoes">
+<ul id="listaSessoes" role="listbox">
     <?php foreach ($secoes as $secao): ?>
-        <li tabindex="0" data-id="<?= $secao['id'] ?>">
+        <li tabindex="0"
+            role="option"
+            aria-grabbed="false"
+            data-id="<?= $secao['id'] ?>">
+            
             <span class="numero"><?= $secao['ordem'] ?></span>
             <span class="titulo"><?= htmlspecialchars($secao['nome']) ?></span>
         </li>
@@ -35,35 +43,50 @@ usort($secoes, function($a, $b) {
 </ul>
 
 <button id="salvar">Salvar Ordem</button><br><br>
-        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-
+<a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
 
 <script>
 const lista = document.getElementById('listaSessoes');
+const avisos = document.getElementById('avisos');
 
-//  arrastar
+// arrastar com o mouse
 const sortable = new Sortable(lista, {
     animation: 150,
-    onEnd: atualizarNumeros
+    onEnd: function(evt) {
+        atualizarNumeros();
+
+        const item = evt.item;
+        const titulo = item.querySelector('.titulo').innerText.trim();
+        const novaPos = evt.newIndex + 1;
+
+        avisos.textContent = titulo + " movida para a posição " + novaPos;
+    }
 });
 
-// Atualiza numeração 
+// atualiza numeração visual
 function atualizarNumeros() {
     Array.from(lista.children).forEach((li, index) => {
         li.querySelector('.numero').textContent = index + 1;
     });
 }
 
-//  teclado setas
+// movimentar pelas setas
 lista.addEventListener('keydown', e => {
     const foco = document.activeElement;
     if (!foco || !foco.matches('li[data-id]')) return;
+
+    const titulo = foco.querySelector('.titulo').innerText.trim();
 
     if (e.key === 'ArrowUp') {
         const anterior = foco.previousElementSibling;
         if (anterior) {
             lista.insertBefore(foco, anterior);
             foco.focus();
+
+            foco.setAttribute('aria-grabbed', 'true');
+            avisos.textContent = titulo + " movida para cima";
+            foco.setAttribute('aria-grabbed', 'false');
+
             atualizarNumeros();
         }
         e.preventDefault();
@@ -74,13 +97,18 @@ lista.addEventListener('keydown', e => {
         if (proximo) {
             lista.insertBefore(proximo, foco);
             foco.focus();
+
+            foco.setAttribute('aria-grabbed', 'true');
+            avisos.textContent = titulo + " movida para baixo";
+            foco.setAttribute('aria-grabbed', 'false');
+
             atualizarNumeros();
         }
         e.preventDefault();
     }
 });
 
-// Salvar nova ordem 
+// salva nova ordem
 document.getElementById('salvar').addEventListener('click', () => {
     const ordem = Array.from(lista.children).map((li, index) => ({
         id: li.dataset.id,
@@ -95,13 +123,15 @@ document.getElementById('salvar').addEventListener('click', () => {
     .then(res => res.json())
     .then(data => {
         if (data.status === 'sucesso') {
-            window.location.href = 'home.php';
+            avisos.textContent = "Ordem das seções salva com sucesso";
+            setTimeout(() => window.location.href = 'home.php', 600);
         } else {
-            alert('seção salva com sucesso.');
+            alert('Ordem das seções salva com sucesso"');
         }
     });
 });
 </script>
+
 </main>
 </body>
 </html>
