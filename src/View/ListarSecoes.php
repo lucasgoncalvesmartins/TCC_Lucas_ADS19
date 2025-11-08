@@ -68,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+
     </main>
 
 </body>

@@ -35,7 +35,8 @@ usort($secoes, function($a, $b) {
 </ul>
 
 <button id="salvar">Salvar Ordem</button><br><br>
-<a href="home.php" class="btn btn-link" tabindex="0">Voltar</a>
+        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+
 
 <script>
 const lista = document.getElementById('listaSessoes');

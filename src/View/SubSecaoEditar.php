@@ -149,7 +149,8 @@ function insertNota() {
     range.insertNode(span);
 }
 </script>
-    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+            <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+
 
 </body>
 </html>

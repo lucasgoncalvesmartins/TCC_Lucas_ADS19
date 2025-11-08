@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
         </tbody>
     </table>
-        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
 <?php elseif ($id_secao_selecionada): ?>
     <p style="text-align:center;">Nenhuma subseção encontrada para esta seção.</p>
 <?php endif; ?>

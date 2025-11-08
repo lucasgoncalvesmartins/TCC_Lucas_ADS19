@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </select>
 -->
 <button type="submit">Cadastrar Seção</button><br><br>
- <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+         <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
 </form>
 </main>
 <script>
