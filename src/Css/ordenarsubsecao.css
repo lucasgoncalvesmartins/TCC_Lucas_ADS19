@@ -48,7 +48,7 @@ body {
 
     a.btn.btn-link {
         background: transparent;
-        color: #004494; /* cor acessível com contraste AAA */
+        color: #004494; 
         text-decoration: underline;
         font-weight: bold;
     }
@@ -56,3 +56,10 @@ body {
     button#salvar:hover {
         background: #005fd1;
     }
+
+    .numero {
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+    

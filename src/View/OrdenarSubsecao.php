@@ -11,144 +11,150 @@ if (!$id_secao) {
 
 $subsecoes = $subSecaoDAO->buscarPorSecao((int)$id_secao);
 
-usort($subsecoes, function($a, $b) {
+usort($subsecoes, function ($a, $b) {
     return $a['ordem'] <=> $b['ordem'];
 });
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<title>Ordenar SubSeções</title>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-<link rel="stylesheet" href="../Css/ordenarsubsecao.css">
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <meta charset="UTF-8">
+    <title>Ordenar SubSeções</title>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="../Css/ordenarsubsecao.css">
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
+
 <body>
 
 
-<div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+    <div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
 
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<h1>Arraste ou use as setas para reordenar as SubSeções</h1>
+    <h1>Arraste ou use as setas para reordenar as SubSeções</h1>
 
-<ul id="listaSub" role="listbox">
-    <?php foreach($subsecoes as $sub): ?>
-        <li tabindex="0"
-            role="option"
-            aria-grabbed="false"
-            data-id="<?= $sub['id'] ?>"
-            aria-label="<?= $sub['ordem'] ?>. <?= htmlspecialchars($sub['titulo']) ?>">
+    <ul id="listaSub" role="listbox">
+        <?php foreach ($subsecoes as $sub): ?>
+            <li tabindex="0"
+                role="option"
+                aria-grabbed="false"
+                data-id="<?= $sub['id'] ?>"
+                aria-label="<?= $sub['ordem'] ?>. <?= htmlspecialchars($sub['titulo']) ?>">
 
-            <span class="numero"><?= $sub['ordem'] ?></span>
-            <span class="titulo"><?= htmlspecialchars($sub['titulo']) ?></span>
-        </li>
-    <?php endforeach; ?>
-</ul>
+                <span class="numero"><?= $sub['ordem'] ?></span>
+                <span class="titulo"><?= htmlspecialchars($sub['titulo']) ?></span>
+            </li>
 
-<button id="salvar">Salvar Ordem</button>
-<a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
+        <?php endforeach; ?>
+    </ul>
 
-<script>
-const lista = document.getElementById('listaSub');
-const avisos = document.getElementById('avisos');
+    <button id="salvar">Salvar Ordem</button>
+    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
 
-//  atualiza números 
-function atualizarNumeros() {
-    Array.from(lista.children).forEach((li, index) => {
-        const pos = index + 1;
+    <script>
+        const lista = document.getElementById('listaSub');
+        const avisos = document.getElementById('avisos');
 
-        li.querySelector('.numero').textContent = pos;
+        //  atualiza números 
+        function atualizarNumeros() {
+            Array.from(lista.children).forEach((li, index) => {
+                const pos = index + 1;
 
-        const titulo = li.querySelector('.titulo').innerText.trim();
-        li.setAttribute("aria-label", pos + ". " + titulo);
-    });
-}
+                li.querySelector('.numero').textContent = pos;
 
-// arrastar com mouse
-const sortable = new Sortable(lista, {
-    animation: 150,
-    onEnd: function(evt) {
-        atualizarNumeros();
-
-        const item = evt.item;
-        const titulo = item.querySelector('.titulo').innerText.trim();
-        const pos = evt.newIndex + 1;
-
-        avisos.textContent = titulo + " agora é a posição " + pos;
-    }
-});
-
-// teclado
-lista.addEventListener('keydown', e => {
-    const foco = document.activeElement;
-    if (!foco || !foco.matches('li[data-id]')) return;
-
-    const titulo = foco.querySelector('.titulo').innerText.trim();
-
-    if (e.key === 'ArrowUp') {
-        const anterior = foco.previousElementSibling;
-        if (anterior) {
-            lista.insertBefore(foco, anterior);
-            foco.focus();
-            atualizarNumeros();
-
-            const pos = Array.from(lista.children).indexOf(foco) + 1;
-            avisos.textContent = titulo + " agora é a posição " + pos;
+                const titulo = li.querySelector('.titulo').innerText.trim();
+                li.setAttribute("aria-label", pos + ". " + titulo);
+            });
         }
-        e.preventDefault();
-    }
 
-    if (e.key === 'ArrowDown') {
-        const proximo = foco.nextElementSibling;
-        if (proximo) {
-            lista.insertBefore(proximo, foco);
-            foco.focus();
-            atualizarNumeros();
+        // arrastar com mouse
+        const sortable = new Sortable(lista, {
+            animation: 150,
+            onEnd: function(evt) {
+                atualizarNumeros();
 
-            const pos = Array.from(lista.children).indexOf(foco) + 1;
-            avisos.textContent = titulo + " agora é a posição " + pos;
-        }
-        e.preventDefault();
-    }
-});
+                const item = evt.item;
+                const titulo = item.querySelector('.titulo').innerText.trim();
+                const pos = evt.newIndex + 1;
 
-// salvar nova ordem
-document.getElementById('salvar').addEventListener('click', () => {
-    const ordem = Array.from(lista.children).map((li, index) => ({
-        id: li.dataset.id,
-        ordem: index + 1
-    }));
+                avisos.textContent = titulo + " agora é a posição " + pos;
+            }
+        });
 
-    fetch('salvarOrdemSubSecao.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(ordem)
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 'sucesso') {
+        // teclado
+        lista.addEventListener('keydown', e => {
+            const foco = document.activeElement;
+            if (!foco || !foco.matches('li[data-id]')) return;
 
-            avisos.textContent = "";
+            const titulo = foco.querySelector('.titulo').innerText.trim();
 
-            setTimeout(() => {
-                avisos.textContent = "Ordem das subseções salva com sucesso";
-            }, 30);
+            if (e.key === 'ArrowUp') {
+                const anterior = foco.previousElementSibling;
+                if (anterior) {
+                    lista.insertBefore(foco, anterior);
+                    foco.focus();
+                    atualizarNumeros();
 
-            setTimeout(() => {
-                window.location.href = 'home.php';
-            }, 900);
+                    const pos = Array.from(lista.children).indexOf(foco) + 1;
+                    avisos.textContent = titulo + " agora é a posição " + pos;
+                }
+                e.preventDefault();
+            }
 
-        } else {
-            avisos.textContent = "";
-            setTimeout(() => {
-                avisos.textContent = "Erro ao salvar a ordem das subseções";
-            }, 30);
-        }
-    });
-});
-</script>
+            if (e.key === 'ArrowDown') {
+                const proximo = foco.nextElementSibling;
+                if (proximo) {
+                    lista.insertBefore(proximo, foco);
+                    foco.focus();
+                    atualizarNumeros();
+
+                    const pos = Array.from(lista.children).indexOf(foco) + 1;
+                    avisos.textContent = titulo + " agora é a posição " + pos;
+                }
+                e.preventDefault();
+            }
+        });
+
+        // salvar nova ordem
+        document.getElementById('salvar').addEventListener('click', () => {
+            const ordem = Array.from(lista.children).map((li, index) => ({
+                id: li.dataset.id,
+                ordem: index + 1
+            }));
+
+            fetch('salvarOrdemSubSecao.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ordem)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'sucesso') {
+
+                        avisos.textContent = "";
+
+                        setTimeout(() => {
+                            avisos.textContent = "Ordem das subseções salva com sucesso";
+                        }, 30);
+
+                        setTimeout(() => {
+                            window.location.href = 'home.php';
+                        }, 900);
+
+                    } else {
+                        avisos.textContent = "";
+                        setTimeout(() => {
+                            avisos.textContent = "Erro ao salvar a ordem das subseções";
+                        }, 30);
+                    }
+                });
+        });
+    </script>
 
 </body>
+
 </html>
