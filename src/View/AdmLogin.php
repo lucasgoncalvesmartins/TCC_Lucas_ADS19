@@ -47,13 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div>
             <label for="email">E-mail:</label>
-            <input type="text" id="email" name="email" required>
+            <input type="text" id="email" name="email" aria-label="Insira seu email aqui" required>
         </div>
 
         <div>
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
-        </div>
+    <label for="senha">Senha:</label>
+    <div style="display: flex; gap: 8px; align-items: center;">
+        <input type="password" id="senha" name="senha" required aria-label="Insira sua senha aqui">
+        <button type="button" id="toggleSenha" aria-label="tornar senha que você digitou visivel">
+            👁️
+        </button>
+    </div>
+</div>
 
         <div>
             <button type="submit">Entrar</button>
@@ -64,6 +69,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </form>
         </main>
+
+        <script>
+document.getElementById('toggleSenha').addEventListener('click', function () {
+    const campo = document.getElementById('senha');
+
+    if (campo.type === 'password') {
+        campo.type = 'text';
+        this.setAttribute('aria-label', 'A senha que você digitou está visivel oculta');
+    } else {
+        campo.type = 'password';
+        this.setAttribute('aria-label', 'A senha que você digitou está visivel');
+    }
+});
+</script>
+
 </body>
 
 </html>

@@ -31,26 +31,26 @@ $msg = $controller->msg;
     <form action="" method="POST" enctype="multipart/form-data">
         <div>
             <label for="nome">Nome completo:</label><br>
-            <input type="text" name="nome" id="nome" required>
+            <input type="text" name="nome" id="nome" aria-label="Insira seu nome aqui" required>
         </div>
         <br>
         <div>
             <label for="profissao">Profissão:</label><br>
-            <input type="text" name="profissao" id="profissao" required>
+            <input type="text" name="profissao" id="profissao" aria-label="Insira sua profissão aqui" required>
         </div>
         <br>
         <div>
             <label for="email">Email:</label><br>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" aria-label="Insira seu email aqui" required>
         </div>
         <br>
         <div>
             <label for="sugestoes">Sugestões:</label><br>
-            <textarea name="sugestoes" id="sugestoes" rows="4" cols="50"></textarea>
+            <textarea name="sugestoes" id="sugestoes" aria-label="Insira sua sugestão aqui" rows="4" cols="50"></textarea>
         </div>
         <br>
 
-        <button type="submit">Enviar</button>
+        <button type="submit">Enviar Sugestão</button>
         <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
     </form>
     </main>

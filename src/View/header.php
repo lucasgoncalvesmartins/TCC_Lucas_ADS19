@@ -24,8 +24,8 @@ if (session_status() === PHP_SESSION_NONE) {
                 // para usuários não logados ou do tipo comum
                 if (!isset($_SESSION['id']) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'comum')): ?>
                     <a href="Home.php"  tabindex="0">Home</a>
-                    <a href="UsuarioSugestao.php"  tabindex="0">Enviar Material</a>
                     <a href="FaleConosco.php"  tabindex="0">Enviar Sugestão</a>
+                    <a href="UsuarioSugestao.php"  tabindex="0">Enviar Material</a>
                     <a href="AdmLogin.php"  tabindex="0">Login</a>
                 <?php endif; ?>
 

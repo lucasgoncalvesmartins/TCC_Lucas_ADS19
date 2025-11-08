@@ -31,9 +31,11 @@ $Secaoes = $SecaoDAO->listarSecaoComPosts();
                         <ul>
                             <?php foreach ($secao['subsecoes'] as $sub): ?>
                                 <li>
-                                    <a href="#subsecao-<?= $sub['id'] ?>" aria-label="Ir para a seção">
+                                    <a href="#subsecao-<?= $sub['id'] ?>"
+                                        aria-label="Ir para a subseção <?= htmlspecialchars($sub['titulo']) ?>">
                                         <?= htmlspecialchars($sub['titulo']) ?>
                                     </a>
+
                                 </li>
                             <?php endforeach; ?>
                         </ul>
