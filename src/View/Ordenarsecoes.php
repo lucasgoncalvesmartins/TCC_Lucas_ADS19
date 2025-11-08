@@ -21,8 +21,12 @@ usort($secoes, function($a, $b) {
 </head>
 <body>
 
-
-<div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
+<!-- Região lida pelo leitor de tela -->
+<div id="avisos"
+     aria-live="assertive"
+     aria-atomic="true"
+     style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+</div>
 
 <?php include 'header.php'; ?>
 
@@ -59,18 +63,26 @@ const sortable = new Sortable(lista, {
         const titulo = item.querySelector('.titulo').innerText.trim();
         const novaPos = evt.newIndex + 1;
 
-        avisos.textContent = titulo + " movida para a posição " + novaPos;
+        anunciar(titulo + " movida para a posição " + novaPos);
     }
 });
 
-// atualiza numeração visual
+// atualiza numeração 
 function atualizarNumeros() {
     Array.from(lista.children).forEach((li, index) => {
         li.querySelector('.numero').textContent = index + 1;
     });
 }
 
-// movimentar pelas setas
+//  leitura pelo leitor de tela
+function anunciar(msg) {
+    avisos.textContent = "";  
+    setTimeout(() => {
+        avisos.textContent = msg;
+    }, 30);
+}
+
+// ordem por setas
 lista.addEventListener('keydown', e => {
     const foco = document.activeElement;
     if (!foco || !foco.matches('li[data-id]')) return;
@@ -84,7 +96,7 @@ lista.addEventListener('keydown', e => {
             foco.focus();
 
             foco.setAttribute('aria-grabbed', 'true');
-            avisos.textContent = titulo + " movida para cima";
+            anunciar(titulo + " movida para cima");
             foco.setAttribute('aria-grabbed', 'false');
 
             atualizarNumeros();
@@ -99,7 +111,7 @@ lista.addEventListener('keydown', e => {
             foco.focus();
 
             foco.setAttribute('aria-grabbed', 'true');
-            avisos.textContent = titulo + " movida para baixo";
+            anunciar(titulo + " movida para baixo");
             foco.setAttribute('aria-grabbed', 'false');
 
             atualizarNumeros();
@@ -108,7 +120,8 @@ lista.addEventListener('keydown', e => {
     }
 });
 
-// salva nova ordem
+// salva ordem
+// salvar nova ordem
 document.getElementById('salvar').addEventListener('click', () => {
     const ordem = Array.from(lista.children).map((li, index) => ({
         id: li.dataset.id,
@@ -122,14 +135,25 @@ document.getElementById('salvar').addEventListener('click', () => {
     })
     .then(res => res.json())
     .then(data => {
-        if (data.status === 'sucesso') {
-            avisos.textContent = "Ordem das seções salva com sucesso";
-            setTimeout(() => window.location.href = 'home.php', 600);
-        } else {
-            alert('Ordem das seções salva com sucesso"');
-        }
+        
+
+            // limpa para garantir leitura
+            avisos.textContent = "";
+
+            // força o leitor a ler a mensagem completa
+            setTimeout(() => {
+                avisos.textContent = "Ordem das seções salva com sucesso";
+            }, 30);
+
+            // dá tempo do leitor terminar a fala antes de redirecionar
+            setTimeout(() => {
+                window.location.href = "Home.php";
+            }, 900);
+
+        
     });
 });
+
 </script>
 
 </main>

@@ -51,7 +51,7 @@ usort($subsecoes, function($a, $b) {
     const lista = document.getElementById('listaSub');
     const avisos = document.getElementById('avisos');
 
-    // Arrastar com o mouse
+    // Arrasta com o mouse
     const sortable = new Sortable(lista, {
         animation: 150,
         onEnd: function(evt) {
@@ -65,10 +65,10 @@ usort($subsecoes, function($a, $b) {
     });
 
     function atualizarNumeros() {
-        // Caso você queira numerar visualmente depois
+        
     }
 
-    // Movimentar via teclado com feedback para leitor de tela
+    // Movimentar por teclado 
     lista.addEventListener('keydown', e => {
         const foco = document.activeElement;
         if (!foco || !foco.matches('li[data-id]')) return;
@@ -106,7 +106,7 @@ usort($subsecoes, function($a, $b) {
         }
     });
 
-    // Salvar ordem
+    // salva ordem
     document.getElementById('salvar').addEventListener('click', () => {
         const ordem = Array.from(lista.children).map((li, index) => ({
             id: li.dataset.id,
