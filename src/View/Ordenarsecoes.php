@@ -4,7 +4,7 @@ include_once __DIR__ . '/../Controller/SecaoDAO.php';
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
 
-// Ordena pelo campo "ordem"
+
 usort($secoes, function($a, $b) {
     return $a['ordem'] <=> $b['ordem'];
 });
@@ -21,9 +21,9 @@ usort($secoes, function($a, $b) {
 </head>
 <body>
 
-<!-- Região lida pelo leitor de tela -->
+
 <div id="avisos"
-     aria-live="assertive"
+     aria-live="polite"
      aria-atomic="true"
      style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
 </div>
@@ -38,8 +38,9 @@ usort($secoes, function($a, $b) {
         <li tabindex="0"
             role="option"
             aria-grabbed="false"
-            data-id="<?= $secao['id'] ?>">
-            
+            data-id="<?= $secao['id'] ?>"
+            aria-label="<?= $secao['ordem'] ?>. <?= htmlspecialchars($secao['nome']) ?>">
+
             <span class="numero"><?= $secao['ordem'] ?></span>
             <span class="titulo"><?= htmlspecialchars($secao['nome']) ?></span>
         </li>
@@ -53,7 +54,26 @@ usort($secoes, function($a, $b) {
 const lista = document.getElementById('listaSessoes');
 const avisos = document.getElementById('avisos');
 
-// arrastar com o mouse
+function atualizarNumeros() {
+    Array.from(lista.children).forEach((li, index) => {
+        const pos = index + 1;
+
+        li.querySelector('.numero').textContent = pos;
+
+        const titulo = li.querySelector('.titulo').innerText.trim();
+        li.setAttribute("aria-label", pos + ". " + titulo);
+    });
+}
+
+
+function anunciar(msg) {
+    avisos.textContent = "";
+    setTimeout(() => {
+        avisos.textContent = msg;
+    }, 30);
+}
+
+// arrastar com mouse
 const sortable = new Sortable(lista, {
     animation: 150,
     onEnd: function(evt) {
@@ -63,26 +83,11 @@ const sortable = new Sortable(lista, {
         const titulo = item.querySelector('.titulo').innerText.trim();
         const novaPos = evt.newIndex + 1;
 
-        anunciar(titulo + " movida para a posição " + novaPos);
+        anunciar(titulo + " agora é a posição " + novaPos);
     }
 });
 
-// atualiza numeração 
-function atualizarNumeros() {
-    Array.from(lista.children).forEach((li, index) => {
-        li.querySelector('.numero').textContent = index + 1;
-    });
-}
-
-//  leitura pelo leitor de tela
-function anunciar(msg) {
-    avisos.textContent = "";  
-    setTimeout(() => {
-        avisos.textContent = msg;
-    }, 30);
-}
-
-// ordem por setas
+// teclado
 lista.addEventListener('keydown', e => {
     const foco = document.activeElement;
     if (!foco || !foco.matches('li[data-id]')) return;
@@ -95,11 +100,10 @@ lista.addEventListener('keydown', e => {
             lista.insertBefore(foco, anterior);
             foco.focus();
 
-            foco.setAttribute('aria-grabbed', 'true');
-            anunciar(titulo + " movida para cima");
-            foco.setAttribute('aria-grabbed', 'false');
-
             atualizarNumeros();
+
+            const pos = Array.from(lista.children).indexOf(foco) + 1;
+            anunciar(titulo + " agora é a posição " + pos);
         }
         e.preventDefault();
     }
@@ -110,18 +114,16 @@ lista.addEventListener('keydown', e => {
             lista.insertBefore(proximo, foco);
             foco.focus();
 
-            foco.setAttribute('aria-grabbed', 'true');
-            anunciar(titulo + " movida para baixo");
-            foco.setAttribute('aria-grabbed', 'false');
-
             atualizarNumeros();
+
+            const pos = Array.from(lista.children).indexOf(foco) + 1;
+            anunciar(titulo + " agora é a posição " + pos);
         }
         e.preventDefault();
     }
 });
 
 // salva ordem
-// salvar nova ordem
 document.getElementById('salvar').addEventListener('click', () => {
     const ordem = Array.from(lista.children).map((li, index) => ({
         id: li.dataset.id,
@@ -135,25 +137,14 @@ document.getElementById('salvar').addEventListener('click', () => {
     })
     .then(res => res.json())
     .then(data => {
-        
 
-            // limpa para garantir leitura
-            avisos.textContent = "";
+        anunciar("Ordem das seções salva com sucesso");
 
-            // força o leitor a ler a mensagem completa
-            setTimeout(() => {
-                avisos.textContent = "Ordem das seções salva com sucesso";
-            }, 30);
-
-            // dá tempo do leitor terminar a fala antes de redirecionar
-            setTimeout(() => {
-                window.location.href = "Home.php";
-            }, 900);
-
-        
+        setTimeout(() => {
+            window.location.href = "Home.php";
+        }, 900);
     });
 });
-
 </script>
 
 </main>

@@ -26,108 +26,129 @@ usort($subsecoes, function($a, $b) {
 </head>
 <body>
 
-   
-    <div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
 
-    <?php include 'header.php'; ?>
+<div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
 
-    <h1>Arraste ou use as setas para reordenar as SubSeções</h1>
+<?php include 'header.php'; ?>
 
-    <ul id="listaSub" role="listbox">
-        <?php foreach($subsecoes as $sub): ?>
-            <li tabindex="0"
-                role="option"
-                aria-grabbed="false"
-                data-id="<?= $sub['id'] ?>">
-                <?= htmlspecialchars($sub['titulo']) ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+<h1>Arraste ou use as setas para reordenar as SubSeções</h1>
 
-    <button id="salvar">Salvar Ordem</button>
-    <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
+<ul id="listaSub" role="listbox">
+    <?php foreach($subsecoes as $sub): ?>
+        <li tabindex="0"
+            role="option"
+            aria-grabbed="false"
+            data-id="<?= $sub['id'] ?>"
+            aria-label="<?= $sub['ordem'] ?>. <?= htmlspecialchars($sub['titulo']) ?>">
 
-    <script>
-    const lista = document.getElementById('listaSub');
-    const avisos = document.getElementById('avisos');
+            <span class="numero"><?= $sub['ordem'] ?></span>
+            <span class="titulo"><?= htmlspecialchars($sub['titulo']) ?></span>
+        </li>
+    <?php endforeach; ?>
+</ul>
 
-    // Arrasta com o mouse
-    const sortable = new Sortable(lista, {
-        animation: 150,
-        onEnd: function(evt) {
-            atualizarNumeros();
-            const item = evt.item;
-            const titulo = item.innerText.trim();
-            const novaPos = evt.newIndex + 1;
+<button id="salvar">Salvar Ordem</button>
+<a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
 
-            avisos.textContent = titulo + " movida para a posição " + novaPos;
-        }
+<script>
+const lista = document.getElementById('listaSub');
+const avisos = document.getElementById('avisos');
+
+//  atualiza números 
+function atualizarNumeros() {
+    Array.from(lista.children).forEach((li, index) => {
+        const pos = index + 1;
+
+        li.querySelector('.numero').textContent = pos;
+
+        const titulo = li.querySelector('.titulo').innerText.trim();
+        li.setAttribute("aria-label", pos + ". " + titulo);
     });
+}
 
-    function atualizarNumeros() {
-        
+// arrastar com mouse
+const sortable = new Sortable(lista, {
+    animation: 150,
+    onEnd: function(evt) {
+        atualizarNumeros();
+
+        const item = evt.item;
+        const titulo = item.querySelector('.titulo').innerText.trim();
+        const pos = evt.newIndex + 1;
+
+        avisos.textContent = titulo + " agora é a posição " + pos;
+    }
+});
+
+// teclado
+lista.addEventListener('keydown', e => {
+    const foco = document.activeElement;
+    if (!foco || !foco.matches('li[data-id]')) return;
+
+    const titulo = foco.querySelector('.titulo').innerText.trim();
+
+    if (e.key === 'ArrowUp') {
+        const anterior = foco.previousElementSibling;
+        if (anterior) {
+            lista.insertBefore(foco, anterior);
+            foco.focus();
+            atualizarNumeros();
+
+            const pos = Array.from(lista.children).indexOf(foco) + 1;
+            avisos.textContent = titulo + " agora é a posição " + pos;
+        }
+        e.preventDefault();
     }
 
-    // Movimentar por teclado 
-    lista.addEventListener('keydown', e => {
-        const foco = document.activeElement;
-        if (!foco || !foco.matches('li[data-id]')) return;
+    if (e.key === 'ArrowDown') {
+        const proximo = foco.nextElementSibling;
+        if (proximo) {
+            lista.insertBefore(proximo, foco);
+            foco.focus();
+            atualizarNumeros();
 
-        const titulo = foco.innerText.trim();
-
-        if (e.key === 'ArrowUp') {
-            const anterior = foco.previousElementSibling;
-            if (anterior) {
-                lista.insertBefore(foco, anterior);
-                foco.focus();
-                foco.setAttribute('aria-grabbed', 'true');
-
-                avisos.textContent = titulo + " movida para cima";
-
-                foco.setAttribute('aria-grabbed', 'false');
-                atualizarNumeros();
-            }
-            e.preventDefault();
+            const pos = Array.from(lista.children).indexOf(foco) + 1;
+            avisos.textContent = titulo + " agora é a posição " + pos;
         }
+        e.preventDefault();
+    }
+});
 
-        if (e.key === 'ArrowDown') {
-            const proximo = foco.nextElementSibling;
-            if (proximo) {
-                lista.insertBefore(proximo, foco);
-                foco.focus();
-                foco.setAttribute('aria-grabbed', 'true');
+// salvar nova ordem
+document.getElementById('salvar').addEventListener('click', () => {
+    const ordem = Array.from(lista.children).map((li, index) => ({
+        id: li.dataset.id,
+        ordem: index + 1
+    }));
 
-                avisos.textContent = titulo + " movida para baixo";
+    fetch('salvarOrdemSubSecao.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ordem)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'sucesso') {
 
-                foco.setAttribute('aria-grabbed', 'false');
-                atualizarNumeros();
-            }
-            e.preventDefault();
+            avisos.textContent = "";
+
+            setTimeout(() => {
+                avisos.textContent = "Ordem das subseções salva com sucesso";
+            }, 30);
+
+            setTimeout(() => {
+                window.location.href = 'home.php';
+            }, 900);
+
+        } else {
+            avisos.textContent = "";
+            setTimeout(() => {
+                avisos.textContent = "Erro ao salvar a ordem das subseções";
+            }, 30);
         }
     });
+});
+</script>
 
-    // salva ordem
-    document.getElementById('salvar').addEventListener('click', () => {
-        const ordem = Array.from(lista.children).map((li, index) => ({
-            id: li.dataset.id,
-            ordem: index + 1
-        }));
-
-        fetch('salvarOrdemSubSecao.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(ordem)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 'sucesso') {
-                avisos.textContent = "Ordem salva com sucesso";
-                setTimeout(() => window.location.href = 'home.php', 600);
-            } else {
-                alert('Erro ao salvar a ordem das subseções.');
-            }
-        });
-    });
-    </script>
 </body>
 </html>
