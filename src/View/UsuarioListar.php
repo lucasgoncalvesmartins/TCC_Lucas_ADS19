@@ -80,7 +80,11 @@ $usuarios = $usuarioDAO->listarTodos();
             </tbody>
         </table>
         <br><br>
-                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+               <div class="text-center mt-3">
+                <a href="Home.php" class="btn-voltar" tabindex="0">
+                    Voltar para página inicial
+                </a>
+            </div>
 
     </main>
 

@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $novaSenha);
                 if ($sucesso) {
                     $sucessoMsg = "Perfil e senha atualizados com sucesso!";
-                    $usuario['senha'] = $novaSenha; 
+                    $usuario['senha'] = $novaSenha;
                     $usuario['email'] = $email;
                 } else {
                     $erro = "Erro ao atualizar perfil.";
@@ -58,18 +58,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
     <link rel="stylesheet" href="../Css/perfil.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .erro { color: red; }
-        .sucesso { color: green; }
-        form div { margin-bottom: 10px; }
+        .erro {
+            color: red;
+        }
+
+        .sucesso {
+            color: green;
+        }
+
+        form div {
+            margin-bottom: 10px;
+        }
     </style>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
+
 <body>
     <?php include 'header.php'; ?>
 
@@ -85,13 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="" method="POST">
             <div>
                 <label for="email">E-mail:</label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    value="<?= htmlspecialchars($usuario['email']) ?>" 
-                    required
-                >
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value="<?= htmlspecialchars($usuario['email']) ?>"
+                    required>
             </div>
 
             <h2>Alterar senha</h2>
@@ -111,9 +120,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit">Atualizar</button> <br>
-                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar</a>
+            <div class="text-center mt-3">
+                <a href="Home.php" class="btn-voltar" tabindex="0">
+                    Voltar para página inicial
+                </a>
+            </div>
 
         </form>
     </main>
 </body>
+
 </html>
