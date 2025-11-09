@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/AdmLogin.css">
     <title>Login Administrador</title>
- <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
 <body>
@@ -35,54 +35,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     ?>
     <main>
-    <form action="" method="post">
-        <h1>Login</h1>
+        <form action="" method="post">
+            <h1>Login</h1>
 
-        <?php 
-        if (!empty($_GET['msg']) && $_GET['msg'] === 'erro'): ?>
-            <div class="msg erro">Email ou senha incorretos.</div>
-        <?php elseif (!empty($_GET['msg']) && $_GET['msg'] === 'senhaAtualizada'): ?>
-            <div class="msg sucesso">Senha redefinida com sucesso! Faça login.</div>
-        <?php endif; ?>
+            <?php
+            if (!empty($_GET['msg']) && $_GET['msg'] === 'erro'): ?>
+                <div class="msg erro">Email ou senha incorretos.</div>
+            <?php elseif (!empty($_GET['msg']) && $_GET['msg'] === 'senhaAtualizada'): ?>
+                <div class="msg sucesso">Senha redefinida com sucesso! Faça login.</div>
+            <?php endif; ?>
 
-        <div>
-            <label for="email">E-mail:</label>
-            <input type="text" id="email" name="email" aria-label="Insira seu email aqui" required>
-        </div>
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" name="email" aria-label="Insira seu email aqui" required>
+            </div>
 
-        <div>
-    <label for="senha">Senha:</label>
-    <div style="display: flex; gap: 8px; align-items: center;">
-        <input type="password" id="senha" name="senha" required aria-label="Insira sua senha aqui">
-        <button type="button" id="toggleSenha" aria-label="tornar senha que você digitou visivel">
-            👁️
-        </button>
-    </div>
-</div>
+            <div>
+                <label for="senha">Senha:</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <input type="password" id="senha" name="senha" required aria-label="Insira sua senha aqui">
+                    <button type="button" id="toggleSenha" aria-label="tornar senha que você digitou visivel">
+                        👁️
+                    </button>
+                </div>
+            </div>
 
-        <div>
-            <button type="submit">Entrar</button>
-        </div>
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
 
-        <a href="Solicitar_Recuperacao.php"  tabindex="0">Esqueci a senha</a> <br>
-        <a href="AdmCadastra.php"  tabindex="0">Quero Me Cadastrar</a>
+            <a href="Solicitar_Recuperacao.php" tabindex="0">Esqueci a senha</a> <br>
+            <a href="AdmCadastra.php" class="link-cadastro" tabindex="0">Quero Me Cadastrar</a>
+            <a href="Home.php" class="btn-voltar" tabindex="0">
+                Voltar para página inicial
+            </a>
 
-    </form>
-        </main>
+        </form>
+    </main>
 
-        <script>
-document.getElementById('toggleSenha').addEventListener('click', function () {
-    const campo = document.getElementById('senha');
+    <script>
+        document.getElementById('toggleSenha').addEventListener('click', function() {
+            const campo = document.getElementById('senha');
 
-    if (campo.type === 'password') {
-        campo.type = 'text';
-        this.setAttribute('aria-label', 'A senha que você digitou está visivel oculta');
-    } else {
-        campo.type = 'password';
-        this.setAttribute('aria-label', 'A senha que você digitou está visivel');
-    }
-});
-</script>
+            if (campo.type === 'password') {
+                campo.type = 'text';
+                this.setAttribute('aria-label', 'A senha que você digitou está visivel oculta');
+            } else {
+                campo.type = 'password';
+                this.setAttribute('aria-label', 'A senha que você digitou está visivel');
+            }
+        });
+    </script>
 
 </body>
 

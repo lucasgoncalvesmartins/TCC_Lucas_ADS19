@@ -55,8 +55,17 @@ button {
 }
 
 /* Link de voltar */
-.btn-link {
+
+.btn-voltar {
     display: inline-block;
-    margin-top: 10px;
+    padding: 6px 12px;
+    margin-top: 24px;
+    background-color: #0056b3;
+    color: #ffffff;
     text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    width: auto;      
 }

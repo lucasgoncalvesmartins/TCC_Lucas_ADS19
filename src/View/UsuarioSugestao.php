@@ -52,8 +52,13 @@ require_once __DIR__ . '/../Controller/EnviarPdfController.php';
         </div>
         <br>
         <button type="submit">Enviar PDF</button>
+        <div class="text-center mt-3">
+                <a href="Home.php" class="btn-voltar" tabindex="0">
+                    Voltar para página inicial
+                </a>
+            </div>
     </form>
- <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+
 
 </main>
 </body>

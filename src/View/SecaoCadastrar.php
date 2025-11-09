@@ -24,58 +24,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Cadastrar Seção</title>
-<link rel="stylesheet" href="../Css/cadastroSecao.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-/* visualizar o editor */
-#editor {
-    border: 1px solid #ccc;
-    padding: 5px;
-    min-height: 150px;
-}
-.editor-buttons button {
-    margin-right: 5px;
-    cursor: pointer;
-}
-#editor ul { list-style-type: disc; padding-left: 1.5rem; }
-#editor ol { list-style-type: decimal; padding-left: 1.5rem; }
-#editor li { margin-bottom: 0.3rem; }
-</style>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <meta charset="UTF-8">
+    <title>Cadastrar Seção</title>
+    <link rel="stylesheet" href="../Css/cadastroSecao.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* visualizar o editor */
+        #editor {
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 150px;
+        }
+
+        .editor-buttons button {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        #editor ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        #editor ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+
+        #editor li {
+            margin-bottom: 0.3rem;
+        }
+    </style>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
+
 <body>
-<?php include 'header.php'; ?>
-<main id="conteudo-principal">
-<?php if (!empty($erro)): ?>
-<p style="color:red;"><?= htmlspecialchars($erro) ?></p>
-<?php endif; ?>
+    <?php include 'header.php'; ?>
+    <main id="conteudo-principal">
+        <?php if (!empty($erro)): ?>
+            <p style="color:red;"><?= htmlspecialchars($erro) ?></p>
+        <?php endif; ?>
 
-<form action="" method="post" onsubmit="document.getElementById('descricao_html').value = document.getElementById('editor').innerHTML;">
-<h1>Cadastrar Seção</h1>
+        <form action="" method="post" onsubmit="document.getElementById('descricao_html').value = document.getElementById('editor').innerHTML;">
+            <h1>Cadastrar Seção</h1>
 
-<label for="nome">Nome da Seção:</label><br>
-<input type="text" name="nome" id="nome" required><br><br>
+            <label for="nome">Nome da Seção:</label><br>
+            <input type="text" name="nome" id="nome" required><br><br>
 
-<label for="descricao">Descrição:</label><br>
+            <label for="descricao">Descrição:</label><br>
 
-<div class="editor-buttons">
-    <button type="button" onclick="execCommand('bold')" aria-label="Aplicar negrito ao texto"><b>B</b></button>
-    <button type="button" onclick="execCommand('italic')" aria-label="Aplicar italico ao texto"><i>I</i></button>
-    <button type="button" onclick="execCommand('insertUnorderedList')" aria-label="Aplicar lista bolinha">UL</button>
-    <button type="button" onclick="execCommand('insertOrderedList')" aria-label="Aplicar lista numerada">OL</button>
-    <button type="button" onclick="insertLink()" aria-label="inserir link">Link</button>
-</div><br>
+            <div class="editor-buttons">
+                <button type="button" onclick="execCommand('bold')" aria-label="Aplicar negrito ao texto"><b>B</b></button>
+                <button type="button" onclick="execCommand('italic')" aria-label="Aplicar italico ao texto"><i>I</i></button>
+                <button type="button" onclick="execCommand('insertUnorderedList')" aria-label="Aplicar lista bolinha">UL</button>
+                <button type="button" onclick="execCommand('insertOrderedList')" aria-label="Aplicar lista numerada">OL</button>
+                <button type="button" onclick="insertLink()" aria-label="inserir link">Link</button>
+            </div><br>
 
-<!-- Editor contenteditable isso aqui faz aparecer as bolinhas e tals -->
-<div id="editor" contenteditable="true" aria-label="Escrever descrição da seção"></div>
+            <!-- Editor contenteditable isso aqui faz aparecer as bolinhas e tals -->
+            <div id="editor" contenteditable="true" aria-label="Escrever descrição da seção"></div>
 
-<!-- Input hidden para enviar -->
-<input type="hidden" name="descricao_html" id="descricao_html"><br><br>
+            <!-- Input hidden para enviar -->
+            <input type="hidden" name="descricao_html" id="descricao_html"><br><br>
 
-<!-- 
+            <!-- 
 <label for="ordem">Posição:</label>
 <select name="ordem" id="ordem">
     <php
@@ -86,22 +100,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //?>
 </select>
 -->
-<button type="submit">Cadastrar Seção</button><br><br>
-         <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-</form>
-</main>
-<script>
-function execCommand(command) {
-    document.execCommand(command, false, null);
-}
+            <button type="submit">Cadastrar Seção</button><br><br>
+            <div class="text-center mt-3">
+                <a href="Home.php" class="btn-voltar" tabindex="0">
+                    Voltar para página inicial
+                </a>
+            </div>
+        </form>
+    </main>
+    <script>
+        function execCommand(command) {
+            document.execCommand(command, false, null);
+        }
 
-function insertLink() {
-    const url = prompt("Digite a URL do link:");
-    if (!url) return;
-    document.execCommand('createLink', false, url);
-}
-</script>
-   
+        function insertLink() {
+            const url = prompt("Digite a URL do link:");
+            if (!url) return;
+            document.execCommand('createLink', false, url);
+        }
+    </script>
+
 
 </body>
+
 </html>

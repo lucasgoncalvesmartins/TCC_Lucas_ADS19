@@ -116,7 +116,7 @@ form {
     width: fit-content;
     margin: 30px auto 0;
     text-align: center;
-    background-color: #3c0064;
+    background-color: #0056b3;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -127,9 +127,9 @@ form {
 
 .btn.btn-link:hover,
 .btn.btn-link:focus {
-    background-color: #5a0099;
+    background-color: #0056b3;
     transform: scale(1.03);
-    outline: 3px solid #d8bfff;
+    outline: 3px solid #0056b3;
 }
 
 /*  FOCUS VISÍVEL */

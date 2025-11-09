@@ -20,39 +20,43 @@ $msg = $controller->msg;
 <body>
     <?php include 'header.php'; ?>
     <main>
-    <h1>Fale Conosco</h1>
+        <h1>Fale Conosco</h1>
 
-    <?php if ($msg): ?>
-        <p style="color: <?= strpos($msg, 'sucesso') !== false ? 'green' : 'red' ?>;">
-            <?= htmlspecialchars($msg) ?>
-        </p>
-    <?php endif; ?>
+        <?php if ($msg): ?>
+            <p style="color: <?= strpos($msg, 'sucesso') !== false ? 'green' : 'red' ?>;">
+                <?= htmlspecialchars($msg) ?>
+            </p>
+        <?php endif; ?>
 
-    <form action="" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="nome">Nome completo:</label><br>
-            <input type="text" name="nome" id="nome" aria-label="Insira seu nome aqui" required>
-        </div>
-        <br>
-        <div>
-            <label for="profissao">Profissão:</label><br>
-            <input type="text" name="profissao" id="profissao" aria-label="Insira sua profissão aqui" required>
-        </div>
-        <br>
-        <div>
-            <label for="email">Email:</label><br>
-            <input type="email" name="email" id="email" aria-label="Insira seu email aqui" required>
-        </div>
-        <br>
-        <div>
-            <label for="sugestoes">Sugestões:</label><br>
-            <textarea name="sugestoes" id="sugestoes" aria-label="Insira sua sugestão aqui" rows="4" cols="50"></textarea>
-        </div>
-        <br>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="nome">Nome completo:</label><br>
+                <input type="text" name="nome" id="nome" aria-label="Insira seu nome aqui" required>
+            </div>
+            <br>
+            <div>
+                <label for="profissao">Profissão:</label><br>
+                <input type="text" name="profissao" id="profissao" aria-label="Insira sua profissão aqui" required>
+            </div>
+            <br>
+            <div>
+                <label for="email">Email:</label><br>
+                <input type="email" name="email" id="email" aria-label="Insira seu email aqui" required>
+            </div>
+            <br>
+            <div>
+                <label for="sugestoes">Sugestões:</label><br>
+                <textarea name="sugestoes" id="sugestoes" aria-label="Insira sua sugestão aqui" rows="4" cols="50"></textarea>
+            </div>
+            <br>
 
-        <button type="submit">Enviar Sugestão</button>
-        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-    </form>
+            <button type="submit">Enviar Sugestão</button>
+            <div class="text-center mt-3">
+                <a href="Home.php" class="btn-voltar" tabindex="0">
+                    Voltar para página inicial
+                </a>
+            </div>
+        </form>
     </main>
 </body>
 

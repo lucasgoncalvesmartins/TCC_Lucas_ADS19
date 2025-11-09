@@ -31,16 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Listar Sub-seções</title>
-    <style>
-        table { border-collapse: collapse; width: 80%; margin: 20px auto; }
-        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn { padding: 4px 8px; margin-right: 5px; border-radius: 3px; text-decoration: none; color: white; }
-        .btn.edit { background-color: #1e5e3a; }
-        .btn.delete { background-color: #8B0000; border: none; cursor: pointer; }
-        .btn.ordenar { background-color: #5a0099; }
-    </style>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <link rel="stylesheet" href="../Css/listarSubSecao.css">
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -92,7 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
         </tbody>
     </table>
-                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+
+    <div class="text-center mt-3">
+                <a href="Home.php" class="btn-voltar" tabindex="0">
+                    Voltar para página inicial
+                </a>
+            </div>
+            
 <?php elseif ($id_secao_selecionada): ?>
     <p style="text-align:center;">Nenhuma subseção encontrada para esta seção.</p>
 <?php endif; ?>
