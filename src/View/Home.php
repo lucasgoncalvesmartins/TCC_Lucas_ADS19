@@ -114,11 +114,7 @@ function renderTexto($texto)
                                 <div class="card-body">
                                     <h3 class="card-title"><?= htmlspecialchars($sub['titulo']) ?></h3>
                                     <p class="card-text"><?= renderTexto($sub['conteudo']) ?></p>
-                                    <p class="mt-3 text-muted">
-                                        <strong>Autor:</strong> <?= htmlspecialchars($sub['autor']) ?> |
-                                        <strong>Data:</strong>
-                                        <?= $sub['data_publicacao'] ? date('d/m/Y H:i', strtotime($sub['data_publicacao'])) : '—' ?>
-                                    </p><br>
+                                    
                                 </div>
                             </article>
                         <?php endforeach; ?>
