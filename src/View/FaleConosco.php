@@ -20,7 +20,7 @@ $msg = $controller->msg;
 <body>
     <?php include 'header.php'; ?>
     <main>
-        <h1>Fale Conosco</h1>
+        <h1>Enviar Sugestão</h1>
 
         <?php if ($msg): ?>
             <p style="color: <?= strpos($msg, 'sucesso') !== false ? 'green' : 'red' ?>;">

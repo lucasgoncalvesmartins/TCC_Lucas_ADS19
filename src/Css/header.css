@@ -12,6 +12,7 @@ header {
     background-color: #fff;
     font-size: 1.125rem; 
     box-sizing: border-box;
+    Border-bottom: 2px solid #000;
 }
 
 /* blocos */
