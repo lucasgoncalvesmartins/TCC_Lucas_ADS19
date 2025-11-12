@@ -16,14 +16,13 @@ public function cadastrar() {
 
     $Secao = new SecaoModel($_POST);
 
-    // Defini a ordem
     if (!isset($_POST['ordem']) || empty($_POST['ordem'])) {
         $stmtMax = $this->conexao->query("SELECT MAX(ordem) AS max_ordem FROM secoes");
         $max = $stmtMax->fetch(PDO::FETCH_ASSOC)['max_ordem'];
         $ordem = $max + 1;
     } else {
         $ordem = (int) $_POST['ordem'];
-        // meche nas outras seções para abrir espaço
+        
         $stmtShift = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :ordem");
         $stmtShift->execute([':ordem' => $ordem]);
     }

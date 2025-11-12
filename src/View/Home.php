@@ -49,6 +49,8 @@ if (is_array($subsecoes)) {
         ];
     }
 }
+
+//tratamento de negrito, italico, listas e links
 function renderTexto($texto)
 {
     // Tratamento de notas e listas
