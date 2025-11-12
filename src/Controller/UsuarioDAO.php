@@ -19,11 +19,11 @@ class UsuarioDAO
 
         $Usuario = new UsuarioModel($_POST);
 
-        // verifica se já existe algum usuário no banco
+        
         $check = $this->conexao->query("SELECT COUNT(*) as total FROM usuarios");
         $count = $check->fetch(PDO::FETCH_ASSOC)['total'];
 
-        // se for o primeiro dá adm pra ele
+        
         if ($count == 0) {
             $Usuario->setTipo('admin');
         } else {

@@ -50,8 +50,6 @@ class LoginDAO
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-
-        // só verificando  se a sessão existe
         if (isset($_SESSION['id'])) {
             $data['saida'] = 'login';
         } else {

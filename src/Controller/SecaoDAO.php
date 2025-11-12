@@ -134,29 +134,27 @@ public function cadastrar() {
 }
 
 
-    // Editar ordem da seção
+    // Editar ordem da seção, primeiramente busca a ordem antiga, depois sobe ou desce as outras seções conforme a nova ordem, e por fim atualiza a seção
 public function editarOrdem($dados) {
     $id = $dados['id'];
     $nova_ordem = $dados['ordem'];
 
-    // Pega a ordem antiga
     $stmt = $this->conexao->prepare("SELECT ordem FROM secoes WHERE id = :id");
     $stmt->execute([':id' => $id]);
     $ordem_antiga = $stmt->fetch(PDO::FETCH_ASSOC)['ordem'];
 
     if ($nova_ordem != $ordem_antiga) {
         if ($nova_ordem < $ordem_antiga) {
-            // Sobe seção
+            
             $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem + 1 WHERE ordem >= :nova AND ordem < :antiga");
             $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
         } else {
-            // Desce seção
+            
             $stmt = $this->conexao->prepare("UPDATE secoes SET ordem = ordem - 1 WHERE ordem <= :nova AND ordem > :antiga");
             $stmt->execute([':nova' => $nova_ordem, ':antiga' => $ordem_antiga]);
         }
     }
 
-    // Atualiza a seção
     $stmt = $this->conexao->prepare("UPDATE secoes SET nome = :nome, descricao = :descricao, ordem = :ordem WHERE id = :id");
     $stmt->execute([
         ':nome' => $dados['nome'],
