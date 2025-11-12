@@ -68,8 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </tbody>
         </table>
-                <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-
+        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
     </main>
 
 </body>

@@ -146,7 +146,15 @@ document.getElementById('salvar').addEventListener('click', () => {
     });
 });
 </script>
-
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
 </main>
 </body>
 </html>

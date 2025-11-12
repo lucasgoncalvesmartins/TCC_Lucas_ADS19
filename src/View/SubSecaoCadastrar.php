@@ -115,6 +115,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
         </form>
+        </script>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
     </main>
     <script>
         function execCommand(command) {
@@ -127,19 +137,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const url = prompt("Digite a URL do link:");
             if (!url) return;
 
-            // aqui ta capturando a seleção de texto feita pelo usuário
+            
             const sel = window.getSelection();
             if (!sel.rangeCount) return;
 
-            // Pega o texto selecionado 
+            
             const range = sel.getRangeAt(0);
             const link = document.createElement('a');
             link.href = url;
             link.target = "_blank";
             link.textContent = range.toString() || "Texto do link";
-            // texto vira o link;
+            
 
-            // Substitui o conteúdo selecionado pelo link criado
+            
             range.deleteContents();
             range.insertNode(link);
         }
@@ -154,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             range.insertNode(span);
         }
     </script>
+
 
 </body>
 

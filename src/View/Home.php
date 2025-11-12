@@ -53,7 +53,7 @@ if (is_array($subsecoes)) {
 //tratamento de negrito, italico, listas e links
 function renderTexto($texto)
 {
-    // Tratamento de notas e listas
+
     $texto = preg_replace('/\[nota\](.*?)\[\/nota\]/s', '<span class="nota">$1</span>', $texto);
     $texto = preg_replace_callback('/\[li\](.*?)\[\/li\]/s', function ($m) {
         return '<li>' . $m[1] . '</li>';
@@ -66,7 +66,7 @@ function renderTexto($texto)
         return '<ol>' . $m[1] . '</ol>';
     }, $texto);
 
-    // aplica nl2br fora de listas (se aplicar dentro de listas quebra o layout)
+
     $texto = preg_replace_callback(
         '/((?:.(?!<ul|<ol|<li|<span))*.?)/s',
         function ($matches) {
@@ -116,7 +116,7 @@ function renderTexto($texto)
                                 <div class="card-body">
                                     <h3 class="card-title"><?= htmlspecialchars($sub['titulo']) ?></h3>
                                     <p class="card-text"><?= renderTexto($sub['conteudo']) ?></p>
-                                    
+
                                 </div>
                             </article>
                         <?php endforeach; ?>
@@ -124,6 +124,15 @@ function renderTexto($texto)
                 </section>
             <?php endforeach; ?>
         <?php endif; ?>
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
     </main>
 
     <?php include_once __DIR__ . '/footer.php'; ?>

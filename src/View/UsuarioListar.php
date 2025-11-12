@@ -80,12 +80,21 @@ $usuarios = $usuarioDAO->listarTodos();
             </tbody>
         </table>
         <br><br>
-               <div class="text-center mt-3">
-                <a href="Home.php" class="btn-voltar" tabindex="0">
-                    Voltar para página inicial
-                </a>
+        <div class="text-center mt-3">
+            <a href="Home.php" class="btn-voltar" tabindex="0">
+                Voltar para página inicial
+            </a>
+        </div>
+        </script>
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
             </div>
-
+        </div>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
     </main>
 
 </body>

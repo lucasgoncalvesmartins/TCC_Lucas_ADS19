@@ -32,7 +32,7 @@ usort($subsecoes, function ($a, $b) {
     <div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
 
     <?php include 'header.php'; ?>
-
+<main> 
     <h1>Arraste ou use as setas para reordenar as SubSeções</h1>
 
     <ul id="listaSub" role="listbox">
@@ -154,7 +154,17 @@ usort($subsecoes, function ($a, $b) {
                 });
         });
     </script>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
 
+</main>
 </body>
 
 </html>

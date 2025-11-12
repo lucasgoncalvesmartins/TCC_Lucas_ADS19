@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../Css/editaSecao.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        /* Estilo do editor */
+        
         #editor {
             border: 1px solid #ccc;
             padding: 5px;
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php include 'header.php'; ?>
-
+<main>
 <div class="container my-5">
 
     <?php if ($sucesso): ?>
@@ -141,6 +141,16 @@ function insertNota() {
 }
 </script>
             <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-
+</script>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+</main>
 </body>
 </html>

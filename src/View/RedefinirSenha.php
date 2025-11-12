@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($senha !== $confirmar) {
         $erro = "As senhas não coincidem.";
     } else {
-        
-       // $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+        // $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
         $stmt = $pdo->prepare("UPDATE usuarios SET senha = :senha WHERE email = :email");
         $ok = $stmt->execute([
@@ -42,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         if ($ok) {
-            
+
             unset($_SESSION['recuperar_email']);
 
-            
+
             header("Location: AdmLogin.php");
             exit;
         } else {
@@ -56,32 +56,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Redefinir Senha</title>
     <link rel="stylesheet" href="../Css/RedefinirSenha.css">
-     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-   
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
 </head>
+
 <body>
     <main>
-    <h1>Redefinir Senha</h1>
+        <h1>Redefinir Senha</h1>
 
-    <?php if ($erro): ?>
-        <div class="erro"><?= htmlspecialchars($erro) ?></div>
-    <?php endif; ?>
+        <?php if ($erro): ?>
+            <div class="erro"><?= htmlspecialchars($erro) ?></div>
+        <?php endif; ?>
 
-    <form method="POST">
-        <label for="senha">Nova Senha:</label>
-        <input type="password" name="senha" id="senha" required>
+        <form method="POST">
+            <label for="senha">Nova Senha:</label>
+            <input type="password" name="senha" id="senha" required>
 
-        <label for="confirmar">Confirmar Senha:</label>
-        <input type="password" name="confirmar" id="confirmar" required>
+            <label for="confirmar">Confirmar Senha:</label>
+            <input type="password" name="confirmar" id="confirmar" required>
 
-        <button type="submit">Salvar Nova Senha</button>
-    </form>
-            <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-
+            <button type="submit">Salvar Nova Senha</button>
+        </form>
+        <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
+        </script>
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
     </main>
 </body>
+
 </html>

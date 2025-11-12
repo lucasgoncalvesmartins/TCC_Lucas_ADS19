@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../Controller/SubSecaoController.php'; 
+include_once __DIR__ . '/../Controller/SubSecaoController.php';
 
 $subSecaoDAO = new SubSecaoDAO();
 $secoes = $subSecaoDAO->buscaSecao();
@@ -16,7 +16,7 @@ $erro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['excluir']) && isset($_POST['id'])) {
         $id = (int) $_POST['id'];
-        if ($subSecaoDAO->excluir($id)) { 
+        if ($subSecaoDAO->excluir($id)) {
             header('Location: home.php?msg=excluido');
             exit();
         } else {
@@ -28,72 +28,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Listar Sub-seções</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <link rel="stylesheet" href="../Css/listarSubSecao.css">
 </head>
+
 <body>
-<?php include 'header.php'; ?>
-<main>
-    <h1>Listar SubSeções</h1>
-<h2 style="text-align:center;">Sub-seções por Seção</h2>
+    <?php include 'header.php'; ?>
+    <main>
+        <h1>Listar SubSeções</h1>
+        <h2 style="text-align:center;">Sub-seções por Seção</h2>
 
-<?php if (!empty($erro)): ?>
-    <p style="color:red; text-align:center;"><?= htmlspecialchars($erro) ?></p>
-<?php endif; ?>
+        <?php if (!empty($erro)): ?>
+            <p style="color:red; text-align:center;"><?= htmlspecialchars($erro) ?></p>
+        <?php endif; ?>
 
-<form method="get" style="text-align:center; margin-bottom: 20px;">
-    <label for="secao">Selecione a Seção:</label>
-    <select name="secao" id="secao" onchange="this.form.submit()">
-        <option value="">-- Selecione --</option>
-        <?php foreach ($secoes as $secao): ?>
-            <option value="<?= $secao['id'] ?>" <?= ($secao['id'] == $id_secao_selecionada) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($secao['nome']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</form>
+        <form method="get" style="text-align:center; margin-bottom: 20px;">
+            <label for="secao">Selecione a Seção:</label>
+            <select name="secao" id="secao" onchange="this.form.submit()">
+                <option value="">-- Selecione --</option>
+                <?php foreach ($secoes as $secao): ?>
+                    <option value="<?= $secao['id'] ?>" <?= ($secao['id'] == $id_secao_selecionada) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($secao['nome']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
 
-<?php if ($id_secao_selecionada && $subsecoes): ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Data Publicação</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($subsecoes as $sub): ?>
-                <tr>
-                    <td><?= htmlspecialchars($sub['titulo']) ?></td>
-                    <td><?= htmlspecialchars($sub['autor']) ?></td>
-                    <td><?= date('d/m/Y H:i', strtotime($sub['data_publicacao'])) ?></td>
-                    <td>
-                        <a class="btn edit" href="SubSecaoEditar.php?id=<?= $sub['id'] ?>">Editar</a>
-                        <a class="btn ordenar" href="OrdenarSubSecao.php?secao=<?= $id_secao_selecionada ?>">Ordenar Subseção</a>
-                        <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta subseção?');">
-                            <input type="hidden" name="id" value="<?= $sub['id'] ?>">
-                            <button type="submit" name="excluir" class="btn delete">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <?php if ($id_secao_selecionada && $subsecoes): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Data Publicação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($subsecoes as $sub): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($sub['titulo']) ?></td>
+                            <td><?= htmlspecialchars($sub['autor']) ?></td>
+                            <td><?= date('d/m/Y H:i', strtotime($sub['data_publicacao'])) ?></td>
+                            <td>
+                                <a class="btn edit" href="SubSecaoEditar.php?id=<?= $sub['id'] ?>">Editar</a>
+                                <a class="btn ordenar" href="OrdenarSubSecao.php?secao=<?= $id_secao_selecionada ?>">Ordenar Subseção</a>
+                                <form method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir esta subseção?');">
+                                    <input type="hidden" name="id" value="<?= $sub['id'] ?>">
+                                    <button type="submit" name="excluir" class="btn delete">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-    <div class="text-center mt-3">
+            <div class="text-center mt-3">
                 <a href="Home.php" class="btn-voltar" tabindex="0">
                     Voltar para página inicial
                 </a>
             </div>
-            
-<?php elseif ($id_secao_selecionada): ?>
-    <p style="text-align:center;">Nenhuma subseção encontrada para esta seção.</p>
-<?php endif; ?>
-</main>
+
+        <?php elseif ($id_secao_selecionada): ?>
+            <p style="text-align:center;">Nenhuma subseção encontrada para esta seção.</p>
+        <?php endif; ?>
+
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
+    </main>
 </body>
+
 </html>

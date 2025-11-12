@@ -30,7 +30,7 @@ $secao = $secaoDAO->buscarPorId($secao_id);
 </head>
 <body>
 <?php include 'header.php'; ?>
-
+<main>
 <div>
     <h1>SubSeções da Seção: <?= htmlspecialchars($secao['nome'] ?? '') ?></h1>
 
@@ -52,7 +52,16 @@ $secao = $secaoDAO->buscarPorId($secao_id);
     <?php endif; ?>
 </div>
      <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para pagina inicial</a>
-
-
+</script>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+    </main>
 </body>
 </html>
