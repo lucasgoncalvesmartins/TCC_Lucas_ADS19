@@ -65,19 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../Css/header.css">
     <link rel="stylesheet" href="../Css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .erro {
-            color: red;
-        }
-
-        .sucesso {
-            color: green;
-        }
-
-        form div {
-            margin-bottom: 10px;
-        }
-    </style>
      <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>

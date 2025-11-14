@@ -50,33 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../Css/editaSubSecao.css">
     <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        #editor {
-            border: 1px solid #ccc;
-            padding: 5px;
-            min-height: 150px;
-        }
-
-        .editor-buttons button {
-            margin-right: 5px;
-            cursor: pointer;
-        }
-
-        #editor ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-        }
-
-        #editor ol {
-            list-style-type: decimal;
-            padding-left: 1.5rem;
-        }
-
-        #editor li {
-            margin-bottom: 0.3rem;
-        }
-    </style>
 </head>
 
 <body>

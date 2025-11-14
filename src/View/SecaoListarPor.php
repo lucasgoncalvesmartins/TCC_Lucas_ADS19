@@ -29,6 +29,8 @@ $secao = $secaoDAO->buscarPorId($secao_id);
     <title>SubSeções da Seção</title>
     <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>    
+     
 </head>
 <body>
 <?php include 'header.php'; ?>

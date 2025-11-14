@@ -104,3 +104,15 @@ form button {
 .mt-3 {
     margin-top: 20px;
 }
+
+.erro {
+            color: red;
+        }
+
+        .sucesso {
+            color: green;
+        }
+
+        form div {
+            margin-bottom: 10px;
+        }

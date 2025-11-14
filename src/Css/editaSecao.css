@@ -48,3 +48,16 @@ button {
 form {
     margin-bottom: 20px;
 }
+
+ #editor {
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 150px;
+        }
+        .editor-buttons button {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #editor ul { list-style-type: disc; padding-left: 1.5rem; }
+        #editor ol { list-style-type: decimal; padding-left: 1.5rem; }
+        #editor li { margin-bottom: 0.3rem; }
