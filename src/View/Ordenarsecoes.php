@@ -16,6 +16,7 @@ usort($secoes, function($a, $b) {
 <meta charset="UTF-8">
 <title>Reordenar Seções</title>
 <link rel="stylesheet" href="../Css/ordenarsecao.css">
+ <link rel="stylesheet" href="../Css/footer.css">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
@@ -156,5 +157,6 @@ document.getElementById('salvar').addEventListener('click', () => {
   new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
 </main>
+<?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 </html>

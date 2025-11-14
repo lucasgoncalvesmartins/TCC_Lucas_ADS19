@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Cadastrar SubSeção</title>
     <link rel="stylesheet" href="../Css/cadastroSubSecao.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         #editor {
@@ -165,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 
-
+<?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 
 </html>

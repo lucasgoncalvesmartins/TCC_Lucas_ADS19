@@ -23,6 +23,7 @@ usort($subsecoes, function ($a, $b) {
     <title>Ordenar SubSeções</title>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="../Css/ordenarsubsecao.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
@@ -165,6 +166,7 @@ usort($subsecoes, function ($a, $b) {
 </script>
 
 </main>
+<?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 
 </html>

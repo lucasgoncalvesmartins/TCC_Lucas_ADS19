@@ -19,19 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $novaSenha = $_POST['nova_senha'] ?? '';
     $confSenha = $_POST['conf_senha'] ?? '';
 
-    // Valida o email
+    // Valida o email e atualizar a senha e email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = "E-mail inválido.";
     } else {
-        // Verifica se o usuário quer alterar a senha
+        
         if (!empty($senhaAtual) || !empty($novaSenha) || !empty($confSenha)) {
-            // Verifica senha atual 
+            
             if ($senhaAtual !== $usuario['senha']) {
                 $erro = "Senha atual incorreta.";
             } elseif ($novaSenha !== $confSenha) {
                 $erro = "A nova senha e a confirmação não coincidem.";
             } else {
-                // Atualiza email e senha 
                 $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $novaSenha);
                 if ($sucesso) {
                     $sucessoMsg = "Perfil e senha atualizados com sucesso!";
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         } else {
-            // Apenas atualiza o email mantendo a senha antiga
+    
             $sucesso = $usuarioDAO->atualizar($_SESSION['id'], $email, $usuario['senha']);
             if ($sucesso) {
                 $sucessoMsg = "Perfil atualizado com sucesso!";
@@ -77,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 10px;
         }
     </style>
+     <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
@@ -138,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 
 </html>

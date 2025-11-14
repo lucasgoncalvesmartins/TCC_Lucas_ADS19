@@ -27,6 +27,7 @@ $usuarios = $usuarioDAO->listarTodos();
 <head>
     <meta charset="UTF-8">
     <Link rel="stylesheet" href="../Css/usuariosListar.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <title> Usuários</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
@@ -55,7 +56,7 @@ $usuarios = $usuarioDAO->listarTodos();
                             <form method="POST" action="">
                                 <input type="hidden" name="atualizar_id" value="<?= $usuario['id'] ?>">
                                 <select name="nova_role" aria-label="Alterar função do usuário">
-                                    <option value="autor" <?= $usuario['tipo'] == 'autor' ? 'selected' : '' ?>>Autor</option>
+                                    
                                     <option value="admin" <?= $usuario['tipo'] == 'admin' ? 'selected' : '' ?>>Admin</option>
                                     <option value="comum" <?= $usuario['tipo'] == 'comum' ? 'selected' : '' ?>>Comum</option>
                                 </select>
@@ -96,6 +97,7 @@ $usuarios = $usuarioDAO->listarTodos();
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 
 </body>
 

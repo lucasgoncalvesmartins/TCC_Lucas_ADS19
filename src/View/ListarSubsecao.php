@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Listar Sub-seções</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <link rel="stylesheet" href="../Css/listarSubSecao.css">
+    <link rel="stylesheet" href="../Css/footer.css">
 </head>
 
 <body>
@@ -107,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 
 </html>

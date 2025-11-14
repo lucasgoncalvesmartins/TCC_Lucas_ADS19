@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Redefinir Senha</title>
     <link rel="stylesheet" href="../Css/RedefinirSenha.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
 </head>
@@ -94,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 
 </html>

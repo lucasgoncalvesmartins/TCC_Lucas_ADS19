@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Editar SubSeção</title>
     <link rel="stylesheet" href="../Css/editaSubSecao.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         #editor {
@@ -130,27 +131,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <script>
             function execCommand(command) {
-                // Executa um comando de edição no documento 
-                // API document.execCommand
+
                 document.execCommand(command, false, null);
             }
 
+            ///primeiro capitura a seleção de texto feita pelo usuário depois pega o texto selecionado e depois substitui pra link
             function insertLink() {
                 const url = prompt("Digite a URL do link:");
                 if (!url) return;
 
-                // aqui ta capturando a seleção de texto feita pelo usuário
+                
                 const sel = window.getSelection();
                 if (!sel.rangeCount) return;
-                // Pega o texto selecionado 
+               
                 const range = sel.getRangeAt(0);
                 const link = document.createElement('a');
                 link.href = url;
                 link.target = "_blank";
                 link.textContent = range.toString() || "Texto do link";
-                // texto vira o link;
-
-                // Substitui o conteúdo selecionado pelo link criado
+                
                 range.deleteContents();
                 range.insertNode(link);
             }
@@ -178,6 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 
 </body>
 

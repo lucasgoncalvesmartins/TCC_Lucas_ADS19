@@ -27,6 +27,7 @@ $secao = $secaoDAO->buscarPorId($secao_id);
 <head>
     <meta charset="UTF-8">
     <title>SubSeções da Seção</title>
+     <link rel="stylesheet" href="../Css/footer.css">
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -63,5 +64,6 @@ $secao = $secaoDAO->buscarPorId($secao_id);
   new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 </html>

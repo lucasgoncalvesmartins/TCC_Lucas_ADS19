@@ -88,6 +88,7 @@ function renderTexto($texto)
     <title>Página Inicial</title>
     <link rel="stylesheet" href="../Css/sumario.css">
     <link rel="stylesheet" href="../Css/home.css">
+    <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
 </head>
@@ -136,6 +137,7 @@ function renderTexto($texto)
     </main>
 
     <?php include_once __DIR__ . '/footer.php'; ?>
+
 </body>
 
 </html>

@@ -29,9 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Cadastrar Seção</title>
     <link rel="stylesheet" href="../Css/cadastroSecao.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* visualizar o editor */
+        
         #editor {
             border: 1px solid #ccc;
             padding: 5px;
@@ -83,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="button" onclick="insertLink()" aria-label="inserir link">Link</button>
             </div><br>
 
-            <!-- Editor contenteditable isso aqui faz aparecer as bolinhas e tals -->
+    
             <div id="editor" contenteditable="true" aria-label="Escrever descrição da seção"></div>
 
-            <!-- Input hidden para enviar -->
+            
             <input type="hidden" name="descricao_html" id="descricao_html"><br><br>
 
             <!-- 
@@ -119,6 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
     <script>
         function execCommand(command) {
             document.execCommand(command, false, null);

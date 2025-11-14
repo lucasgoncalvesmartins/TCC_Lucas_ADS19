@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/AdmLogin.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <title>Login Administrador</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
@@ -54,9 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="senha">Senha:</label>
                 <div style="display: flex; gap: 8px; align-items: center;">
                     <input type="password" id="senha" name="senha" required aria-label="Insira sua senha aqui">
-                    <button type="button" id="toggleSenha" aria-label="tornar senha que você digitou visivel">
-                        👁️
-                    </button>
                 </div>
             </div>
 
@@ -82,19 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </script>
     </main>
 
-    <script>
-        document.getElementById('toggleSenha').addEventListener('click', function() {
-            const campo = document.getElementById('senha');
-
-            if (campo.type === 'password') {
-                campo.type = 'text';
-                this.setAttribute('aria-label', 'A senha que você digitou está visivel oculta');
-            } else {
-                campo.type = 'password';
-                this.setAttribute('aria-label', 'A senha que você digitou está visivel');
-            }
-        });
-    </script>
+     <?php include_once __DIR__ . '/footer.php'; ?>
 
 </body>
 

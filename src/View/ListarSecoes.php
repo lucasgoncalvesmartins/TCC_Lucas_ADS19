@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/listarsecoes.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <title>Listar Seções</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
@@ -81,5 +82,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
 </body>
-
+<?php include_once __DIR__ . '/footer.php'; ?>
 </html>

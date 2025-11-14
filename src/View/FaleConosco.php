@@ -12,6 +12,7 @@ $msg = $controller->msg;
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/usuarioSugestao.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <title>Fale Conosco</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
@@ -67,7 +68,9 @@ $msg = $controller->msg;
         <script>
             new window.VLibras.Widget('https://vlibras.gov.br/app');
         </script>
+        
     </main>
+    <?php include_once __DIR__ . '/footer.php'; ?>
 </body>
-
+  
 </html>

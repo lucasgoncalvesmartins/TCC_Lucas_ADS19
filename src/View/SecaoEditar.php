@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <title>Editar Seção</title>
     <link rel="stylesheet" href="../Css/editaSecao.css">
+     <link rel="stylesheet" href="../Css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
         
@@ -152,5 +153,6 @@ function insertNota() {
   new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
 </main>
+<?php include_once __DIR__ . '/footer.php'; ?>
 </body>
 </html>
