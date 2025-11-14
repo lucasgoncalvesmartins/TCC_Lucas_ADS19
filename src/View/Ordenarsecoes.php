@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: Home.php');
+    exit;
+}
 include_once __DIR__ . '/../Controller/SecaoDAO.php';
 
 $secaoDAO = new SecaoDAO();
@@ -16,6 +21,7 @@ usort($secoes, function($a, $b) {
 <meta charset="UTF-8">
 <title>Reordenar Seções</title>
 <link rel="stylesheet" href="../Css/ordenarsecao.css">
+<link rel="stylesheet" href="../Css/header.css">
  <link rel="stylesheet" href="../Css/footer.css">
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>

@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: Home.php');
+    exit;
+}
 include_once __DIR__ . '/../Controller/SubSecaoController.php';
 
 $subSecaoDAO = new SubSecaoDAO();
@@ -34,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Listar Sub-seções</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <link rel="stylesheet" href="../Css/listarSubSecao.css">
+    <link rel="stylesheet" href="../Css/header.css">
     <link rel="stylesheet" href="../Css/footer.css">
 </head>
 

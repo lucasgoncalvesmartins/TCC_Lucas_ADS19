@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['id'])) {
-    header('Location: TelaLogin.php');
+    header('Location: Home.php');
     exit;
 }
 
@@ -12,17 +12,16 @@ $subSecaoDAO = new SubSecaoDAO();
 $erro = '';
 $subSecao = null;
 
-// Busca pelo id passado via GET do link "Editar"
+
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if ($id) {
-    $subSecao = $subSecaoDAO->buscarSubSecaoPorId($id); // precisa criar esse método
+    $subSecao = $subSecaoDAO->buscarSubSecaoPorId($id);
 }
 
 $secoes = $subSecaoDAO->buscaSecao();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Copia conteúdo do editor contenteditable para POST
     $_POST['conteudo'] = $_POST['conteudo_html'] ?? '';
 
     if (isset($_POST['excluir']) && isset($_POST['id'])) {
@@ -49,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Editar SubSeção</title>
     <link rel="stylesheet" href="../Css/editaSubSecao.css">
+    <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>

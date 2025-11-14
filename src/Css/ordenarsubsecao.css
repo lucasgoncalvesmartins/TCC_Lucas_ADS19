@@ -35,23 +35,18 @@ body {
     }
 
     button#salvar, 
-    a.btn.btn-link {
-        margin-top: 15px;
-        padding: 10px 20px;
-        border: none;
-        background: #0078ff;
-        color: #fff;
-        border-radius: 6px;
-        cursor: pointer;
-        text-decoration: none;
-    }
+a.btn.btn-link {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #0056b3;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+}
 
-    a.btn.btn-link {
-        background: transparent;
-        color: #004494; 
-        text-decoration: underline;
-        font-weight: bold;
-    }
+
 
     button#salvar:hover {
         background: #005fd1;

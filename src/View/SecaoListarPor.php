@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
-    header('Location: TelaLogin.php');
+    header('Location: Home.php');
     exit;
 }
 
@@ -27,6 +27,7 @@ $secao = $secaoDAO->buscarPorId($secao_id);
 <head>
     <meta charset="UTF-8">
     <title>SubSeções da Seção</title>
+    <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
 </head>
 <body>

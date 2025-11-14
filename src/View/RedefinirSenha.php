@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: Home.php');
+    exit;
+}
 
 
 if (!isset($_SESSION['recuperar_email'])) {
@@ -61,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Redefinir Senha</title>
     <link rel="stylesheet" href="../Css/RedefinirSenha.css">
+    <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 

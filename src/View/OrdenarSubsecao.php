@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: Home.php');
+    exit;
+}
 include_once __DIR__ . '/../Controller/SubSecaoController.php';
 
 $subSecaoDAO = new SubSecaoDAO();
@@ -23,6 +28,7 @@ usort($subsecoes, function ($a, $b) {
     <title>Ordenar SubSeções</title>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="../Css/ordenarsubsecao.css">
+    <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
@@ -36,7 +42,7 @@ usort($subsecoes, function ($a, $b) {
 <main> 
     <h1>Arraste ou use as setas para reordenar as SubSeções</h1>
 
-    <ul id="listaSub" role="listbox">
+    <ul id="listaSub" role="listbox" aria-label="Lista de subseções para ordenar">
         <?php foreach ($subsecoes as $sub): ?>
             <li tabindex="0"
                 role="option"
@@ -51,7 +57,7 @@ usort($subsecoes, function ($a, $b) {
         <?php endforeach; ?>
     </ul>
 
-    <button id="salvar">Salvar Ordem</button>
+    <button id="salvar">Salvar Ordem</button><br><br>
     <a href="Home.php" class="btn btn-link" tabindex="0">Voltar para página inicial</a>
 
     <script>

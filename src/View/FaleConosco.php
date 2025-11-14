@@ -13,6 +13,7 @@ $msg = $controller->msg;
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/usuarioSugestao.css">
      <link rel="stylesheet" href="../Css/footer.css">
+     <link rel="stylesheet" href="../Css/header.css">
     <title>Fale Conosco</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 

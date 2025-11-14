@@ -1,5 +1,12 @@
 <?php
+
+session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: Home.php');
+    exit;
+}
 include_once __DIR__ . '/../Controller/SecaoDAO.php';
+
 
 $secaoDAO = new SecaoDAO();
 $secoes = $secaoDAO->listarTodas();
@@ -29,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../Css/listarsecoes.css">
+    <link rel="stylesheet" href="../Css/header.css">
      <link rel="stylesheet" href="../Css/footer.css">
     <title>Listar Seções</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>

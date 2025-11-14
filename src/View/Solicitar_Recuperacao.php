@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../Css/RecuperarSenha.css" />
+  <link rel="stylesheet" href="../Css/header.css">
   <link rel="stylesheet" href="../Css/footer.css">
   <title>Recuperar Senha</title>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>

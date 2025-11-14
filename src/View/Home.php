@@ -88,6 +88,7 @@ function renderTexto($texto)
     <title>Página Inicial</title>
     <link rel="stylesheet" href="../Css/sumario.css">
     <link rel="stylesheet" href="../Css/home.css">
+    <link rel="stylesheet" href="../Css/header.css">
     <link rel="stylesheet" href="../Css/footer.css">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 

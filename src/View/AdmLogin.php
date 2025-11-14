@@ -1,7 +1,5 @@
 <?php
-
-
-
+session_start();
 if (isset($_SESSION['id'])) {
     header('Location: AdmHome.php');
     exit;
@@ -25,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Css/AdmLogin.css">
      <link rel="stylesheet" href="../Css/footer.css">
+     <link rel="stylesheet" href="../Css/header.css">
     <title>Login Administrador</title>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
