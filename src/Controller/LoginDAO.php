@@ -30,7 +30,7 @@ class LoginDAO
             $_SESSION['id'] = $linha['id'];
             $_SESSION['tipo'] = $linha['tipo'];
             $_SESSION['email'] = $linha['email'];
-            
+
             // Ia armazenar o session_id no bd mas desisti
             // $sessaoID = session_id();
             // $stmt = $this->conexao->prepare("UPDATE usuarios SET sessaoID = :sessaoID WHERE id = :id");
@@ -41,7 +41,8 @@ class LoginDAO
             header('Location: ./../View/Home.php');
             exit;
         } else {
-            echo "E-mail ou senha incorretos!";
+            header("Location: ./../View/AdmLogin.php?erro=1");
+            exit;
         }
     }
 
@@ -59,4 +60,3 @@ class LoginDAO
         echo json_encode($data);
     }
 }
-

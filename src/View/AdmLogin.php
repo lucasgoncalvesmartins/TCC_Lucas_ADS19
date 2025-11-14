@@ -34,7 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once __DIR__ . '/header.php';
 
     ?>
+
+
     <main>
+
+    <?php if (isset($_GET['erro'])): ?>
+    <div class="erro-login" style="color: red; text-align:center; margin-bottom: 10px;">
+        E-mail ou senha incorretos!
+    </div>
+<?php endif; ?>
         <form action="" method="post">
             <h1>Login</h1>
 
