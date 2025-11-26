@@ -1,12 +1,12 @@
 <?php
-
+/// Modelo de SubSeção
 class SubSecaoModel
 {
-    private $id;             // ID da subseção
+    private $id;             
     private $titulo;
     private $conteudo;
-    private $id_autor;       // ID do usuário logado
-    private $id_secao;       // ID da seção que a subseção pertence
+    private $id_autor;       
+    private $id_secao;       
     private $data_publicacao;
 
     public function __construct($data = [])
@@ -14,7 +14,7 @@ class SubSecaoModel
         $this->titulo = $data['titulo'] ?? '';
         $this->conteudo = $data['conteudo'] ?? '';
         $this->id_secao = $data['id_secao'] ?? null; 
-        // id_autor é setado manualmente pelo DAO
+        // n esquecer q id_autor ta sendo setado manualmente pelo DAO
     }
 
     public function atualizar($atributos)

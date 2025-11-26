@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
 </head>
-
+<!---/// redefinr senha --->
 <body>
     <main>
         <h1>Redefinir Senha</h1>

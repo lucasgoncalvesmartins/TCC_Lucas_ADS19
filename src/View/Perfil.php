@@ -69,6 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
+<!--- /// Página de perfil do usuário com formulário para atualizar email e senha, mensagens de erro e sucesso, link para voltar para home --->
+
+
 <body>
     <?php include 'header.php'; ?>
 

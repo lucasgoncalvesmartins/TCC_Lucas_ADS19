@@ -21,6 +21,9 @@ $msg = $controller->msg;
 
 <body>
     <?php include 'header.php'; ?>
+
+   
+     <!---  /// ///body com form para enviar sugestão com campos nome, profissão, email e sugestão, botão de submit e link para voltar para home -->
     <main>
         <h1>Enviar Sugestão</h1>
 

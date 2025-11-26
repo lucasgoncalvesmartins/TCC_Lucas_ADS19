@@ -19,6 +19,7 @@ $Secaoes = $SecaoDAO->listarSecaoComPosts();
 
 <body>
 
+<!---/// Sumário de navegação --->
     <aside id="sumario" aria-label="Sumário de navegação">
         <h2>Sumario</h2>
         <ul>

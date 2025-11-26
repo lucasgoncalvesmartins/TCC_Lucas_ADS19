@@ -34,6 +34,8 @@ $secao = $secaoDAO->buscarPorId($secao_id);
 </head>
 <body>
 <?php include 'header.php'; ?>
+
+<!---///lista de subseções por seção --->
 <main>
 <div>
     <h1>SubSeções da Seção: <?= htmlspecialchars($secao['nome'] ?? '') ?></h1>

@@ -49,7 +49,7 @@ class SubSecaoDAO
 
 
 
-   
+   ///listar todas as subseções em ordem de seção e ordem de subseção
     public function listarTodasemOrdem()
 {
     $sql = "
@@ -160,7 +160,7 @@ class SubSecaoDAO
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
+///excluir subseção
     public function excluir($id)
     {
         $stmt = $this->conexao->prepare("DELETE FROM subsecoes WHERE id = :id");
@@ -168,6 +168,7 @@ class SubSecaoDAO
         return $stmt->execute();
     }
 
+    ///buscar subseção por id
     public function buscarSubSecaoPorId($id)
 {
     $stmt = $this->conexao->prepare('SELECT * FROM subsecoes WHERE id = :id');
@@ -176,6 +177,7 @@ class SubSecaoDAO
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+///atualizar ordem das subseções
 public function atualizarOrdem($ordemArray)
 {
     foreach ($ordemArray as $item) {

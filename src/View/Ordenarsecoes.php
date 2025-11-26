@@ -37,6 +37,8 @@ usort($secoes, function($a, $b) {
 
 <?php include 'header.php'; ?>
 
+<!--- ///listar seções com possibilidade de arrastar e soltar para reordenar, botão para salvar ordem e link para voltar para home --->
+
 <main>
 <h1>Arraste as seções ou use as setas para reordenar as seções</h1>
 

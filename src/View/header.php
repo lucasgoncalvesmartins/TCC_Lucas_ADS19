@@ -3,6 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+ <!---///header com menu de navegação com links diferentes dependendo se o usuário está logado e seu tipo (autor, admin)--->
+
 
 <header>
     <nav aria-label="Menu principal">

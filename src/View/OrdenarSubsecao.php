@@ -35,6 +35,8 @@ usort($subsecoes, function ($a, $b) {
 
 <body>
 
+<!--- /// ordenar subseções de uma seção específica com  setas do teclado, botão para salvar ordem e link para home
+--->
 
     <div id="avisos" aria-live="polite" style="position:absolute; left:-9999px;"></div>
 

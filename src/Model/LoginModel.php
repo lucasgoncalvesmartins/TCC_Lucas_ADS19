@@ -1,4 +1,5 @@
 <?php
+/// Modelo de Login
 class LoginModel{
 	private $id;
 	private $email;

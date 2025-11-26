@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../Controller/SecaoDAO.php';
-
+/// Recebe os dados JSON 
 $dados = json_decode(file_get_contents('php://input'), true);
 
 $secaoDAO = new SecaoDAO();

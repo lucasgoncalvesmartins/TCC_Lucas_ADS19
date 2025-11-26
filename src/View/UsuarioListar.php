@@ -39,6 +39,9 @@ $usuarios = $usuarioDAO->listarTodos();
 
 <body>
     <?php include_once __DIR__ . '/header.php'; ?>
+
+<!--- ///listar usuarios --->
+
     <main>
         <h1> Lista de Usuários</h1>
         <table>

@@ -12,6 +12,7 @@ class LoginDAO
         $this->conexao = Conexao::getConexao();
     }
 
+    ///metodo de login
     public function login()
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -45,7 +46,7 @@ class LoginDAO
             exit;
         }
     }
-
+///metodo de logout
     public function checkLogin()
     {
         if (session_status() === PHP_SESSION_NONE) {

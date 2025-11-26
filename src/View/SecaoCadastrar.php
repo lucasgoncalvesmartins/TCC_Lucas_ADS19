@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
 
+<!--- /// cadastrar seção ------>
+
 <body>
     <?php include 'header.php'; ?>
     <main id="conteudo-principal">

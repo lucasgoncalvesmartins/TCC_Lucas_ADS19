@@ -10,6 +10,7 @@ body {
         text-align: center;          
     }
 
+    /* Lista */
     #listaSub {
         list-style: none;
         padding: 0;
@@ -34,6 +35,7 @@ body {
         background: #e8f2ff;
     }
 
+    /* Botões */
     button#salvar, 
 a.btn.btn-link {
     margin-top: 15px;

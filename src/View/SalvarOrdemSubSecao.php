@@ -2,10 +2,10 @@
 include_once __DIR__ . '/../Controller/SubSecaoController.php'; 
 $subSecaoDAO = new SubSecaoDAO();
 
-
+/// Recebe os dados JSON
 $data = json_decode(file_get_contents('php://input'), true);
 
-//  array direto com id e ordem
+
 if (is_array($data)) {
     if ($subSecaoDAO->atualizarOrdem($data)) {
         echo json_encode(['status' => 'sucesso']);

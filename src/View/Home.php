@@ -100,6 +100,7 @@ function renderTexto($texto)
     include_once __DIR__ . '/sumario.php';
     ?>
 
+ <!---/// home com exibição das seções e subseções da cartilha, formatadas com negrito, itálico, listas e links ---->
     <main>
         <h1 class="text-center mb-5">
             Cartilha de Orientações para o ensino de Programação de Computadores para estudantes cegos

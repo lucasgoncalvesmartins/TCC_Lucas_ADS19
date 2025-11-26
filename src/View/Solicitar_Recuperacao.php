@@ -18,6 +18,7 @@
 
   ?>
 
+<!--- ///Formulario de solicitar recuperação de senha--->
   <main>
     <form id="formSolicitarRecuperacao">
       <h1>Recuperar Senha</h1>

@@ -43,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 
+
+ <!---///listar seções com tabela exibindo ordem, nome e ações (editar, redefinir numeração, excluir) e link para voltar para home
+ --->
 <body>
     <?php include 'header.php'; ?>
     <main>

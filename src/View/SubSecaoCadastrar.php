@@ -43,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'header.php'; ?>
+    <!---///Formulario de cadastro de subseção
+ --->
+
     <main>
         <?php if (!empty($erro)): ?>
             <p style="color:red;"><?= htmlspecialchars($erro) ?></p>

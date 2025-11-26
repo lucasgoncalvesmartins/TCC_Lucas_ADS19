@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </head>
-
+ <!---  ///body com form de cadastro de usuário com campos nome, email e senha, botão de submit e link para voltar para home -->
 <body>
     <?php
     include_once __DIR__ . '/header.php';

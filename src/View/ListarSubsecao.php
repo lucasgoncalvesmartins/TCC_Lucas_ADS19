@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../Css/footer.css">
 </head>
 
+<!--- \\\listar subseções com tabela exibindo ordem, nome e ações (editar, redefinir numeração, excluir) e link para voltar para home --->
+
 <body>
     <?php include 'header.php'; ?>
     <main>

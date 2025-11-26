@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     ?>
 
-
+ <!---  ///body com form de login com campos email e senha, botão de submit, link para solicitar recuperação de senha, link para cadastro de novo usuário e link para voltar para home -->
     <main>
 
     <?php if (isset($_GET['erro'])): ?>

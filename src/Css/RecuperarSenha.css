@@ -1,4 +1,4 @@
-/* Centraliza o conteúdo na tela */
+
 body {
     display: flex;
     justify-content: center;  

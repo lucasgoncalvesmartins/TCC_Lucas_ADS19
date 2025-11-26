@@ -1,5 +1,5 @@
 <?php
-
+/// Modelo de Seção
 class SecaoModel
 {
     private $id;
